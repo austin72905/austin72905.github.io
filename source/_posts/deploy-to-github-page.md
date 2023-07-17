@@ -25,7 +25,7 @@ tags:
     deploy:
     type: git
     repo: git@github.com:austin72905/austin72905.github.io.git
-    branch: master # 如果是使用 http(s)://<username>.github.io 這邊就填master
+    branch: gh-pages # 如果是使用 http(s)://<username>.github.io 這邊就填master
 
 ```
 
