@@ -15,11 +15,12 @@ tags:
 
 [在 GitHub Pages 上部署 Hexo](https://hexo.io/zh-tw/docs/github-pages)
 
-官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式
+官方提供了兩種部屬方式，本文介紹的為使用Github Action 部屬到Github Pages的方式
 
-## 步驟
+## 步驟 (使用一鍵部屬)
 
 1. 創建repository，並將hexo 專案推上去，預設`public`目錄不會被推上去
+
 
 2. 將`_config.yml` 修改:
 
@@ -39,11 +40,13 @@ tags:
 
 github pages 編譯時針對gh-pages 上的文件進行編譯
 
+
 3. 下載一鍵部屬套件
 
 ```bash
     npm install hexo-deployer-git --save
 ```
+
 
 4. 部屬
 
@@ -51,6 +54,75 @@ github pages 編譯時針對gh-pages 上的文件進行編譯
     hexo d
 ```
 
-透過 hexo 一鍵部屬套件部屬後，未來只要更新代碼推上git後，還是需要`hexo d`將新代碼部屬上去。
+透過 hexo 一鍵部屬套件部屬後，未來更新代碼推上git後，還是需要
+
+```bash
+    hexo clean
+    hexo g
+    hexo d
+```
+將新代碼部屬上去。
 
 如果要使用Github Action實現持續部屬(CD)的功能，需要使用Hexo 官方提供的另一種方式。
+
+
+## 步驟 (使用Github Action 部屬到Github Pages) (推薦)
+
+1. 創建github repository
+
+2. 在hexo 專案中建立`.github/workflows/pages.yml`
+
+3. 查看你的node 版本
+
+```bash
+    node --version  # 得到的結果會類似 (v16.5.3)
+```
+4. 將以下內容貼到`.github/workflows/pages.yml`， (將 `16` 替換為上個步驟中記下的版本)
+
+```yaml
+name: Pages
+
+on:
+  push:
+    branches:
+      - main  # default branch，或是master
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # If your repository depends on submodule, please see: https://github.com/actions/checkout
+          submodules: recursive
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+```
+
+
+3. 將hexo 專案推上去，預設`public`目錄不會被推上去
+
+4. 在儲存庫中前往 **Settings** > **Pages** > **Source**，並將 branch 改為 gh-pages
+
+使用此方式，未來只要有新代碼推上去，就會自動觸發Github Action，將Github Pages 上的網站重新編驛更新。
