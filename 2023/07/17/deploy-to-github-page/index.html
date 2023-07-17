@@ -16,22 +16,22 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 github pages文檔 在 GitHub Pages 上部署 Hexo 官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式 步驟 創建repository，並將">
+    <meta name="description" content="前言撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 github pages文檔 在 GitHub Pages 上部署 Hexo 官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式 步驟 創建repository，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="將hexo blog 部屬到github pages 上">
+<meta property="og:title" content="將Hexo Blog 部屬到github pages 上">
 <meta property="og:url" content="http://example.com/2023/07/17/deploy-to-github-page/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 github pages文檔 在 GitHub Pages 上部署 Hexo 官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式 步驟 創建repository，並將">
+<meta property="og:description" content="前言撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 github pages文檔 在 GitHub Pages 上部署 Hexo 官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式 步驟 創建repository，">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-07-17T13:25:00.000Z">
-<meta property="article:modified_time" content="2023-07-17T13:42:02.045Z">
+<meta property="article:published_time" content="2023-07-17T21:25:00.000Z">
+<meta property="article:modified_time" content="2023-07-17T16:48:32.316Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>將hexo blog 部屬到github pages 上 - Hexo</title>
+  <title>將Hexo Blog 部屬到github pages 上 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="將hexo blog 部屬到github pages 上"></span>
+            <span id="subtitle" data-typed-text="將Hexo Blog 部屬到github pages 上"></span>
           
         </div>
 
@@ -257,12 +257,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">將hexo blog 部屬到github pages 上</h1>
+            <h1 id="seo-header">將Hexo Blog 部屬到github pages 上</h1>
             
             
               <div class="markdown-body">
                 
-                <p>撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，<br>但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，<br>但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。</p>
 <p><a target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">github pages文檔</a></p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/github-pages">在 GitHub Pages 上部署 Hexo</a></p>
 <p>官方提供了兩種部屬方式，本文介紹的為一鍵部屬的方式</p>
@@ -272,8 +272,14 @@
 <li><p>將<code>_config.yml</code> 修改:</p>
 </li>
 </ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br><span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br><span class="hljs-attr">repo:</span> <span class="hljs-string">git@github.com:austin72905/austin72905.github.io.git</span><br><span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span> <span class="hljs-comment"># 如果是使用 http(s)://&lt;username&gt;.github.io 這邊就填master</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br><span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br><span class="hljs-attr">repo:</span> <span class="hljs-string">git@github.com:austin72905/austin72905.github.io.git</span><br><span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span> <span class="hljs-comment"># 指定github pages 編譯的分支，不要使用master</span><br><br></code></pre></td></tr></table></figure>
 
+<p><em><strong>branch分支不要指定master!!</strong></em><br>如果branch指定master，hexo 專案會把<code>public</code>目錄的內容推到master 上，蓋掉你原本推上去的內容，這樣其他的檔案就無法做版本控制了</p>
+<ul>
+<li>master : 未打包的原始碼</li>
+<li>gh-pages : 打包過後的靜態文件</li>
+</ul>
+<p>github pages 編譯時針對gh-pages 上的文件進行編譯</p>
 <ol start="3">
 <li>下載一鍵部屬套件</li>
 </ol>
@@ -283,6 +289,9 @@
 <li>部屬</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo d<br></code></pre></td></tr></table></figure>
+
+<p>透過 hexo 一鍵部屬套件部屬後，未來只要更新代碼推上git後，還是需要<code>hexo d</code>將新代碼部屬上去。</p>
+<p>如果要使用Github Action實現持續部屬(CD)的功能，需要使用Hexo 官方提供的另一種方式。</p>
 
                 
               </div>
@@ -328,7 +337,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>將hexo blog 部屬到github pages 上</div>
+      <div>將Hexo Blog 部屬到github pages 上</div>
       <div>http://example.com/2023/07/17/deploy-to-github-page/</div>
     </div>
     <div class="license-meta">
