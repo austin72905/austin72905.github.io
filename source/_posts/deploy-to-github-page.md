@@ -51,4 +51,6 @@ github pages 編譯時針對gh-pages 上的文件進行編譯
     hexo d
 ```
 
-透過 hexo 一鍵部屬套件部屬後，未來只要更新代碼推上git後，就會自動觸發github Action，將最新的代碼編譯到github pages 的網站上，實現持續部屬(CD)的功能。
+透過 hexo 一鍵部屬套件部屬後，未來只要更新代碼推上git後，還是需要`hexo d`將新代碼部屬上去。
+
+如果要使用Github Action實現持續部屬(CD)的功能，需要使用Hexo 官方提供的另一種方式。
