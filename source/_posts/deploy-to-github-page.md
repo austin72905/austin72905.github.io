@@ -11,15 +11,22 @@ tags:
 撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，
 但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。
 
-[github pages文檔](https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages)
-
-[在 GitHub Pages 上部署 Hexo](https://hexo.io/zh-tw/docs/github-pages)
-
-官方提供了兩種部屬方式，本文介紹的為使用Github Action 部屬到Github Pages的方式
+官方提供了兩種部屬方式
 
 ## 步驟 (使用一鍵部屬)
 
 1. 創建repository，並將hexo 專案推上去，預設`public`目錄不會被推上去
+
+會有兩種域名呈現方式
+
+* <username>.github.io
+* <username>.github.io/repositoryName
+
+如果想要讓blog的域名以 `username`.github.io 呈現，那在創建repository時，repository名稱要取為 `username`.github.io ，`username`為github帳號名 如: austin72905.github.io
+
+如果是`username`.github.io/repositoryName呈現方式，在創建repository時，名稱任意。
+
+
 
 
 2. 將`_config.yml` 修改:
@@ -58,8 +65,8 @@ github pages 編譯時針對gh-pages 上的文件進行編譯
 
 ```bash
     hexo clean
-    hexo g
-    hexo d
+    hexo g # 生成靜態文件
+    hexo d # 部屬
 ```
 將新代碼部屬上去。
 
@@ -69,6 +76,8 @@ github pages 編譯時針對gh-pages 上的文件進行編譯
 ## 步驟 (使用Github Action 部屬到Github Pages) (推薦)
 
 1. 創建github repository
+
+同一鍵部屬步驟1，依照需求調整repository名稱，如: `username`.github.io
 
 2. 在hexo 專案中建立`.github/workflows/pages.yml`
 
@@ -126,3 +135,9 @@ jobs:
 4. 在儲存庫中前往 **Settings** > **Pages** > **Source**，並將 branch 改為 gh-pages
 
 使用此方式，未來只要有新代碼推上去，就會自動觸發Github Action，將Github Pages 上的網站重新編驛更新。
+
+
+## 參考文章
+[github pages文檔](https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages)
+
+[在 GitHub Pages 上部署 Hexo](https://hexo.io/zh-tw/docs/github-pages)
