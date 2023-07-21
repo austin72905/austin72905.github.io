@@ -4,9 +4,34 @@
   
   
   <entry>
+    <title>安裝golang (ubuntu 20.04)</title>
+    <link href="/2023/07/21/install-golang/"/>
+    <url>/2023/07/21/install-golang/</url>
+    
+    <content type="html"><![CDATA[<h2 id="安裝步驟"><a href="#安裝步驟" class="headerlink" title="安裝步驟"></a>安裝步驟</h2><ol><li>到官網連結安裝，(官網連結可以能會修改)，安裝的版本選 amd64</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://go.dev/dl/go1.20.6.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure><ol start="2"><li>解壓縮到 <code>/usr/local</code>，解壓縮完會發現  &#96;&#x2F;usr&#x2F;local&#96;&#96; 多了一個go 目錄</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -C 解壓縮的目標目錄</span><br>sudo tar -C /usr/local -xzf go1.20.6.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure><ol start="3"><li>在 <code>/etc/profile</code> 檔案 新增 go 的 環境變數</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 編輯 /etc/profile</span><br>sudo vi /etc/profile<br><br><span class="hljs-comment"># 在檔案中新增這行</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/local/go/bin <br></code></pre></td></tr></table></figure><ol start="4"><li>刷新當前shell環境，獲取到&#x2F;etc&#x2F;profile最新的配置</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure><ol start="5"><li>也可以修改~&#x2F;.profile</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi ~/.profile<br><br><span class="hljs-comment"># 在檔案中新增這行</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/local/go/bin <br><br><span class="hljs-comment"># 刷新當前shell環境</span><br><span class="hljs-built_in">source</span> ~/.profile<br></code></pre></td></tr></table></figure><ol start="6"><li>檢查下是否安裝成功<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">go version<br><br><span class="hljs-comment"># 應該會出現</span><br>go version go1.20.6 linux/amd64<br></code></pre></td></tr></table></figure></li></ol><p>關掉 cmd 後可能會出現”無法找到go 指令”，可以重啟VM 試試</p><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://quietbo.com/2022/07/21/golang-%E5%AE%89%E8%A3%9D-windows-ubuntu20-04/">[Golang] 安裝 (Windows &amp; ubuntu20.04)</a></p><p><a href="https://www.linuxprobe.com/linux-source-useful.html">Linux中source命令的使用方式</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技術</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>golang</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
-    <link href="/2023/07/19/hello-world/"/>
-    <url>/2023/07/19/hello-world/</url>
+    <link href="/2023/07/21/hello-world/"/>
+    <url>/2023/07/21/hello-world/</url>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
