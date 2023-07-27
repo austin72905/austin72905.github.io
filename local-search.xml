@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>Github 上實用的小技巧</title>
+    <link href="/2023/07/27/awesome-skill-in-github/"/>
+    <url>/2023/07/27/awesome-skill-in-github/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Github 是一個代碼的存儲庫，上面有許多優秀的開源方案，有時想要搜尋符合自己需求的專案，搜尋結果可能包含多種程式語言，或是代碼庫早已沒有維護。</p><p>就算找到了符合自己需求的代碼庫，每次想要查看他的源代碼都需要下載到本地，本次就來介紹一些實用的技巧，提高查看源代碼時的體驗。</p><h1 id="搜尋代碼庫技巧"><a href="#搜尋代碼庫技巧" class="headerlink" title="搜尋代碼庫技巧"></a>搜尋代碼庫技巧</h1><h2 id="進階搜索"><a href="#進階搜索" class="headerlink" title="進階搜索"></a>進階搜索</h2><p>可以直接搜尋 <code>https://github.com/search/advanced</code>，進入進階搜索的頁面，</p><p>也可以直接使用快捷鍵<code>s</code>，開啟github 高級搜索功能，可以自行輸入語句設定搜索條件，這邊介紹幾個常用的語法</p><h3 id="設定星星數"><a href="#設定星星數" class="headerlink" title="設定星星數"></a>設定星星數</h3><ul><li><code>mitm stars:&gt;500</code> (內容包含mitm)</li></ul><h3 id="設定語言"><a href="#設定語言" class="headerlink" title="設定語言"></a>設定語言</h3><ul><li><code>mitm language:Go</code></li><li><code>mitm language:Go language:JAVA</code>  (使用 JAVA、Go 寫的)</li></ul><h3 id="設定代碼庫更新時間，可以用來看存儲庫是否還有在維護"><a href="#設定代碼庫更新時間，可以用來看存儲庫是否還有在維護" class="headerlink" title="設定代碼庫更新時間，可以用來看存儲庫是否還有在維護"></a>設定代碼庫更新時間，可以用來看存儲庫是否還有在維護</h3><ul><li><code>mitm pushed:&gt;2020-01-01</code></li></ul><h3 id="指定欄位"><a href="#指定欄位" class="headerlink" title="指定欄位"></a>指定欄位</h3><ul><li><code>mitm in:name</code>  (指定倉庫名稱包含mitm)</li></ul><h3 id="同時設定多個條件"><a href="#同時設定多個條件" class="headerlink" title="同時設定多個條件"></a>同時設定多個條件</h3><ul><li><code>mitm in:name stars:&gt;500 language:Go  pushed:&gt;2020-01-01</code></li></ul><h1 id="代碼查看技巧"><a href="#代碼查看技巧" class="headerlink" title="代碼查看技巧"></a>代碼查看技巧</h1><h2 id="存儲庫內常用快捷鍵"><a href="#存儲庫內常用快捷鍵" class="headerlink" title="存儲庫內常用快捷鍵"></a>存儲庫內常用快捷鍵</h2><h3 id="在代碼庫搜尋文件"><a href="#在代碼庫搜尋文件" class="headerlink" title="在代碼庫搜尋文件"></a>在代碼庫搜尋文件</h3><p>使用<code>T</code>快捷鍵，可以在代碼庫進行全文件搜索，在那種目錄包很多層的代碼庫中尤其好用</p><h3 id="快速跳到某一行"><a href="#快速跳到某一行" class="headerlink" title="快速跳到某一行"></a>快速跳到某一行</h3><p>使用<code>L</code> 快捷鍵</p><h3 id="查看某文件的改動紀錄"><a href="#查看某文件的改動紀錄" class="headerlink" title="查看某文件的改動紀錄"></a>查看某文件的改動紀錄</h3><p>使用<code>B</code> 快捷鍵</p><h2 id="線上開啟vscode-編輯器"><a href="#線上開啟vscode-編輯器" class="headerlink" title="線上開啟vscode 編輯器"></a>線上開啟vscode 編輯器</h2><p>使用<code>.</code>快捷鍵，github會開啟一個線上vscode 編輯器，就不用每次都要下載源代碼到本地，還可以在線上安裝plugin，但語言的標準庫就不像本地一樣方便，可以直接查看內容</p><h3 id="使用-alt"><a href="#使用-alt" class="headerlink" title="使用 alt + &lt;- (左方向建) 可以回到上一頁"></a>使用 alt + &lt;- (左方向建) 可以回到上一頁</h3><p>這個是vscode 提供的快捷鍵功能</p><h1 id="線上運行代碼"><a href="#線上運行代碼" class="headerlink" title="線上運行代碼"></a>線上運行代碼</h1><p>在網址前墜加上 <code>gitpod.io/#</code></p><p>如<br><code>https://github.com/owner/repository</code><br>改成<br><code>https://gitpod.io/#/github.com/owner/repository</code></p><p>會開啟gitpod 線上運行環境的功能，自動安裝目前項目需要的依賴包，並可自行輸入command line，在網頁上查看代碼執行的效果，這部分我沒有嘗試，有興趣的可以自行試試看。</p><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://www.youtube.com/watch?v=yoRxfPfFOh8&t=20s">5个隐藏的GitHub神技巧，助你秒变大佬！</a><br><a href="https://zhuanlan.zhihu.com/p/347723938">21个GitHub精准搜索的神仙技巧</a><br><a href="https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax">github搜尋語法官方文檔</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技術</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2023/07/27/hello-world/"/>
+    <url>/2023/07/27/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>安裝golang (ubuntu 20.04)</title>
     <link href="/2023/07/21/install-golang/"/>
     <url>/2023/07/21/install-golang/</url>
@@ -23,19 +61,6 @@
       <tag>golang</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2023/07/21/hello-world/"/>
-    <url>/2023/07/21/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
     
   </entry>
   
