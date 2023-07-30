@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>Hello World</title>
+    <link href="/2023/07/30/hello-world/"/>
+    <url>/2023/07/30/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux 文件系統</title>
+    <link href="/2023/07/30/linux-filesystem/"/>
+    <url>/2023/07/30/linux-filesystem/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Linux 中每個目錄都有其各自的作用，有些目錄也有限制訪問權限，所以安裝軟體時還是別隨心所欲地亂放，記得第一次使用時安裝nginx，竟然把它放在<code>/etc</code> 目錄下，因為些權限問題而啟動時遇到困難。今天就整理一下常見目錄的作用，以及常用操作目錄及文件的指令。</p><h1 id="目錄作用"><a href="#目錄作用" class="headerlink" title="目錄作用"></a>目錄作用</h1><ul><li><p><code>/boot</code> : 存放系統開機時必要的文件</p></li><li><p><code>/root</code> : root user 的家目錄，不等同於 “&#x2F;”</p></li><li><p><code>/dev</code> : 硬體設備(keyboard、mouse)的操作文件</p></li><li><p><code>/etc</code> : 存放<font color=#EB5757>配置文件</font>(如:DNS、某個應用的配置檔)</p></li><li><p><code>/bin</code> ⇒ <code>/usr/bin</code> : 這兩個目錄都是存放常見且通用的系統命令，(如 ls（列出目錄內容）、cp（複製文件）、mv（移動文件）等)</p></li><li><p><code>/sbin</code>⇒ <code>/usr/sbin</code> : 存放系統管理員使用的系統級命令，(ifconfig（設置網絡接口）、fdisk（磁盤分割工具）、mount（掛載文件系統）等)</p></li><li><p><code>/opt</code> : (optional)用來存放第三方軟體</p></li><li><p><code>/proc</code> : 是一種虛擬文件系統，<font color=#EB5757>紀錄正在運行中的進程文件</font>，也能查看目前的硬體訊息如CPU，如果停止運行裡面文件就會消失，這些文件只存在於記憶體中</p></li><li><p><code>/lib</code> ⇒ <code>/usr/lib</code> : 所有<font color=#EB5757>C 語言的依賴包</font>都存在這裡，如使用的那些cmd 是用C 語言寫的，他的依賴包就是存在這個資料夾，可以用 strace -e open pwd  就可以看這個指令使用的依賴包有哪些</p></li><li><p><code>/tmp</code> : 檔案暫時存放區</p></li><li><p><code>/home</code> : 用戶的家目錄，裡面會有所有用戶的家目錄(除了root)</p></li><li><p><code>/var</code> : 系統的log 存放區</p></li><li><p><code>/run</code> : 它主要用於存放在系統開機期間需要在運行時創建的臨時運行時檔案（runtime files）。&#x2F;run 目錄通常用於<font color=#EB5757>存放正在運行的系統和服務的狀態資訊、進程檔案、socket 檔案</font>等。這些檔案在系統重新開機後會被清理，因為 &#x2F;run 目錄是一個暫存的文件系統，它存在於記憶體中，而不是永久存儲在硬碟上。裡面有PID 文件，用于存储进程的 PID（Process ID）信息</p></li><li><p><code>/mnt</code> : 可以用來掛載其他的文件系統</p></li><li><p><code>/media</code> : 可以用來<font color=#EB5757>掛載可移動裝置</font>，包括 USB 驅動器、光碟、SD 卡、移動硬碟等</p></li><li><p><code>/usr</code> : 存放使用者相關的應用程式和檔案，通常被稱為 “Unix System Resources” 或 “User System Resources</p><ul><li><p><code>/usr/bin</code> : 存放大部分使用者可執行的命令和應用程式，包括系統自帶的工具和第三方軟體。例如，ls、cp、mv 等常用命令就位於 &#x2F;usr&#x2F;bin 目錄下。</p></li><li><p><code>/usr/local</code> : 通常被用於<font color=#EB5757>安裝本地使用者自己編譯的軟體</font>，目錄下通常包含 bin、lib、include 等子目錄，類似於 &#x2F;usr 目錄的結構。</p></li><li><p><code>/usr/share</code> : 共享的資料檔案，例如文件、幫助檔案、圖示。</p></li><li><p><code>/usr/lib</code> : 存放系統和應用程式所使用的共享庫檔案（shared libraries）</p></li></ul></li></ul><h1 id="檔案屬性"><a href="#檔案屬性" class="headerlink" title="檔案屬性"></a>檔案屬性</h1><table><thead><tr><th>Type</th><th># of links</th><th>Owner</th><th>Group</th><th>Size</th><th>Month</th><th>Day</th><th>Time</th><th>Name</th></tr></thead><tbody><tr><td>drwxr-xr-x.</td><td>21</td><td>root</td><td>root</td><td>4096</td><td>Feb</td><td>27</td><td>13:33</td><td>var</td></tr><tr><td>lrwxrwxrwx.</td><td>1</td><td>root</td><td>root</td><td>7</td><td>Feb</td><td>27</td><td>13:15</td><td>bin</td></tr><tr><td>-rw-r-r–</td><td>1</td><td>root</td><td>root</td><td>0</td><td>Mar</td><td>27</td><td>13:15</td><td>test</td></tr></tbody></table><ul><li><code># of links</code> : 該檔案有幾個硬連結，如果是目錄，就是 (該目錄+其父目錄+其子目錄)</li></ul><h1 id="檔案類型"><a href="#檔案類型" class="headerlink" title="檔案類型"></a>檔案類型</h1><p>使用 <code>ls -l</code> 常可以看到文件屬性前面有一段英文字如<code>-rw-r-r--</code>，其中最前面的字母代表了該檔案的類型，分別為</p><ul><li><code>d</code> : 目錄</li><li><code>l</code> : 連結</li><li><code>-</code> :  一般文件</li><li><code>s</code> : socket</li><li><code>c</code> : 裝置文件(keyboard)</li><li><code>p</code> : Name pipe</li><li><code>b</code> : block device</li></ul><h1 id="硬連結（Hard-Link）、軟連結（Soft-Link）、inode"><a href="#硬連結（Hard-Link）、軟連結（Soft-Link）、inode" class="headerlink" title="硬連結（Hard Link）、軟連結（Soft Link）、inode"></a>硬連結（Hard Link）、軟連結（Soft Link）、inode</h1><ul><li><p>inode :  檔案在磁碟上的<code>指標</code>(實際上的物理位置)，每次檢索檔案時，磁碟都會用到這組數字</p></li><li><p>硬連結（Hard Link） :  直接連到 inode ，不經過檔案，他和檔案共享同一個數據塊，所以檔案刪除或是改名，硬連結不會被影響，不可跨文件系統，當所有硬連結和原始檔案都被刪除時，才會真正釋放檔案的磁碟空間。</p></li><li><p>軟連結（Soft Link） :  像是創建檔案的捷徑，透過檔案(他指向的只是檔案的路徑，而不是真實數據)，再連到 inode， <font color=#EB5757>檔案刪除或是改名，軟連結就GG了</font>，可以跨文件系統</p></li><li><p>指令</p><ul><li><code>ln</code> : 創建硬連結</li><li><code>ln -s</code> : 創建軟連結</li></ul></li><li><p>不要在同一個目錄下創建連結</p></li></ul><p>使用連結時需要小心，以免因刪除原始檔案或連結檔案而丟失資料或引起檔案系統的混亂。同時，避免創建過多的<code>硬連結</code>，以免在刪除硬連結時不小心刪除了原始檔案。</p><h1 id="針對文件、目錄的操作"><a href="#針對文件、目錄的操作" class="headerlink" title="針對文件、目錄的操作"></a>針對文件、目錄的操作</h1><h2 id="創建檔案"><a href="#創建檔案" class="headerlink" title="創建檔案"></a>創建檔案</h2><h3 id="創建文件-touch"><a href="#創建文件-touch" class="headerlink" title="創建文件 (touch)"></a>創建文件 (touch)</h3><p>創建單一文件 <code>touch 檔名</code></p><p>例如: <code>touch test</code></p><p>創建多個文件 <code>touch 檔名1 檔名2 檔名3</code></p><p>例如: <code>touch test1 test2 test3</code></p><p>創建多文件</p><p><code>touch abc&#123;1..9&#125;.xyz</code><br>會新增 abc1.xyz、abc2.xyz … abc9.xyz 的檔案</p><h3 id="創建目錄-mkdir"><a href="#創建目錄-mkdir" class="headerlink" title="創建目錄 (mkdir)"></a>創建目錄 (mkdir)</h3><p><code>mkdir 目錄名</code></p><p>例如: <code>mkdir test-dir</code></p><h2 id="複製檔案-cp"><a href="#複製檔案-cp" class="headerlink" title="複製檔案 (cp)"></a>複製檔案 (cp)</h2><h3 id="複製文件"><a href="#複製文件" class="headerlink" title="複製文件"></a>複製文件</h3><p>複製文件 <code>cp 檔名 新檔名</code><br><code>cp test test-bak</code></p><h3 id="複製目錄"><a href="#複製目錄" class="headerlink" title="複製目錄"></a>複製目錄</h3><p>-R 代表把目錄裡面的文件也都複製一份， 他是把原目錄裡面的檔案都複製一分到新目錄名下面<br><code>cp -R 原目錄 新目錄名</code></p><p>例如: <code>cp -R test-dir test-dir-bak</code></p><h2 id="尋找檔案-find、locate"><a href="#尋找檔案-find、locate" class="headerlink" title="尋找檔案 (find、locate)"></a>尋找檔案 (find、locate)</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p><code>find 查詢的起始目錄 -name &quot;檔名&quot;</code></p><p>從當前目錄開始尋找</p><p><code>find . -name &quot;test&quot;</code></p><p>從根目錄開始尋找</p><p><code>find / -name &quot;test&quot;</code></p><h3 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h3><p><code>locate 檔名</code></p><p>例如: <code>locate test</code></p><h3 id="locate-、find-差異"><a href="#locate-、find-差異" class="headerlink" title="locate 、find 差異?"></a>locate 、find 差異?</h3><ul><li><p><code>locate</code> 有維護一張表，他會直接去從表查，所以速度會比<code>find</code> 快很多，但是表如果還不是最新版本(該表是系統排程更新)，可能查詢結果不準確 (<code>updatedb</code>指令)</p></li><li><p><code>find</code> 是每次都會去文件系統查，速度較慢，但是準確</p></li></ul><h1 id="通配符-WildCards"><a href="#通配符-WildCards" class="headerlink" title="通配符  (WildCards)"></a>通配符  (WildCards)</h1><p>通配符是用於匹配檔案名或目錄名的特殊字符，常用於需要批量操作一些檔名很類似， abc1、abc2、abc3…abc99，如日誌檔</p><p>可以快速搜尋符合條件的檔案，並執行相對應動作，很大的提高工作效率，常用的通配符有以下幾種</p><ul><li><p><code>*</code>  :  用來匹配0~ 多個字符，如想要找出所有的txt結尾的檔案， 可以用<code>*.txt</code>表示</p></li><li><p><code>?</code> :  匹配1個字符，如想要找出 ab1、ab2、ab3…ab9 等 ab開頭，結果只有一個字符的檔案，可以用<code>ab?</code>表示</p></li><li><p><code>[ ]</code> :  指定一個字符集合 例如含有x或y的檔名，可以用<code>*[xy]*</code>表示</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Github 上實用的小技巧</title>
     <link href="/2023/07/27/awesome-skill-in-github/"/>
     <url>/2023/07/27/awesome-skill-in-github/</url>
@@ -13,7 +51,7 @@
     
     <categories>
       
-      <category>技術</category>
+      <category>Git</category>
       
     </categories>
     
@@ -29,19 +67,6 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/2023/07/27/hello-world/"/>
-    <url>/2023/07/27/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>安裝golang (ubuntu 20.04)</title>
     <link href="/2023/07/21/install-golang/"/>
     <url>/2023/07/21/install-golang/</url>
@@ -51,7 +76,7 @@
     
     <categories>
       
-      <category>技術</category>
+      <category>golang</category>
       
     </categories>
     
@@ -76,7 +101,7 @@
     
     <categories>
       
-      <category>技術</category>
+      <category>Git</category>
       
     </categories>
     
@@ -101,7 +126,7 @@
     
     <categories>
       
-      <category>技術</category>
+      <category>Hexo</category>
       
     </categories>
     
@@ -126,7 +151,7 @@
     
     <categories>
       
-      <category>技術</category>
+      <category>Hexo</category>
       
     </categories>
     
