@@ -1,7 +1,7 @@
 ---
 title: Hexo 框架介紹
 date: 2023-7-17 16:30
-categories: 技術
+categories: Hexo
 tags:
     - 前端
 ---

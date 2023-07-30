@@ -1,7 +1,7 @@
 ---
 title: Hexo 主題修改(Fluid)
 date: 2023-7-17 19:17
-categories: 技術
+categories: Hexo
 tags:
     - 前端
 ---

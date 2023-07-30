@@ -1,7 +1,7 @@
 ---
 title: 安裝golang (ubuntu 20.04)
 date: 2023-7-21 16:43
-categories: 技術
+categories: golang
 tags:
     - golang
 ---

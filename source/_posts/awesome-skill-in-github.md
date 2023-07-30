@@ -1,7 +1,7 @@
 ---
 title: Github 上實用的小技巧
 date: 2023-7-27 11:49
-categories: 技術
+categories: Git
 tags:
     - git
 ---

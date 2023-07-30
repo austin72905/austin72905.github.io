@@ -1,7 +1,7 @@
 ---
 title: 將Hexo Blog 部屬到github pages 上
 date: 2023-7-17 21:25
-categories: 技術
+categories: Git
 tags:
     - git
 ---
