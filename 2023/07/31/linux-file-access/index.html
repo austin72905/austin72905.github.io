@@ -16,22 +16,22 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 官方提供了兩種部屬方式 步驟 (使用一鍵部屬) 創建repository，並將hexo 專案推上去，預設public目錄不會被推上去  會有兩種域名呈現方式  .">
+    <meta name="description" content="前言Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。 本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。 檔案的所有權 (所有者、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="將Hexo Blog 部屬到github pages 上">
-<meta property="og:url" content="http://example.com/2023/07/17/deploy-to-github-page/index.html">
+<meta property="og:title" content="Linux 檔案權限">
+<meta property="og:url" content="http://example.com/2023/07/31/linux-file-access/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。 官方提供了兩種部屬方式 步驟 (使用一鍵部屬) 創建repository，並將hexo 專案推上去，預設public目錄不會被推上去  會有兩種域名呈現方式  .">
+<meta property="og:description" content="前言Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。 本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。 檔案的所有權 (所有者、">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-07-17T21:25:00.000Z">
+<meta property="article:published_time" content="2023-07-31T02:30:00.000Z">
 <meta property="article:modified_time" content="2023-07-31T02:35:43.947Z">
 <meta property="article:author" content="Austin Lin">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>將Hexo Blog 部屬到github pages 上 - Hexo</title>
+  <title>Linux 檔案權限 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="將Hexo Blog 部屬到github pages 上"></span>
+            <span id="subtitle" data-typed-text="Linux 檔案權限"></span>
           
         </div>
 
@@ -240,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-17 21:25" pubdate>
-          2023年7月17日 晚上
+        <time datetime="2023-07-31 02:30" pubdate>
+          2023年7月31日 凌晨
         </time>
       </span>
     
@@ -284,75 +284,127 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">將Hexo Blog 部屬到github pages 上</h1>
+            <h1 id="seo-header">Linux 檔案權限</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>撰寫完文章後，下一步就是將網站部屬到github pages上了，github 除了可以存放代碼之外，還提供讓你免費部屬靜態網站的功能，<br>但還是有一些限制，如respository 容量只能到1G，但在初期文章數量不多時，是個好選擇。</p>
-<p>官方提供了兩種部屬方式</p>
-<h2 id="步驟-使用一鍵部屬"><a href="#步驟-使用一鍵部屬" class="headerlink" title="步驟 (使用一鍵部屬)"></a>步驟 (使用一鍵部屬)</h2><ol>
-<li>創建repository，並將hexo 專案推上去，預設<code>public</code>目錄不會被推上去</li>
-</ol>
-<p>會有兩種域名呈現方式</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。</p>
+<p>本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。</p>
+<h1 id="檔案的所有權-所有者、群組"><a href="#檔案的所有權-所有者、群組" class="headerlink" title="檔案的所有權 (所有者、群組)"></a>檔案的所有權 (所有者、群組)</h1><p>每個檔案都有2種類型的所有權 (ownership)</p>
 <ul>
-<li><username>.github.io</li>
-<li><username>.github.io&#x2F;repositoryName</li>
+<li>user  :  擁有者</li>
+<li>group  :  擁有群組</li>
 </ul>
-<p>如果想要讓blog的域名以 <code>username</code>.github.io 呈現，那在創建repository時，repository名稱要取為 <code>username</code>.github.io ，<code>username</code>為github帳號名 如: austin72905.github.io</p>
-<p>如果是<code>username</code>.github.io&#x2F;repositoryName呈現方式，在創建repository時，名稱任意。</p>
-<ol start="2">
-<li>將<code>_config.yml</code> 修改:</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br><span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br><span class="hljs-attr">repo:</span> <span class="hljs-string">git@github.com:austin72905/austin72905.github.io.git</span><br><span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span> <span class="hljs-comment"># 指定github pages 編譯的分支，不要使用master</span><br><br></code></pre></td></tr></table></figure>
-
-<p><em><strong>branch分支不要指定master!!</strong></em><br>如果branch指定master，hexo 專案會把<code>public</code>目錄的內容推到master 上，蓋掉你原本推上去的內容，這樣其他的檔案就無法做版本控制了</p>
+<h2 id="修改檔案的擁有者-chown"><a href="#修改檔案的擁有者-chown" class="headerlink" title="修改檔案的擁有者 (chown)"></a>修改檔案的擁有者 (chown)</h2><p>只有文件擁有者、系統管理員帳號可以修改</p>
+<p><code>chown 新的擁有者 檔名</code></p>
+<p>例如 : <code>chown austin72905 test-right</code></p>
+<p><code>chown -R</code>  :  會對該目錄裡面所有的檔案進行遞歸修改權限</p>
+<h2 id="修改檔案的擁有群組-chgrp"><a href="#修改檔案的擁有群組-chgrp" class="headerlink" title="修改檔案的擁有群組 (chgrp)"></a>修改檔案的擁有群組 (chgrp)</h2><p>只有文件擁有者、系統管理員帳號可以修改</p>
+<p><code>chgrp 新的擁有全組 檔名</code></p>
+<p>例如 : <code>chown austin72905 test-right</code></p>
+<h1 id="檔案權限"><a href="#檔案權限" class="headerlink" title="檔案權限"></a>檔案權限</h1><p>只有文件擁有者、系統管理員帳號可以修改</p>
+<p>每個檔案有 3  種類型的權限</p>
 <ul>
-<li>master : 未打包的原始碼</li>
-<li>gh-pages : 打包過後的靜態文件</li>
+<li>r  :  讀，沒有此權限無法 <code>ls</code> 查看目錄裡的文件</li>
+<li>w  :  寫，沒有此權限無法修改、刪除檔案</li>
+<li>x  :  執行，沒有此權限無法<code>cd</code> 進入該目錄</li>
 </ul>
-<p>github pages 編譯時針對gh-pages 上的文件進行編譯</p>
-<ol start="3">
-<li>下載一鍵部屬套件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
-
-
-<ol start="4">
-<li>部屬</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo d<br></code></pre></td></tr></table></figure>
-
-<p>透過 hexo 一鍵部屬套件部屬後，未來更新代碼推上git後，還是需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean<br>hexo g <span class="hljs-comment"># 生成靜態文件</span><br>hexo d <span class="hljs-comment"># 部屬</span><br></code></pre></td></tr></table></figure>
-<p>將新代碼部屬上去。</p>
-<p>如果要使用Github Action實現持續部屬(CD)的功能，需要使用Hexo 官方提供的另一種方式。</p>
-<h2 id="步驟-使用Github-Action-部屬到Github-Pages-推薦"><a href="#步驟-使用Github-Action-部屬到Github-Pages-推薦" class="headerlink" title="步驟 (使用Github Action 部屬到Github Pages) (推薦)"></a>步驟 (使用Github Action 部屬到Github Pages) (推薦)</h2><ol>
-<li>創建github repository</li>
-</ol>
-<p>同一鍵部屬步驟1，依照需求調整repository名稱，如: <code>username</code>.github.io</p>
-<ol start="2">
-<li><p>在hexo 專案中建立<code>.github/workflows/pages.yml</code></p>
+<p>3 種權限針對不同的對象</p>
+<ul>
+<li>u  :  擁有者 (user)</li>
+<li>g  :  擁有群組 (group)</li>
+<li>o  :  其他人 (other)，系統上其他的一般使用者</li>
+</ul>
+<h3 id="如何查看檔案權限"><a href="#如何查看檔案權限" class="headerlink" title="如何查看檔案權限 ?"></a>如何查看檔案權限 ?</h3><p>使用<code>ls -l</code> 可以看到 類似於 <code>drwxr-xr-x</code> 的一串英文字共10個字符，把它拆成 1、3、3、3 的方式查看</p>
+<table>
+<thead>
+<tr>
+<th>檔案類型</th>
+<th>擁有者權限</th>
+<th>擁有群組權限</th>
+<th>其他人權限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>rwx</td>
+<td>r-x</td>
+<td>r-x</td>
+</tr>
+</tbody></table>
+<p>由上方範例可知該檔案</p>
+<ul>
+<li>是一個目錄</li>
+<li>擁有者權限 : 讀、寫、執行</li>
+<li>擁有群組權限 : 讀、執行 (-代表沒有該權限)</li>
+<li>其他人權限 : 讀、執行 (-代表沒有該權限)</li>
+</ul>
+<h2 id="修改檔檔案權限-chmod"><a href="#修改檔檔案權限-chmod" class="headerlink" title="修改檔檔案權限 (chmod)"></a>修改檔檔案權限 (chmod)</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用 +-"></a>使用 +-</h3><p>針對對象<code>u、g、o</code>，加上或減少<code>+-</code>，讀寫執行權限<code>rwx</code></p>
+<p><code>chmod (ugo)(+-)(rwx) 檔名</code></p>
+<p>給檔案的 擁有者 去掉 <code>寫</code> 權限</p>
+<p><code>chmod u-w 檔名</code></p>
+<p>給檔案 的 擁有者 加上 <code>寫</code> 跟 <code>執行</code> 權限</p>
+<p><code>chmod u+rw 檔名</code></p>
+<p>給檔案 的 擁有者、擁有群組 加上 <code>寫</code> 跟 <code>執行</code> 權限</p>
+<p><code>chmod ug+rw 檔名</code></p>
+<h3 id="使用-數字"><a href="#使用-數字" class="headerlink" title="使用 數字"></a>使用 數字</h3><p>修改順序為 ugo</p>
+<p>代表數字</p>
+<ul>
+<li><p>4 : r</p>
 </li>
-<li><p>查看你的node 版本</p>
+<li><p>2: w</p>
 </li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">node --version  <span class="hljs-comment"># 得到的結果會類似 (v16.5.3)</span><br></code></pre></td></tr></table></figure>
-<ol start="4">
-<li>將以下內容貼到<code>.github/workflows/pages.yml</code>， (將 <code>16</code> 替換為上個步驟中記下的版本)</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Pages</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>  <span class="hljs-comment"># default branch，或是master</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">pages:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br>    <span class="hljs-attr">permissions:</span><br>      <span class="hljs-attr">contents:</span> <span class="hljs-string">write</span><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">token:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.GITHUB_TOKEN</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-comment"># If your repository depends on submodule, please see: https://github.com/actions/checkout</span><br>          <span class="hljs-attr">submodules:</span> <span class="hljs-string">recursive</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-number">16.</span><span class="hljs-string">x</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v2</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;16&#x27;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Cache</span> <span class="hljs-string">NPM</span> <span class="hljs-string">dependencies</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/cache@v2</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">path:</span> <span class="hljs-string">node_modules</span><br>          <span class="hljs-attr">key:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">runner.OS</span> <span class="hljs-string">&#125;&#125;-npm-cache</span><br>          <span class="hljs-attr">restore-keys:</span> <span class="hljs-string">|</span><br><span class="hljs-string">            $&#123;&#123; runner.OS &#125;&#125;-npm-cache</span><br><span class="hljs-string"></span>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">Dependencies</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">build</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">peaceiris/actions-gh-pages@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">github_token:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.GITHUB_TOKEN</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">publish_dir:</span> <span class="hljs-string">./public</span><br></code></pre></td></tr></table></figure>
-
-
-<ol start="3">
-<li><p>將hexo 專案推上去，預設<code>public</code>目錄不會被推上去</p>
+<li><p>1: u</p>
 </li>
-<li><p>在儲存庫中前往 <strong>Settings</strong> &gt; <strong>Pages</strong> &gt; <strong>Source</strong>，並將 branch 改為 gh-pages</p>
+</ul>
+<p>所以要給一個檔案的擁有者 讀+寫 權限  4+2 &#x3D; 6，給0就是關掉該權限，其他的數字都是由這三個數字相加而來</p>
+<p><code>chmod 600 檔名</code></p>
+<p>上面的範例 擁有者 有 讀+寫 權限 (4+2)，擁有群組、其他人完全沒有權限 (0)</p>
+<p>還有一個常見範例，權限全開<br><code>chmod 777 檔名</code></p>
+<p><code>chmod -R</code> :  會對該目錄裡面所有的檔案進行遞歸修改權限</p>
+<h1 id="針對特定用戶-or-特定群組設定權限-ACL"><a href="#針對特定用戶-or-特定群組設定權限-ACL" class="headerlink" title="針對特定用戶 or 特定群組設定權限 (ACL)"></a>針對特定用戶 or 特定群組設定權限 (ACL)</h1><p>運行級別比 檔案權限還高</p>
+<p>假設只想要給某個用戶有讀寫的權限，一般用戶只有讀權限，就可以使用ACL，給予單獨的用戶或群組設定權限</p>
+<h2 id="設定權限-setfacl"><a href="#設定權限-setfacl" class="headerlink" title="設定權限 (setfacl)"></a>設定權限 (setfacl)</h2><p>(set file acl)</p>
+<p><code>setfacl -m u:用戶名:權限 檔名</code></p>
+<p><code>setfacl -m g:群組名:權限 檔名</code></p>
+<p>例如</p>
+<p><code>setfacl -m u:test:rw test-right</code></p>
+<p><code>setfacl -m g:test:rw test-right</code></p>
+<p>針對目錄和 子目錄 跟 子文件 遞歸設定</p>
+<p><code>setfacl -Rm u:用戶名:權限 檔名</code></p>
+<h3 id="刪除某個用戶的權限-x"><a href="#刪除某個用戶的權限-x" class="headerlink" title="刪除某個用戶的權限 (-x)"></a>刪除某個用戶的權限 (-x)</h3><p><code>setfacl -x u:用戶名 檔名</code></p>
+<h3 id="刪除所有的acl-權限-b"><a href="#刪除所有的acl-權限-b" class="headerlink" title="刪除所有的acl 權限 (-b)"></a>刪除所有的acl 權限 (-b)</h3><p><code>setfacl -b  檔名</code></p>
+<h2 id="獲取權限-getfacl"><a href="#獲取權限-getfacl" class="headerlink" title="獲取權限 (getfacl)"></a>獲取權限 (getfacl)</h2><p>(get file acl)</p>
+<p><code>getfacl 檔名</code></p>
+<h2 id="未設定前"><a href="#未設定前" class="headerlink" title="未設定前"></a>未設定前</h2><pre><code class="hljs"># file: 檔名
+# owner: 擁有者
+# group: 擁有群組
+user::rw-
+group::r--
+mask::r--
+other::r--
+</code></pre>
+<hr>
+<h2 id="設定後，會發現多個一個特別用戶的權限"><a href="#設定後，會發現多個一個特別用戶的權限" class="headerlink" title="設定後，會發現多個一個特別用戶的權限"></a>設定後，會發現多個一個特別用戶的權限</h2><pre><code class="hljs"># file: 檔名
+# owner: 擁有者
+# group: 擁有群組
+user::rw-
+user:特別用戶:rw-
+group::r--
+mask::r--
+other::r--
+</code></pre>
+<hr>
+<p>mask作用</p>
+<ul>
+<li><p>mask 表示在 ACL 中的使用者權限或群組權限的最大權限值，用於限制 ACL 權限的有效性</p>
 </li>
-</ol>
-<p>使用此方式，未來只要有新代碼推上去，就會自動觸發Github Action，將Github Pages 上的網站重新編驛更新。</p>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">github pages文檔</a></p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/github-pages">在 GitHub Pages 上部署 Hexo</a></p>
+<li><p>mask 的值在設置 ACL 時會自動計算，通常不需要手動更改。</p>
+</li>
+<li><p>雖然 擁有者 和群組 本來應該有讀取和寫入權限（rw-），但由於 mask 設置為 r–，所以實際有效的權限為 r–，即只有讀取權限。</p>
+</li>
+</ul>
 
                 
               </div>
@@ -371,7 +423,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Git/" class="category-chain-item">Git</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -386,7 +438,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
     </div>
   
@@ -398,8 +450,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>將Hexo Blog 部屬到github pages 上</div>
-      <div>http://example.com/2023/07/17/deploy-to-github-page/</div>
+      <div>Linux 檔案權限</div>
+      <div>http://example.com/2023/07/31/linux-file-access/</div>
     </div>
     <div class="license-meta">
       
@@ -411,7 +463,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2023年7月17日</div>
+          <div>2023年7月31日</div>
         </div>
       
       
@@ -443,9 +495,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/21/install-golang/" title="安裝golang (ubuntu 20.04)">
+                      <a href="/2023/07/31/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">安裝golang (ubuntu 20.04)</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -453,8 +505,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/17/hexo-theme-modify/" title="Hexo 主題修改(Fluid)">
-                        <span class="hidden-mobile">Hexo 主題修改(Fluid)</span>
+                      <a href="/2023/07/30/linux-filesystem/" title="Linux 文件系統">
+                        <span class="hidden-mobile">Linux 文件系統</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
