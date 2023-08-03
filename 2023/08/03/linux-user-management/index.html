@@ -16,22 +16,22 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言配置完hexo 主題後，發現很多地方跟自己想要呈現的方式不太一樣，這邊就要來客製化一下了，介紹常見的修改 配置文件都在themes 目錄中fluid&#x2F;_config.yml。 整個頁面修改左上角，blog 的名稱博客标题 12navbar:    blog_title: blog標題   修改右上角，巡航列的標題巡航菜單 可以看到文檔說明key 用于关联有语言配置，如不存在关联则显示 key">
+    <meta name="description" content="前言Linux是多用戶的操作系統，針對用戶的角色給予相對應的權限，對於維護系統的安全是非常重要的。在Linux中能夠以 分組 或是 針對個別用戶 的方式給予系統的使用權限，也能對密碼進行相關設定，包含要求 定期更換密碼 或是 密碼的有效期限 ，減少用戶遭到盜用的風險。 關於用戶相關的設定檔 &#x2F;etc&#x2F;passwd  &#x2F;etc&#x2F;group  &#x2F;etc&#x2F;shadow  &#x2F;etc&#x2F;login.defs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 主題修改(Fluid)">
-<meta property="og:url" content="http://example.com/2023/07/17/hexo-theme-modify/index.html">
+<meta property="og:title" content="Linux 用戶管理">
+<meta property="og:url" content="http://example.com/2023/08/03/linux-user-management/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言配置完hexo 主題後，發現很多地方跟自己想要呈現的方式不太一樣，這邊就要來客製化一下了，介紹常見的修改 配置文件都在themes 目錄中fluid&#x2F;_config.yml。 整個頁面修改左上角，blog 的名稱博客标题 12navbar:    blog_title: blog標題   修改右上角，巡航列的標題巡航菜單 可以看到文檔說明key 用于关联有语言配置，如不存在关联则显示 key">
+<meta property="og:description" content="前言Linux是多用戶的操作系統，針對用戶的角色給予相對應的權限，對於維護系統的安全是非常重要的。在Linux中能夠以 分組 或是 針對個別用戶 的方式給予系統的使用權限，也能對密碼進行相關設定，包含要求 定期更換密碼 或是 密碼的有效期限 ，減少用戶遭到盜用的風險。 關於用戶相關的設定檔 &#x2F;etc&#x2F;passwd  &#x2F;etc&#x2F;group  &#x2F;etc&#x2F;shadow  &#x2F;etc&#x2F;login.defs">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-07-17T19:17:00.000Z">
+<meta property="article:published_time" content="2023-08-03T08:47:00.000Z">
 <meta property="article:modified_time" content="2023-08-03T03:58:35.866Z">
 <meta property="article:author" content="Austin Lin">
-<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo 主題修改(Fluid) - Hexo</title>
+  <title>Linux 用戶管理 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hexo 主題修改(Fluid)"></span>
+            <span id="subtitle" data-typed-text="Linux 用戶管理"></span>
           
         </div>
 
@@ -240,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-17 19:17" pubdate>
-          2023年7月17日 晚上
+        <time datetime="2023-08-03 08:47" pubdate>
+          2023年8月3日 早上
         </time>
       </span>
     
@@ -284,47 +284,186 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hexo 主題修改(Fluid)</h1>
+            <h1 id="seo-header">Linux 用戶管理</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>配置完hexo 主題後，發現很多地方跟自己想要呈現的方式不太一樣，這邊就要來客製化一下了，介紹常見的修改</p>
-<p>配置文件都在<code>themes</code> 目錄中<code>fluid/_config.yml</code>。</p>
-<h2 id="整個頁面"><a href="#整個頁面" class="headerlink" title="整個頁面"></a>整個頁面</h2><h3 id="修改左上角，blog-的名稱"><a href="#修改左上角，blog-的名稱" class="headerlink" title="修改左上角，blog 的名稱"></a>修改左上角，blog 的名稱</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E5%8D%9A%E5%AE%A2%E6%A0%87%E9%A2%98">博客标题</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">navbar:<br>    blog_title: blog標題<br></code></pre></td></tr></table></figure>
-
-
-<h3 id="修改右上角，巡航列的標題"><a href="#修改右上角，巡航列的標題" class="headerlink" title="修改右上角，巡航列的標題"></a>修改右上角，巡航列的標題</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95">巡航菜單</a></p>
-<p>可以看到文檔說明<code>key</code> 用于关联有语言配置，如不存在关联则显示 key 本身的值，<br>在這邊修改key的話，在文章內頁標題的文字不會改變。</p>
-<p>如:我想要把”歸檔”兩個字，修改為”全部文章”，當導覽到全部文章頁面時，標題也要顯示全部文章，要達成此效果<br>要直接修改<code>languages/zh-TW.yml</code><br>修改完如下</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">archive:</span><br>    <span class="hljs-attr">menu:</span> <span class="hljs-string">&#x27;全部文章&#x27;</span><br>    <span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;全部文章&#x27;</span><br>    <span class="hljs-attr">subtitle:</span> <span class="hljs-string">&#x27;全部文章&#x27;</span><br>    <span class="hljs-attr">post_total:</span> <span class="hljs-string">&#x27;共有 %d 篇文章&#x27;</span><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="主頁"><a href="#主頁" class="headerlink" title="主頁"></a>主頁</h2><h3 id="修改主頁的slogan"><a href="#修改主頁的slogan" class="headerlink" title="修改主頁的slogan"></a>修改主頁的slogan</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#slogan-%E6%89%93%E5%AD%97%E6%9C%BA">修改slogan</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">index:</span><br>    <span class="hljs-attr">slogan:</span><br>        <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>        <span class="hljs-attr">text:</span> <span class="hljs-string">修改成你要的slogan</span><br></code></pre></td></tr></table></figure>
-
-
-<h3 id="修改頁面頂部大圖"><a href="#修改頁面頂部大圖" class="headerlink" title="修改頁面頂部大圖"></a>修改頁面頂部大圖</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E9%A1%B5%E9%9D%A2%E9%A1%B6%E9%83%A8%E5%A4%A7%E5%9B%BE">修改頁面頂部大圖</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">index:</span><br>    <span class="hljs-attr">banner_img_height:</span> <span class="hljs-number">60</span> <span class="hljs-comment"># 修改圖片高度</span><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="footer"><a href="#footer" class="headerlink" title="footer"></a>footer</h2><h3 id="footer-文字"><a href="#footer-文字" class="headerlink" title="footer 文字"></a>footer 文字</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">footer:</span><br>    <span class="hljs-attr">content:</span><br>    <span class="hljs-string">`</span><br>    <span class="hljs-string">內容</span><br>    <span class="hljs-string">`</span><br><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="文章內頁"><a href="#文章內頁" class="headerlink" title="文章內頁"></a>文章內頁</h2><h3 id="文章頁顯示訊息-字數、日期"><a href="#文章頁顯示訊息-字數、日期" class="headerlink" title="文章頁顯示訊息(字數、日期..)"></a>文章頁顯示訊息(字數、日期..)</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E6%97%A5%E6%9C%9F-%E5%AD%97%E6%95%B0-%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF-%E9%98%85%E8%AF%BB%E6%95%B0">日期&#x2F;字数&#x2F;阅读时长&#x2F;阅读数</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post:</span><br>    <span class="hljs-attr">meta:</span><br>        <span class="hljs-attr">author:</span>  <span class="hljs-comment"># 作者，优先根据 front-matter 里 author 字段，其次是 hexo 配置中 author 值</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">false</span><br>        <span class="hljs-attr">date:</span>  <span class="hljs-comment"># 文章日期，优先根据 front-matter 里 date 字段，其次是 md 文件日期</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>            <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;dddd, MMMM Do YYYY, h:mm a&quot;</span>  <span class="hljs-comment"># 格式参照 ISO-8601 日期格式化</span><br>        <span class="hljs-attr">wordcount:</span>  <span class="hljs-comment"># 字数统计</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>            <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;&#123;&#125; 字&quot;</span>  <span class="hljs-comment"># 显示的文本，&#123;&#125;是数字的占位符（必须包含)，下同</span><br>        <span class="hljs-attr">min2read:</span>  <span class="hljs-comment"># 阅读时间</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>            <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;&#123;&#125; 分钟&quot;</span><br>        <span class="hljs-attr">views:</span>  <span class="hljs-comment"># 阅读次数</span><br>            <span class="hljs-attr">enable:</span> <span class="hljs-literal">false</span><br>            <span class="hljs-attr">source:</span> <span class="hljs-string">&quot;leancloud&quot;</span>  <span class="hljs-comment"># 统计数据来源，可选：leancloud | busuanzi   注意不蒜子会间歇抽风</span><br>            <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;&#123;&#125; 次&quot;</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="代碼塊不顯示使用語言"><a href="#代碼塊不顯示使用語言" class="headerlink" title="代碼塊不顯示使用語言"></a>代碼塊不顯示使用語言</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E4%BB%A3%E7%A0%81%E5%9D%97">代码块</a></p>
-<p><code>fluid/_config.yml</code>搜尋”代码块的增强配置”</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">code:</span><br>    <span class="hljs-comment"># 是否开启复制代码的按钮</span><br>    <span class="hljs-comment"># Enable copy code button</span><br>    <span class="hljs-attr">copy_btn:</span> <span class="hljs-literal">true</span><br><br><span class="hljs-comment"># 代码语言</span><br><span class="hljs-comment"># Code language</span><br><span class="hljs-attr">language:</span><br>    <span class="hljs-attr">enable:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># 把它關掉</span><br>    <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;TEXT&quot;</span><br><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="關於"><a href="#關於" class="headerlink" title="關於"></a>關於</h2><h3 id="關於的內容"><a href="#關於的內容" class="headerlink" title="關於的內容"></a>關於的內容</h3><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E5%85%B3%E4%BA%8E%E4%BF%A1%E6%81%AF">关于信息</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">about:</span><br><span class="hljs-attr">avatar:</span> <span class="hljs-string">/img/avatar.png</span><br><span class="hljs-attr">name:</span> <span class="hljs-string">&quot;你的名字&quot;</span><br><span class="hljs-attr">intro:</span> <span class="hljs-string">&quot;你的介紹&quot;</span><br><br></code></pre></td></tr></table></figure>
-
-<p>至於其他的配置，日後如果有修改的需求，會再持續記錄到此文章</p>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">fluid官方文檔</a></p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Linux是多用戶的操作系統，針對用戶的角色給予相對應的權限，對於維護系統的安全是非常重要的。在Linux中能夠以 <strong><code>分組</code></strong> 或是 <strong><code>針對個別用戶</code></strong> 的方式給予系統的使用權限，也能對密碼進行相關設定，包含要求 <strong><code>定期更換密碼</code></strong> 或是 <strong><code>密碼的有效期限</code></strong> ，減少用戶遭到盜用的風險。</p>
+<h1 id="關於用戶相關的設定檔"><a href="#關於用戶相關的設定檔" class="headerlink" title="關於用戶相關的設定檔"></a>關於用戶相關的設定檔</h1><ul>
+<li><p><code>/etc/passwd</code></p>
+</li>
+<li><p><code>/etc/group</code></p>
+</li>
+<li><p><code>/etc/shadow</code></p>
+</li>
+<li><p><code>/etc/login.defs</code></p>
+</li>
+</ul>
+<h2 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="&#x2F;etc&#x2F;passwd"></a>&#x2F;etc&#x2F;passwd</h2><p>管理用戶資訊的地方，包含以下資訊<br>name、passwd、uid、groupid 、description 、家目錄、shell</p>
+<p>密碼的部分因為是加密過所以會顯示x</p>
+<h2 id="etc-group"><a href="#etc-group" class="headerlink" title="&#x2F;etc&#x2F;group"></a>&#x2F;etc&#x2F;group</h2><p>可以查看所有的群組，同時標註每個用戶是屬於哪個群組，包含以下資訊<br>groupname、grouppassword、groupid ..</p>
+<h2 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="&#x2F;etc&#x2F;shadow"></a>&#x2F;etc&#x2F;shadow</h2><p>這個檔案存放加密過後密碼、密碼過期日、長度限制等等</p>
+<p>可以使用 <code>grep 用戶名 /etc/shadow</code> 查看，會發現一串數字，最後幾個數字，沒有修改過的情況下預設大概會長這樣<code>0:99999:7:::</code></p>
+<p>這幾個數字分別為 多少天不能改密碼、密碼多久時間內有效，時間到就需要修改密碼、修改密碼前的警告天數…</p>
+<p>以下就整理<code>/etc/shadow</code> 檔案中 會顯示的資訊，這些資訊以<code>:</code>分隔，每一列代表一個使用者帳戶</p>
+<ul>
+<li><p>列 1：用戶名</p>
+</li>
+<li><p>列 2：經過加密過後的使用者密碼</p>
+</li>
+<li><p>列 3：上次修改密碼的日期</p>
+</li>
+<li><p>列 4：密碼過期期限，過期後，使用者需要修改密碼才能繼續使用帳戶。</p>
+</li>
+<li><p>列 5：密碼需要修改前的警告天數</p>
+</li>
+<li><p>列 6：密碼過期後帳戶的有效天數。</p>
+</li>
+<li><p>列 7：帳戶失效日期</p>
+</li>
+<li><p>列 8：保留欄位，這些欄位在一些系統中可能用於儲存其他額外的資訊。</p>
+</li>
+</ul>
+<h2 id="etc-login-defs"><a href="#etc-login-defs" class="headerlink" title="&#x2F;etc&#x2F;login.defs"></a>&#x2F;etc&#x2F;login.defs</h2><p>用戶建立時預設使用的設置，如UID、密碼期限…，非常重要的檔案，關係到了整個系統的安全</p>
+<h1 id="用戶管理"><a href="#用戶管理" class="headerlink" title="用戶管理"></a>用戶管理</h1><h2 id="新增用戶-useradd"><a href="#新增用戶-useradd" class="headerlink" title="新增用戶 (useradd)"></a>新增用戶 (useradd)</h2><p><code>useradd 用戶名</code></p>
+<p>新增後會發現<code>/home</code> 多出了一個用戶的目錄</p>
+<p>創建之後也會用戶預設會創建一個跟用戶名一樣的群組，用戶會在該群組內</p>
+<h2 id="刪除用戶-userdel"><a href="#刪除用戶-userdel" class="headerlink" title="刪除用戶 (userdel)"></a>刪除用戶 (userdel)</h2><p>僅刪除用戶<br><code>userdel 用戶名</code></p>
+<ul>
+<li><code>-r</code> : 刪除用戶，同時也刪除家目錄 <code>userdel -r 用戶名</code></li>
+</ul>
+<h2 id="修改用戶-usermod"><a href="#修改用戶-usermod" class="headerlink" title="修改用戶 (usermod)"></a>修改用戶 (usermod)</h2><ul>
+<li><p><code>-l</code> :  修改用戶名</p>
+</li>
+<li><p><code>-d</code> :  修改用戶家目錄。(登陸後所在的目錄)</p>
+</li>
+<li><p><code>-g</code> :  修改用戶所屬的群組。 (會讓家目錄的擁有群組改變)</p>
+</li>
+<li><p><code>-G</code> :  修改用戶所屬的附加群組。</p>
+</li>
+<li><p><code>-s</code> :  修改用戶登入後所使用的shell。</p>
+</li>
+<li><p><code>-m</code> :  如果修改了家目錄，同時移動用戶的家目錄內容。</p>
+</li>
+</ul>
+<h3 id="新增用戶到群組"><a href="#新增用戶到群組" class="headerlink" title="新增用戶到群組"></a>新增用戶到群組</h3><p>只是讓用戶多加入一個群組，不會影響到原本用戶所在的群組</p>
+<p><code>usermod -G 群組名  用戶名</code></p>
+<p>會修改到用戶原本所在的群組</p>
+<p><code>usermod -g 群組名  用戶名</code></p>
+<h3 id="修改用戶名稱"><a href="#修改用戶名稱" class="headerlink" title="修改用戶名稱"></a>修改用戶名稱</h3><p>只會修改用戶名，其他如家目錄、群組都不會動到</p>
+<p><code>sudo usermod -l 新用戶名 舊用戶名</code></p>
+<p>例如 :<br><code>sudo usermod -l allynn ally</code></p>
+<h3 id="修改家目錄"><a href="#修改家目錄" class="headerlink" title="修改家目錄"></a>修改家目錄</h3><p><code>sudo usermod -d 新目錄名稱 -m 用戶名</code></p>
+<p>例如 :<br><code>sudo usermod -d /home/kiki -m ally</code></p>
+<ul>
+<li><p>目錄名稱儘量用<strong>絕對路徑</strong></p>
+</li>
+<li><p>使用 <code>-m</code> 會將原本內容換過去，如果想要新目錄是空的就不用加 <code>-m</code></p>
+</li>
+</ul>
+<h3 id="自己的測試結果"><a href="#自己的測試結果" class="headerlink" title="自己的測試結果"></a>自己的測試結果</h3><ul>
+<li><p><code>-m</code> 比較像是給家目錄改名，原檔名會直接被變成新檔名</p>
+</li>
+<li><p>有加 <code>-m</code> 新目錄名不能存在</p>
+</li>
+<li><p>不加 <code>-m</code> 則目錄必須存在</p>
+</li>
+<li><p>如果只是用 <code>-d</code> ，就什麼都沒差，只是修改用戶登陸後所在的目錄</p>
+</li>
+<li><p>該檔案如果一開始是由root 建立 也沒關係，使用 -d 後不會改變檔案擁有者， -d 很單純的是修改用戶登陸後所在的目錄</p>
+</li>
+</ul>
+<h3 id="同時使用多個參數"><a href="#同時使用多個參數" class="headerlink" title="同時使用多個參數"></a>同時使用多個參數</h3><p><code>useradd -g student -s /bin/bash -c “smart guy” -d /home/jerry -m jerry</code></p>
+<h1 id="群組管理"><a href="#群組管理" class="headerlink" title="群組管理"></a>群組管理</h1><h2 id="新增群組-groupadd"><a href="#新增群組-groupadd" class="headerlink" title="新增群組 (groupadd)"></a>新增群組 (groupadd)</h2><p><code>groupadd 群組名</code></p>
+<h2 id="刪除群組-groupdel"><a href="#刪除群組-groupdel" class="headerlink" title="刪除群組 (groupdel)"></a>刪除群組 (groupdel)</h2><p><code>groupdel 群組名</code></p>
+<h1 id="密碼管理-chage"><a href="#密碼管理-chage" class="headerlink" title="密碼管理 (chage)"></a>密碼管理 (chage)</h1><p><code>chage</code> 是針對個別用戶進行設定</p>
+<p>如果想要對所有的用戶進行修改，可以修改<code>/etc/login.defs</code> 的內容</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p><code>chage -m 3 -M 90 -W 5 -I 3 用戶名</code></p>
+<ul>
+<li><p><code>-m</code> : 設定變更密碼後，多少天以後才能再改密碼</p>
+</li>
+<li><p><code>-M</code> : 密碼的最大有效天數，時間到會請使用者改密碼</p>
+</li>
+<li><p><code>-W</code> : 密碼到期前幾天會提醒用戶</p>
+</li>
+<li><p><code>-I</code> : 密碼到期多少天 後，帳戶會禁用</p>
+</li>
+<li><p><code>-E</code> : 可以直接設定用戶帳戶的過期日期 ，格式為 <code>YYYY-MM-DD</code></p>
+</li>
+</ul>
+<p>只會影響本地帳戶（非LDAP等遠程帳戶）的設置</p>
+<h1 id="切換用戶-su"><a href="#切換用戶-su" class="headerlink" title="切換用戶 (su -)"></a>切換用戶 (su -)</h1><h3 id="切換到其他用戶"><a href="#切換到其他用戶" class="headerlink" title="切換到其他用戶"></a>切換到其他用戶</h3><p><code>su - 用戶名</code></p>
+<h3 id="切換到root-帳號"><a href="#切換到root-帳號" class="headerlink" title="切換到root 帳號"></a>切換到root 帳號</h3><p><code>su -</code></p>
+<p>切換到root 之後，如果想換到其他用戶，不用再輸入密碼</p>
+<p>切換過去後可以使用 <code>exit</code> 登出</p>
+<h1 id="root-權限-su-、-sudo"><a href="#root-權限-su-、-sudo" class="headerlink" title="root 權限 (su - 、 sudo)"></a>root 權限 (su - 、 sudo)</h1><p>root是整個操作系統中的超級用戶，擁有最高級的權限，說它系統內的神也不為過，神可以選擇要給哪個用戶自己部份的權力</p>
+<h2 id="定義那些用戶可以使用sudo-etc-sudoers"><a href="#定義那些用戶可以使用sudo-etc-sudoers" class="headerlink" title="定義那些用戶可以使用sudo  (&#x2F;etc&#x2F;sudoers)"></a>定義那些用戶可以使用sudo  (&#x2F;etc&#x2F;sudoers)</h2><p>用戶是否可以使用sudo，都配置在 <strong><code>/etc/sudoers</code></strong></p>
+<h3 id="修改用戶到-wheel群組"><a href="#修改用戶到-wheel群組" class="headerlink" title="修改用戶到 wheel群組"></a>修改用戶到 wheel群組</h3><p>找到 wheel 那行，會看到只要在wheel 這個群組內的用戶，都有root 權限 (可以使用 sudo 指令)</p>
+<p><code>usermod -G wheel 用戶名</code></p>
+<h3 id="定義個別用戶"><a href="#定義個別用戶" class="headerlink" title="定義個別用戶"></a>定義個別用戶</h3><p>找到root ALL(ALL)&#x3D;ALL 那行，在下一行新增個用戶名</p>
+<p><code>用戶名 ALL(ALL)=ALL</code></p>
+<h1 id="用戶監控-who、last、w、id-指令"><a href="#用戶監控-who、last、w、id-指令" class="headerlink" title="用戶監控 (who、last、w、id 指令)"></a>用戶監控 (who、last、w、id 指令)</h1><ul>
+<li><code>who</code></li>
+<li><code>last</code></li>
+<li><code>w</code></li>
+<li><code>pinky</code></li>
+<li><code>id</code></li>
+<li><code>users</code></li>
+</ul>
+<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>查看那些人正在登錄中</p>
+<ul>
+<li>列 1：用戶名</li>
+<li>列 2：終端（tty）名</li>
+<li>列 3：登錄時間</li>
+<li>列 4：來源 IP 地址或主機名</li>
+</ul>
+<h3 id="last"><a href="#last" class="headerlink" title="last"></a>last</h3><p>可以查看所有登錄過系統的歷史紀錄</p>
+<p><strong>只看登陸名</strong></p>
+<p><code>last | awk &#39;&#123;print $1&#125;&#39;</code> </p>
+<p><strong>只看登陸名、排序</strong></p>
+<p><code>last | awk &#39;&#123;print $1&#125;&#39;  | sort</code></p>
+<p><strong>只看登陸名、排序、去重複</strong></p>
+<p><code>last | awk &#39;&#123;print $1&#125;&#39;  | sort  |  uniq</code></p>
+<h3 id="w"><a href="#w" class="headerlink" title="w"></a>w</h3><p>比 <code>who</code> 更詳細一點的資訊，包含用戶正在使用的程序</p>
+<ul>
+<li>列 1：用戶名</li>
+<li>列 2：TTY（終端）名</li>
+<li>列 3：登錄時間</li>
+<li>列 4：運行的命令或活動</li>
+<li>列 5：JCPU（用戶和系統的 CPU 時間）</li>
+<li>列 6：PCPU（僅用戶 CPU 時間）</li>
+<li>列 7：用戶的活動狀態</li>
+<li>列 8：登錄的來源 IP 地址或主機名</li>
+</ul>
+<h3 id="pinky"><a href="#pinky" class="headerlink" title="pinky"></a>pinky</h3><p>顯示有關用戶的一些基本信息，包括用戶名、真實姓名、登錄時間、空閒時間等。，較早版本可能使用<code>finger</code>指令 (centos 7 以前)</p>
+<p>指令<br><code>pinky  用戶名</code></p>
+<p>以下是一些可能顯示的列信息：</p>
+<ul>
+<li>列 1：用戶名</li>
+<li>列 2：真實姓名</li>
+<li>列 3：終端（tty）名</li>
+<li>列 4：登錄時間</li>
+<li>列 5：空閒時間</li>
+<li>列 6：登錄 IP 地址或主機名</li>
+</ul>
+<p>如果未指定用戶名，它將默將當前登錄中的用戶顯示出來</p>
+<h2 id="id"><a href="#id" class="headerlink" title="id"></a>id</h2><p>查看自己的資訊 (UID、組別….)</p>
+<p><code>id</code> </p>
+<p>查看特定用戶資訊 (UID、組別….)</p>
+<p><code>id 用戶名</code></p>
+<h2 id="users"><a href="#users" class="headerlink" title="users"></a>users</h2><p>查看當前登陸的用戶名</p>
+<h1 id="與用戶對話"><a href="#與用戶對話" class="headerlink" title="與用戶對話"></a>與用戶對話</h1><ul>
+<li><code>wall</code></li>
+<li><code>write</code></li>
+</ul>
+<h2 id="wall"><a href="#wall" class="headerlink" title="wall"></a>wall</h2><p>跟所有當前登錄中的用戶廣播</p>
+<p><code>wall</code><br>輸入指令後可以開始輸入要廣播的訊息，打完按 ctrl+D 送出</p>
+<p>或是可以直接在後面接要廣播的訊息<br><code>wall your message</code></p>
+<h2 id="write"><a href="#write" class="headerlink" title="write"></a>write</h2><p>跟指定用戶傳遞訊息</p>
+<p><code>write 用戶名</code></p>
+<p>打完按 ctrl+D 送出</p>
+<p>或是可以直接在後面接要廣播的訊息<br><code>write 用戶名 your message</code></p>
 
                 
               </div>
@@ -343,7 +482,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -358,7 +497,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%89%8D%E7%AB%AF/" class="print-no-link">#前端</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
     </div>
   
@@ -370,8 +509,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hexo 主題修改(Fluid)</div>
-      <div>http://example.com/2023/07/17/hexo-theme-modify/</div>
+      <div>Linux 用戶管理</div>
+      <div>http://example.com/2023/08/03/linux-user-management/</div>
     </div>
     <div class="license-meta">
       
@@ -383,7 +522,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2023年7月17日</div>
+          <div>2023年8月3日</div>
         </div>
       
       
@@ -415,18 +554,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/17/deploy-to-github-page/" title="將Hexo Blog 部屬到github pages 上">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">將Hexo Blog 部屬到github pages 上</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/17/hexo-introduce/" title="Hexo 框架介紹">
-                        <span class="hidden-mobile">Hexo 框架介紹</span>
+                      <a href="/2023/08/03/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
