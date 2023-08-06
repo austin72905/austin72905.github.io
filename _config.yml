@@ -108,3 +108,7 @@ theme: fluid #初始為 landscape
 
 deploy:
   type: ''
+
+# sitemap
+sitemap:
+  path: sitemap.xml
