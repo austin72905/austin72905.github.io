@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Austin Lin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言在前面兩篇關於文本處理的文章 Linux 文本處理(1) (查看文件內容)   以及 Linux 文本處理(2) (寫入資料到文件)   介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。 cut (切割、擷取文字)常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 split() 方法，會以每行作為單">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 文本處理(3) (cut、grep、sort、uniq、wc)">
+<meta property="og:url" content="https://austin72905.github.io/2023/08/28/linux-text-processing3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言在前面兩篇關於文本處理的文章 Linux 文本處理(1) (查看文件內容)   以及 Linux 文本處理(2) (寫入資料到文件)   介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。 cut (切割、擷取文字)常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 split() 方法，會以每行作為單">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-08-28T00:53:00.000Z">
+<meta property="article:modified_time" content="2023-08-28T08:35:20.421Z">
+<meta property="article:author" content="Austin Lin">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Linux 文本處理(3) (cut、grep、sort、uniq、wc) - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"austin72905.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":false,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-D32GX2SXWV"},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-D32GX2SXWV", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-D32GX2SXWV');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Austin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首頁</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>全部文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分類</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>標籤</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>關於</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux 文本處理(3) (cut、grep、sort、uniq、wc)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Austin Lin
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-28 00:53" pubdate>
+          2023年8月28日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux 文本處理(3) (cut、grep、sort、uniq、wc)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在前面兩篇關於文本處理的文章</p>
+<a href="/2023/08/26/linux-text-processing/" title="Linux 文本處理(1) (查看文件內容)(cat、more、less、tail、head)">Linux 文本處理(1) (查看文件內容)</a>
+
+
+<p>以及</p>
+<a href="/2023/08/26/linux-text-processing2/" title="Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)">Linux 文本處理(2) (寫入資料到文件)</a>
+
+
+<p>介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。</p>
+<h1 id="cut-切割、擷取文字"><a href="#cut-切割、擷取文字" class="headerlink" title="cut (切割、擷取文字)"></a>cut (切割、擷取文字)</h1><p>常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 <strong><font color=#EB5757><code>split()</code></font></strong> 方法，會以每<code>行</code>作為單位執行</p>
+<p>常用參數</p>
+<ul>
+<li><code>-c</code>：擷取特定位置的字符(從1開始)，擷取多個位置用 <code>,</code>分開，連續位置用 <code>-</code></li>
+<li><code>-f</code>：用分割符分割後，擷取哪列的值，多列也是用<code>,</code>分隔，都配合 <code>-d</code> 使用，沒有設定分隔符就是單純把每行印出來</li>
+<li><code>-d</code>：指定分割符</li>
+</ul>
+<p>以下為使用範例</p>
+<h2 id="擷取特定位置字符"><a href="#擷取特定位置字符" class="headerlink" title="擷取特定位置字符"></a>擷取特定位置字符</h2><ul>
+<li><p><strong>切割文本文件每行的第1至3个字符：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cut</span> -c 1-3 文件名.txt<br><br><span class="hljs-comment"># 假設文本內容為</span><br>abcddd<br>bbcddd<br><br><span class="hljs-comment"># 輸出會為</span><br>abc<br>bbc<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>擷取文件內每行的1,3,5 的字符</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cut</span> -c 1,3,5 文件名.txt<br><br><span class="hljs-comment"># 假設文本內容為</span><br>abcddd<br>bbcddd<br><br><span class="hljs-comment"># 輸出會為</span><br>acd<br>bcd<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>擷取文件內每行1至3、6至9 的字符</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cut</span> -c 1-3,6-9 文件名.txt<br><br><span class="hljs-comment"># 假設文本內容為</span><br>abcdddasdg<br>bbcdddasdg<br><br><span class="hljs-comment"># 輸出會為</span><br>abcdas<br>bbcdas<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="以分隔符分割，擷取欄位值"><a href="#以分隔符分割，擷取欄位值" class="headerlink" title="以分隔符分割，擷取欄位值"></a>以分隔符分割，擷取欄位值</h2><ul>
+<li><p><strong>切割以逗號分隔的CSV文件的第2列和第4列：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27;,&#x27;</span> -f 2,4 數據.csv<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>切割以冒号分隔的密碼文件的用户名字段：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27;:&#x27;</span> -f 1 /etc/passwd<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="與其他命令結合使用"><a href="#與其他命令結合使用" class="headerlink" title="與其他命令結合使用"></a>與其他命令結合使用</h2><ul>
+<li><p><strong>從標準輸入讀取數據，切割第1、第3和第5个字符：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello,World&quot;</span> | <span class="hljs-built_in">cut</span> -c 1,3,5<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="grep-搜尋關鍵字"><a href="#grep-搜尋關鍵字" class="headerlink" title="grep (搜尋關鍵字)"></a>grep (搜尋關鍵字)</h1><p><code>grep</code>、 <code>sed</code>、<code>awk</code> 並稱linux 文本處理三劍客</p>
+<p><code>grep</code>是用來<code>搜尋關鍵字</code>，它可以使用正規表示式搜尋文字，並把匹配的行打印出來。全稱是 Global Regular Expression Print。</p>
+<p>常用參數</p>
+<ul>
+<li><p><strong><font color=#EB5757><code>-i</code></font></strong> ：忽略大小寫進行搜索</p>
+</li>
+<li><p><code>-r</code> 或 <code>-R</code> ：遞歸地在<code>目錄</code>中搜索匹配的文本</p>
+</li>
+<li><p><code>-l</code> ：顯示包含匹配文本的<code>文件名</code>。通常配合通配符<code>*</code>使用</p>
+</li>
+<li><p><code>-n</code> ：顯示匹配文本所在的行號</p>
+</li>
+<li><p><code>-v</code> ：反轉搜索，只顯示不匹配模式的行</p>
+</li>
+<li><p><strong><font color=#EB5757><code>-c</code></font></strong> ：顯示匹配行的數量</p>
+</li>
+<li><p><code>-A num</code> ：顯示匹配行及<code>後面</code> num 行的內容</p>
+</li>
+<li><p><code>-B num</code> ：顯示匹配行及<code>前面</code> num 行的內容</p>
+</li>
+<li><p><strong><font color=#EB5757><code>-C num</code></font></strong> ：顯示匹配行以及<code>前後</code>各 num 行的內容</p>
+</li>
+<li><p><code>--color=always</code> ：關鍵字高亮</p>
+</li>
+</ul>
+<p>常用範例</p>
+<h2 id="搜尋關鍵字"><a href="#搜尋關鍵字" class="headerlink" title="搜尋關鍵字"></a>搜尋關鍵字</h2><ul>
+<li><p><strong>在文件 “file.txt” 中搜索包含 “apple” 的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;apple&quot;</span> file.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="針對目錄遞歸搜尋-r"><a href="#針對目錄遞歸搜尋-r" class="headerlink" title="針對目錄遞歸搜尋(-r)"></a>針對目錄遞歸搜尋(-r)</h2><ul>
+<li><p><strong>在目錄 “&#x2F;home” 及其子目錄中搜索包含 “error” 的文本文件：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -r <span class="hljs-string">&quot;error&quot;</span> /home<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="忽略大小寫-i"><a href="#忽略大小寫-i" class="headerlink" title="忽略大小寫(-i)"></a>忽略大小寫(-i)</h2><ul>
+<li><p><strong>忽略大小寫，在文件 “file.txt” 中搜索 “Code: 502”：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -i <span class="hljs-string">&quot;Code: 502&quot;</span> file.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="顯示行號-n"><a href="#顯示行號-n" class="headerlink" title="顯示行號(-n)"></a>顯示行號(-n)</h2><ul>
+<li><p><strong>在文件 “file.txt” 中搜索 “apple” 並顯示行號：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -n <span class="hljs-string">&quot;apple&quot;</span> file.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="顯示包含匹配文本的文件名-l"><a href="#顯示包含匹配文本的文件名-l" class="headerlink" title="顯示包含匹配文本的文件名(-l)"></a>顯示包含匹配文本的文件名(-l)</h2><ul>
+<li><p><strong>在當前目錄搜尋顯示包含 “apple” 的文件名，而不顯示匹配的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -l <span class="hljs-string">&quot;apple&quot;</span> *<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在指定目錄還有其子目錄，搜尋內容包含”test”的文件名：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -r <span class="hljs-string">&quot;test&quot;</span> -l /home/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>搜尋指定目錄下的文件，內容包含”test”的文件名：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep  <span class="hljs-string">&quot;test&quot;</span> -l /home/*<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="顯示匹配行及前後num行-C數字"><a href="#顯示匹配行及前後num行-C數字" class="headerlink" title="顯示匹配行及前後num行(-C數字)"></a>顯示匹配行及前後num行(-C數字)</h2><ul>
+<li><p><strong>搜尋關鍵字，顯示匹配行及其後4行</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>grep -C4 <span class="hljs-string">&quot;status: 502&quot;</span> 2020-1-1.<span class="hljs-built_in">log</span> <br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="關鍵字高亮-color-always"><a href="#關鍵字高亮-color-always" class="headerlink" title="關鍵字高亮 --color=always"></a>關鍵字高亮 <code>--color=always</code></h2><ul>
+<li>關鍵字高亮，如果有用到管道，需要兩個都加  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -C4 <span class="hljs-string">&quot;status: 502&quot;</span> 2020-1-1.<span class="hljs-built_in">log</span>  --color=always | grep -C4 <span class="hljs-string">&quot;url&quot;</span>  --color=always<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="egrep-grep高配版"><a href="#egrep-grep高配版" class="headerlink" title="egrep (grep高配版)"></a>egrep (grep高配版)</h1><p>grep 的高級版，可以同時搜尋多個關鍵字</p>
+<pre><code class="hljs"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">egrep <span class="hljs-string">&quot;A|B&quot;</span> 文件名.txt<br></code></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="sort-排序"><a href="#sort-排序" class="headerlink" title="sort (排序)"></a>sort (排序)</h1><p>用於對文本文件中的內容進行 **<font color=#EB5757><code>排序</code></font>**，按照字母順序or數字順序，以每<code>行</code>作為單位執行</p>
+<p>若未指定文件名，<code>sort</code> 命令將會從標準輸入中讀取資料。</p>
+<p>常用參數</p>
+<ul>
+<li><code>-r</code>：倒序排序</li>
+<li><code>-f</code>：忽略大小排序</li>
+<li><code>-k</code>：根據指定的欄位進行排序(每個欄位預設以<code>\t(空格)</code>分割)。例如，<code>k 2</code> 表示按照第二個欄位進行排序。</li>
+<li><code>-n</code>：按照數字大小進行排序，而不是用英文</li>
+<li><code>-t</code>：指定欄位分隔符</li>
+<li><code>-u</code>：重複的行只保留一行</li>
+</ul>
+<p>以下是常用範例</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><p><strong>對文本文件進行字母順序排序：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="以數字進行排序-n"><a href="#以數字進行排序-n" class="headerlink" title="以數字進行排序(-n)"></a>以數字進行排序(-n)</h2><ul>
+<li><p><strong>對包含數字的檔案進行數值排序：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> -n 文件名.txt <span class="hljs-comment"># 如果沒有數字就預設使用英文字母排序</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="指定分隔符，選擇特定欄位進行排序-t"><a href="#指定分隔符，選擇特定欄位進行排序-t" class="headerlink" title="指定分隔符，選擇特定欄位進行排序(-t)"></a>指定分隔符，選擇特定欄位進行排序(-t)</h2><ul>
+<li><p><strong>對包含 CSV 資料的檔案，依照第二個欄位的數值進行排序：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> -t <span class="hljs-string">&#x27;,&#x27;</span> -k 2 資料.csv<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="倒序-r"><a href="#倒序-r" class="headerlink" title="倒序(-r)"></a>倒序(-r)</h2><ul>
+<li><p><strong>對文本文件進行倒序排序並移除重複的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> -r  文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="去重複-u"><a href="#去重複-u" class="headerlink" title="去重複(-u)"></a>去重複(-u)</h2><ul>
+<li><p><strong>對文本文件進型排序並移除重複的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span>  -u 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="uniq-去重複"><a href="#uniq-去重複" class="headerlink" title="uniq (去重複)"></a>uniq (去重複)</h1><p>主要用於處理已經排序過的文本文件，能夠<code>去除重複</code>的行或報告重複行的數量。</p>
+<p>常用參數</p>
+<ul>
+<li><code>-c</code>：除了顯示去重複後的數據外，也會在每行顯示該行文字出現的數量</li>
+<li><code>-d</code>：只顯示重複行 (exclude 不重複行)</li>
+<li><code>-i</code>：去重複時，忽略大小寫</li>
+</ul>
+<p>常用範例</p>
+<h2 id="去重複"><a href="#去重複" class="headerlink" title="去重複"></a>去重複</h2><ul>
+<li><p><strong>去除已排序文件中連續重複的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uniq</span> 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="顯示重複數量-c"><a href="#顯示重複數量-c" class="headerlink" title="顯示重複數量(-c)"></a>顯示重複數量(-c)</h2><ul>
+<li><p><strong>顯示已排序文件中每行重複的數量：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uniq</span> -c 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="僅顯示重複行-d"><a href="#僅顯示重複行-d" class="headerlink" title="僅顯示重複行(-d)"></a>僅顯示重複行(-d)</h2><ul>
+<li><p><strong>僅顯示已排序文件中重複的行，去除不重複的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uniq</span> -d 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="忽略大小寫-i-1"><a href="#忽略大小寫-i-1" class="headerlink" title="忽略大小寫(-i)"></a>忽略大小寫(-i)</h2><ul>
+<li><p><strong>忽略大小寫，去除已排序文件中連續重複的行：</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uniq</span> -i 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="搭配sort指令使用"><a href="#搭配sort指令使用" class="headerlink" title="搭配sort指令使用"></a>搭配sort指令使用</h2><ul>
+<li><p><strong>搭配sort 指令使用</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> 文件名.txt | <span class="hljs-built_in">uniq</span> -c<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="wc-計數"><a href="#wc-計數" class="headerlink" title="wc (計數)"></a>wc (計數)</h1><p>用來計算文本文件內各項數值的數量<br>沒有輸入任何參數，預設輸出該文件有 幾行、幾個單字、幾個byte</p>
+<p>常用參數</p>
+<ul>
+<li><code>-l</code>：有幾<code>行</code>，通常日誌每個欄位都用行區分，所以這個是最泛用的</li>
+<li><code>-w</code>：有幾個<code>單字</code>，hello world 算2個單字</li>
+<li><code>-c</code>：有幾個<code>byte</code></li>
+<li><code>-m</code>：有幾個<code>char</code></li>
+</ul>
+<p>常用範例</p>
+<h2 id="顯示幾行-l"><a href="#顯示幾行-l" class="headerlink" title="顯示幾行(-l)"></a>顯示幾行(-l)</h2><ul>
+<li><p><strong>該文件有幾行</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">wc</span> -l 文件名.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="搭配其他指令，計算筆數"><a href="#搭配其他指令，計算筆數" class="headerlink" title="搭配其他指令，計算筆數"></a>搭配其他指令，計算筆數</h2><ul>
+<li><p><strong>搭配其他指令找到的資料，計算有幾筆</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;status: 502&quot;</span> 文件名.txt | <span class="hljs-built_in">wc</span> -l<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux 文本處理(3) (cut、grep、sort、uniq、wc)</div>
+      <div>https://austin72905.github.io/2023/08/28/linux-text-processing3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Austin Lin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>發布於</div>
+          <div>2023年8月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>許可協議</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/28/hello-world/" title="Hello World">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/26/linux-text-processing2/" title="Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)">
+                        <span class="hidden-mobile">Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <span>blog主題使用</span> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
