@@ -16,14 +16,14 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言本文將會介紹linux中的標準數據流，以及常見將數據寫入文件的方法 寫入資料到文件通常有幾種方法  使用 vi 編輯器 重定向符( &gt;、&gt;&gt; ) echo 指令 搭配 &gt;、&gt;&gt; 重定向符 tee指令  echo (直接打印文字到終端上)直接打印文字到終端上 1echo &quot;hello world&quot;  終端機上就會打印出hello world">
+    <meta name="description" content="進程相關指令ps（查看各進程情況）1ps -ef 1ps axj  a: 顯示所有 x：顯示沒有控制終端的進程 j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）  kill（中止進程）用來終止特定進程的運行 通過向進程發起信號，來結束相對應的進程 kill -l kill -1 PIDkill -9 PID 需要有足">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)">
-<meta property="og:url" content="https://austin72905.github.io/2023/08/26/linux-text-processing2/index.html">
+<meta property="og:title" content="Linux 系統管理-進程相關操作">
+<meta property="og:url" content="https://austin72905.github.io/2023/09/04/linux-system-process/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言本文將會介紹linux中的標準數據流，以及常見將數據寫入文件的方法 寫入資料到文件通常有幾種方法  使用 vi 編輯器 重定向符( &gt;、&gt;&gt; ) echo 指令 搭配 &gt;、&gt;&gt; 重定向符 tee指令  echo (直接打印文字到終端上)直接打印文字到終端上 1echo &quot;hello world&quot;  終端機上就會打印出hello world">
+<meta property="og:description" content="進程相關指令ps（查看各進程情況）1ps -ef 1ps axj  a: 顯示所有 x：顯示沒有控制終端的進程 j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）  kill（中止進程）用來終止特定進程的運行 通過向進程發起信號，來結束相對應的進程 kill -l kill -1 PIDkill -9 PID 需要有足">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-08-26T17:33:00.000Z">
+<meta property="article:published_time" content="2023-09-04T01:48:00.000Z">
 <meta property="article:modified_time" content="2023-09-04T06:46:20.647Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
@@ -31,7 +31,7 @@
   
   
   
-  <title>Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr) - Hexo</title>
+  <title>Linux 系統管理-進程相關操作 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)"></span>
+            <span id="subtitle" data-typed-text="Linux 系統管理-進程相關操作"></span>
           
         </div>
 
@@ -240,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-26 17:33" pubdate>
-          2023年8月26日 下午
+        <time datetime="2023-09-04 01:48" pubdate>
+          2023年9月4日 凌晨
         </time>
       </span>
     
@@ -284,102 +284,50 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)</h1>
+            <h1 id="seo-header">Linux 系統管理-進程相關操作</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文將會介紹linux中的標準數據流，以及常見將數據寫入文件的方法</p>
-<h1 id="寫入資料到文件"><a href="#寫入資料到文件" class="headerlink" title="寫入資料到文件"></a>寫入資料到文件</h1><p>通常有幾種方法</p>
+                <h1 id="進程相關指令"><a href="#進程相關指令" class="headerlink" title="進程相關指令"></a>進程相關指令</h1><h2 id="ps（查看各進程情況）"><a href="#ps（查看各進程情況）" class="headerlink" title="ps（查看各進程情況）"></a>ps（查看各進程情況）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps axj<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用 vi 編輯器</li>
-<li>重定向符( &gt;、&gt;&gt; )</li>
-<li><code>echo</code> 指令 搭配 &gt;、&gt;&gt; 重定向符</li>
-<li><code>tee</code>指令</li>
+<li>a: 顯示所有</li>
+<li>x：顯示沒有控制終端的進程</li>
+<li>j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）</li>
 </ul>
-<h2 id="echo-直接打印文字到終端上"><a href="#echo-直接打印文字到終端上" class="headerlink" title="echo (直接打印文字到終端上)"></a>echo (直接打印文字到終端上)</h2><p>直接打印文字到終端上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>終端機上就會打印出<code>hello world</code></p>
-<p>但有時想要將打印的文字寫入到文件，而非只是打印出來，可以配合 <code>&gt;</code>、<code>&gt;&gt;</code> 符號</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> &gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
-<p>此命令會將<code>hello world</code>寫入到 <code>test</code> 文件中</p>
-<h2 id="重定向符-、-兩者的差異"><a href="#重定向符-、-兩者的差異" class="headerlink" title="重定向符 &gt;、&gt;&gt; 兩者的差異"></a>重定向符 <code>&gt;</code>、<code>&gt;&gt;</code> 兩者的差異</h2><h3 id="符號：覆蓋檔案內容"><a href="#符號：覆蓋檔案內容" class="headerlink" title="&gt; 符號：覆蓋檔案內容"></a><code>&gt;</code> 符號：覆蓋檔案內容</h3><p><strong><font color=#EB5757><code>&gt;</code></font></strong> 符號會將文字寫入指定的文件中，</p>
+<h2 id="kill（中止進程）"><a href="#kill（中止進程）" class="headerlink" title="kill（中止進程）"></a>kill（中止進程）</h2><p>用來終止特定進程的運行</p>
+<p>通過向進程發起信號，來結束相對應的進程</p>
+<p>kill -l</p>
+<p>kill -1 PID<br>kill -9 PID</p>
+<p>需要有足夠的權限，才能夠停止其他用戶的進程</p>
+<p>停止進程</p>
+<p>若不加任何參數，預設為-15，使用信號15，進程正常退出</p>
+<p>常用參數</p>
 <ul>
-<li>如果文件存在，會覆寫內容</li>
-<li>如果文件不存在，會創建新文件，並寫入內容</li>
+<li>-l：列出所有的信號名稱</li>
+<li>-u：終止指定用戶的進程</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> &gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><p>kill   PID (預設使用-15停止進程)</p>
+<p>kill -1  PID (重新開啟進程)</p>
+<p>kill -2  PID (像是crtl+c 一樣的停止進程)</p>
+<p>kill -9  PID (強制停止進程)</p>
+<p>kill -15  PID (發送信號給進程，請他正常退出)</p>
+<h2 id="查看所有的信號名稱"><a href="#查看所有的信號名稱" class="headerlink" title="查看所有的信號名稱"></a>查看所有的信號名稱</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -l<br></code></pre></td></tr></table></figure>
 
-<p>此時打印<code>test</code> 文件內容應該會出現<code>hello world</code></p>
-<h3 id="符號：追加檔案內容"><a href="#符號：追加檔案內容" class="headerlink" title="&gt;&gt; 符號：追加檔案內容"></a><code>&gt;&gt;</code> 符號：追加檔案內容</h3><p><strong><font color=#EB5757><code>&gt;&gt;</code></font></strong> 符號會將文字寫入指定的文件中，但不是使用覆寫的方式，而是在原本的內容上追加內容到文件末尾</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> &gt;&gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+<h3 id="強制退出進程"><a href="#強制退出進程" class="headerlink" title="強制退出進程"></a>強制退出進程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 PID<br></code></pre></td></tr></table></figure>
 
-<p>如果原本的<code>test</code> 文件裡面已有內容，那會在文件末尾追加<code>hello world</code>，linux 文件末尾通常是換行符(<code>\n</code>)，所以會在新的一行看到<code>hello world</code></p>
-<h2 id="tee-指令-將資料寫入文件外，同時也在終端打印"><a href="#tee-指令-將資料寫入文件外，同時也在終端打印" class="headerlink" title="tee 指令 (將資料寫入文件外，同時也在終端打印)"></a>tee 指令 (將資料寫入文件外，同時也在終端打印)</h2><ul>
-<li>將內容打印到終端，並寫入文件</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> | <span class="hljs-built_in">tee</span> <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+<h3 id="終止指定用戶的進程"><a href="#終止指定用戶的進程" class="headerlink" title="終止指定用戶的進程"></a>終止指定用戶的進程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -u 用戶帳號<br></code></pre></td></tr></table></figure>
 
-<p>這個指令類似於，先打印，在使用 <code>&gt;</code> 寫入文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> &gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+<h2 id="nice（設定進程的優先級）"><a href="#nice（設定進程的優先級）" class="headerlink" title="nice（設定進程的優先級）"></a>nice（設定進程的優先級）</h2><p>設定進程的優先級，設定數值為-20~19，數字越少，進程優先級越高</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nice</span> -n -10 <span class="hljs-built_in">sleep</span> 500<br></code></pre></td></tr></table></figure>
 <ul>
-<li>將內容打印到終端，並<code>追加</code>寫入文件</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello world&quot;</span> | <span class="hljs-built_in">tee</span> -a <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
-
-<p>加上 <code>-a</code> 參數</p>
-<h1 id="重定向符號"><a href="#重定向符號" class="headerlink" title="重定向符號"></a>重定向符號</h1><ul>
-<li><code>&gt;</code>  覆寫內容</li>
-<li><code>&gt;&gt;</code> 追加內容</li>
-<li><code>2&gt;</code> 錯誤輸出重定向</li>
-<li><code>&lt;</code>  從文件讀取內容，而不是從終端輸入</li>
-<li><code>|</code>  通道符，可以將文本傳給下一個指令處理</li>
-</ul>
-<h2 id="：輸出重定向，覆蓋檔案內容"><a href="#：輸出重定向，覆蓋檔案內容" class="headerlink" title="&gt;：輸出重定向，覆蓋檔案內容"></a><code>&gt;</code>：輸出重定向，覆蓋檔案內容</h2><p>使用 <code>&gt;</code> 可將命令的輸出重定向到指定的文件，如果該文件已經存在，則內容會被覆蓋;文件不存在則會創建一個新檔案</p>
-<h2 id="：追加輸出重定向，追加檔案內容"><a href="#：追加輸出重定向，追加檔案內容" class="headerlink" title="&gt;&gt;：追加輸出重定向，追加檔案內容"></a><code>&gt;&gt;</code>：追加輸出重定向，追加檔案內容</h2><p>用 <code>&gt;&gt;</code> 可將命令的輸出附加到指定的文件，如果該文件已經存在，則內容會被追加。</p>
-<h2 id=""><a href="#" class="headerlink" title="&lt;：輸入重定向"></a><code>&lt;</code>：輸入重定向</h2><p>從文件讀取內容，而不是從終端輸入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sort</span> &lt; tempfile  &gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
-<p>如上方指令就是將 <code>tempfile</code> 的內容傳到sort 指令裡，之後再寫入到<code>test</code>文件</p>
-<h2 id="2-：錯誤輸出重定向"><a href="#2-：錯誤輸出重定向" class="headerlink" title="2&gt;：錯誤輸出重定向"></a><code>2&gt;</code>：錯誤輸出重定向</h2><p>將錯誤的輸出寫入到指定的檔案</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> -f delfile  2&gt; <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
-<p>例如，如果在刪除<code>delfile</code>的過程中出現錯誤，就將錯誤的原因寫入<code>test</code>文件，<br>可以做到將一般的輸出與錯誤輸出分流的效果</p>
-<h2 id="：管道"><a href="#：管道" class="headerlink" title="|：管道"></a><code>|</code>：管道</h2><p>將前一個命令的輸出，傳給後面的命令處理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;status: 502&quot;</span> myfile | <span class="hljs-built_in">tail</span> -n 30<br></code></pre></td></tr></table></figure>
-<p>將<code>myfile</code> 中出現<code>status: 502</code>的行數，傳給後面的<code>tail</code> 指令處理</p>
-<h1 id="stdin、stdout、stderr"><a href="#stdin、stdout、stderr" class="headerlink" title="stdin、stdout、stderr"></a>stdin、stdout、stderr</h1><p><code>stdin</code>、<code>stdout</code>、<code>stderr</code>是linux命令啟動時，創建的 <strong><font color=#EB5757><code>標準數據流</code></font></strong> ，linux 在執行命令時，是像流式一樣處理數據，</p>
-<p>命令就像外殼(shell)一樣，這個外殼有來源跟出口，也就是<code>輸入</code>跟<code>輸出</code>，當要執行指令時，需要將數據流<code>輸入</code>外殼，並告訴命令這些數據流<code>輸出</code>的流向，是要透過管道<code>|</code>傳給下一個命令處理? 還是重定向<code>&gt;</code>、<code>&gt;&gt;</code>傳遞到文件內。</p>
-<p>在linux 當中，所有的檔案都被視為一個文件，每一個文件都會分配一個獨立的文件標示符</p>
-<ul>
-<li><code>stdin</code>：標準輸入，文件標示符為 0</li>
-<li><code>stdout</code>：標準輸出，文件標示符為 1</li>
-<li><code>stderr</code>：標準錯誤，文件標示符為 2</li>
-</ul>
-<h2 id="stdin"><a href="#stdin" class="headerlink" title="stdin"></a>stdin</h2><p>代表著標準輸入，以下是常見用途</p>
-<ul>
-<li><p><strong>用戶輸入</strong>：在命令行中獲取用戶鍵盤的輸入</p>
+<li><p>這會將 <code>sleep 500</code> 設置為較高的優先級（-10），使其在系統資源分配中更有可能獲得更多的CPU時間。</p>
 </li>
-<li><p><strong>文件輸入</strong>：讀取文件的內容，作為其他命令的輸入</p>
+<li><p>nice 命令通常需要超級用戶權限（root）才能將進程優先級降低。普通用戶只能將其提高到0</p>
 </li>
 </ul>
-<h2 id="stdout"><a href="#stdout" class="headerlink" title="stdout"></a>stdout</h2><p>代表著標準輸出，以下是常見用途</p>
-<ul>
-<li><p><strong>終端輸出</strong>：程式運行的結果輸出到終端上</p>
-</li>
-<li><p><strong>重定向到文件</strong>：程式運行的結果使用<code>&gt;</code>、<code>&gt;&gt;</code>，將數據寫入到文件中</p>
-</li>
-</ul>
-<h2 id="stderr"><a href="#stderr" class="headerlink" title="stderr"></a>stderr</h2><p>代表著標準錯誤，通常用於將程式執行過程中的 <strong><font color=#EB5757><code>錯誤</code></font></strong> 、警告和異常訊息輸出到終端或檔案，以下是常見用途</p>
-<ul>
-<li><p><strong>區分一般輸出與錯誤的輸出</strong>：將正常輸出和錯誤訊息區分開來，使得使用者能夠更容易地捕捉並處理這些不同類型的訊息。</p>
-</li>
-<li><p><strong>將錯誤輸出重定向到文件</strong>：使用<code>2&gt;</code> 將程式運行時遇到的錯誤輸出，寫入到文件中</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ll 2&gt; test.txt<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/culinxia2707/article/details/108776303">什么是Linux上的stdin，stdout和stderr？</a></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/peida/archive/2012/12/20/2825837.html">每天一个linux命令（42）：kill命令</a></p>
 
                 
               </div>
@@ -425,8 +373,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux 文本處理(2) (寫入資料到文件)(重定向指令 &gt;、&gt;&gt;、| 管道、標準數據流 stdin、stdout、stderr)</div>
-      <div>https://austin72905.github.io/2023/08/26/linux-text-processing2/</div>
+      <div>Linux 系統管理-進程相關操作</div>
+      <div>https://austin72905.github.io/2023/09/04/linux-system-process/</div>
     </div>
     <div class="license-meta">
       
@@ -438,7 +386,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2023年8月26日</div>
+          <div>2023年9月4日</div>
         </div>
       
       
@@ -470,9 +418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/28/linux-text-processing3/" title="Linux 文本處理(3) (cut、grep、sort、uniq、wc)">
+                      <a href="/2023/09/04/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux 文本處理(3) (cut、grep、sort、uniq、wc)</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -480,8 +428,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/26/linux-text-processing/" title="Linux 文本處理(1) (查看文件內容)(cat、more、less、tail、head)">
-                        <span class="hidden-mobile">Linux 文本處理(1) (查看文件內容)(cat、more、less、tail、head)</span>
+                      <a href="/2023/09/03/linux-system-management-introduce/" title="Linux 系統管理-常見名詞介紹">
+                        <span class="hidden-mobile">Linux 系統管理-常見名詞介紹</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
