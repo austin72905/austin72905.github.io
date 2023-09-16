@@ -16,15 +16,15 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="進程相關指令ps（查看各進程情況）1ps -ef 1ps axj  a: 顯示所有 x：顯示沒有控制終端的進程 j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）  kill（中止進程）用來終止特定進程的運行 通過向進程發起信號，來結束相對應的進程 kill -l kill -1 PIDkill -9 PID 需要有足">
+    <meta name="description" content="ps（查看各進程情況）ps (Process Status) 是用來查看系統當前運行的進程，可以查看當前進程的狀態以及進程號等資訊，通常會先使用ps找出特定的進程，配合kill指令來終止進程。 進程的狀態   狀態 定義    R 運行中  (Running)   S 睡眠，等待調用  (Interruptible Sleep)   D 等待硬碟I&#x2F;O  (Uninterruptible">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 系統管理-進程相關操作">
 <meta property="og:url" content="https://austin72905.github.io/2023/09/04/linux-system-process/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="進程相關指令ps（查看各進程情況）1ps -ef 1ps axj  a: 顯示所有 x：顯示沒有控制終端的進程 j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）  kill（中止進程）用來終止特定進程的運行 通過向進程發起信號，來結束相對應的進程 kill -l kill -1 PIDkill -9 PID 需要有足">
+<meta property="og:description" content="ps（查看各進程情況）ps (Process Status) 是用來查看系統當前運行的進程，可以查看當前進程的狀態以及進程號等資訊，通常會先使用ps找出特定的進程，配合kill指令來終止進程。 進程的狀態   狀態 定義    R 運行中  (Running)   S 睡眠，等待調用  (Interruptible Sleep)   D 等待硬碟I&#x2F;O  (Uninterruptible">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-09-04T01:48:00.000Z">
-<meta property="article:modified_time" content="2023-09-04T06:46:20.647Z">
+<meta property="article:modified_time" content="2023-09-16T05:12:42.202Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,37 +289,178 @@
             
               <div class="markdown-body">
                 
-                <h1 id="進程相關指令"><a href="#進程相關指令" class="headerlink" title="進程相關指令"></a>進程相關指令</h1><h2 id="ps（查看各進程情況）"><a href="#ps（查看各進程情況）" class="headerlink" title="ps（查看各進程情況）"></a>ps（查看各進程情況）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef<br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps axj<br></code></pre></td></tr></table></figure>
+                <h1 id="ps（查看各進程情況）"><a href="#ps（查看各進程情況）" class="headerlink" title="ps（查看各進程情況）"></a>ps（查看各進程情況）</h1><p>ps (Process Status) 是用來查看系統當前運行的進程，可以查看當前進程的狀態以及進程號等資訊，通常會先使用<code>ps</code>找出特定的進程，配合<code>kill</code>指令來終止進程。</p>
+<h2 id="進程的狀態"><a href="#進程的狀態" class="headerlink" title="進程的狀態"></a>進程的狀態</h2><table>
+<thead>
+<tr>
+<th>狀態</th>
+<th>定義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R</td>
+<td>運行中  (Running)</td>
+</tr>
+<tr>
+<td>S</td>
+<td>睡眠，等待調用  (Interruptible Sleep)</td>
+</tr>
+<tr>
+<td>D</td>
+<td>等待硬碟I&#x2F;O  (Uninterruptible Sleep)</td>
+</tr>
+<tr>
+<td>T</td>
+<td>暫停狀態  (Stoped)</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>僵屍進程  (Zombie)</td>
+</tr>
+<tr>
+<td>N</td>
+<td>低優先級進程</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>高優先級進程</td>
+</tr>
+<tr>
+<td>s</td>
+<td>進程的領導者</td>
+</tr>
+<tr>
+<td>I</td>
+<td>多線程狀態</td>
+</tr>
+<tr>
+<td>+</td>
+<td>前台進程</td>
+</tr>
+</tbody></table>
+<h2 id="指令風格-參數、-參數、參數"><a href="#指令風格-參數、-參數、參數" class="headerlink" title="指令風格( -參數、--參數、參數 )"></a>指令風格( <code>-參數</code>、<code>--參數</code>、<code>參數</code> )</h2><p>常會看到指令有時出現 <code>-</code>，有時 <code>--</code> ，有時前面又沒有<code>-</code>，分別代表不同風格的指令</p>
 <ul>
-<li>a: 顯示所有</li>
-<li>x：顯示沒有控制終端的進程</li>
-<li>j：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）</li>
+<li>UNIX：<code>-參數</code>，如 <code>ps -ef</code></li>
+<li>BSD：參數前沒有符號，如 <code>ps aux</code></li>
+<li>GNU：<code>--參數</code>，如 <code>ps axu --sort -%cpu</code></li>
 </ul>
-<h2 id="kill（中止進程）"><a href="#kill（中止進程）" class="headerlink" title="kill（中止進程）"></a>kill（中止進程）</h2><p>用來終止特定進程的運行</p>
-<p>通過向進程發起信號，來結束相對應的進程</p>
-<p>kill -l</p>
-<p>kill -1 PID<br>kill -9 PID</p>
-<p>需要有足夠的權限，才能夠停止其他用戶的進程</p>
-<p>停止進程</p>
-<p>若不加任何參數，預設為-15，使用信號15，進程正常退出</p>
+<h2 id="常用參數"><a href="#常用參數" class="headerlink" title="常用參數"></a>常用參數</h2><ul>
+<li><p><font color=#EB5757><code>a</code></font>：顯示當前終端運行的進程</p>
+</li>
+<li><p><font color=#EB5757><code>u</code></font>：顯示用戶相關進程與用戶相關屬性，格式會從<br>  <code>UID PID PPIC C STIME TTY TIME CMD</code> 轉變成  <code>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND</code> 的格式</p>
+</li>
+<li><p><font color=#EB5757><code>x</code></font>：顯示沒有控制終端的進程</p>
+</li>
+<li><p><font color=#EB5757><code>j</code></font>：顯示與作業有關的信息（顯示的列）：會話期ID（SID），進程組ID（PGID），控制終端（TT），終端進程組ID（TRGID）</p>
+</li>
+<li><p><font color=#EB5757><code>f</code></font>：樹狀結構，表達程序間的相互關係</p>
+</li>
+<li><p><font color=#EB5757><code>-e</code></font>：顯示所有的進程</p>
+</li>
+<li><p><font color=#EB5757><code>-f</code></font>：列出進程的完整資訊(最詳盡)</p>
+</li>
+<li><p><font color=#EB5757><code>-u</code></font>：列出指定用戶運行的進程</p>
+</li>
+<li><p><font color=#EB5757><code>--sort +-列名</code></font>：依照哪個列的數值排序，<code>+</code> 為升序(小 ~ 大) ; <code>-</code>為降序(大 ~ 小)</p>
+</li>
+</ul>
+<h2 id="ps-f列出的詳細資訊"><a href="#ps-f列出的詳細資訊" class="headerlink" title="ps -f列出的詳細資訊"></a><code>ps -f</code>列出的詳細資訊</h2><p>以下是 <code>ps -f</code> 命令列出的進程資訊的詳細說明：</p>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>定義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PID</td>
+<td>進程 ID，是系統用來識別進程的唯一編號</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>進程所屬的使用者</td>
+</tr>
+<tr>
+<td>STAT</td>
+<td>進程的狀態</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>進程連接的終端，若與終端無關顯示 <code>?</code></td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>進程使用 CPU 的時間</td>
+</tr>
+<tr>
+<td>START</td>
+<td>進程啟動的時間</td>
+</tr>
+<tr>
+<td>%CPU</td>
+<td>進程使用的 CPU 使用率</td>
+</tr>
+<tr>
+<td>%MEM</td>
+<td>進程使用的記憶體使用率</td>
+</tr>
+<tr>
+<td>VSZ</td>
+<td>進程使用的虛擬記憶體(內存)大小</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>進程使用的實際記憶體(內存)大小</td>
+</tr>
+<tr>
+<td>COMMAND</td>
+<td>進程的命令行</td>
+</tr>
+</tbody></table>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ul>
+<li><p>不加任何參數查看當前使用的終端會話(你當前使用的帳號)正在使用的進程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>顯示所有進程的完整資訊 (最常用)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef<br></code></pre></td></tr></table></figure></li>
+<li><p>想要查看CPU、記憶體等資訊時 (u 跟 j 只能選一個用)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps aux<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看與job 作業有關的列資訊，也可以用來查看守護進程 (u 跟 j 只能選一個用)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps axj<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查詢當前nginx 相關的進程，通常可以用在當nginx 占用進程號，需要將他停止時</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef | grep nginx<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>後續使用grep 又想保留標題行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef | grep -E <span class="hljs-string">&quot;^USER|nginx&quot;</span><br><br><span class="hljs-comment"># 看你選擇要顯示的列擇一</span><br>ps -ef | grep -E <span class="hljs-string">&quot;^UID|nginx&quot;</span><br></code></pre></td></tr></table></figure>
+
+</li>
+<li><p>查看root用戶運行的進程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -f -u root<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>依照cpu 使用率排序 大 ~ 小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps aux --<span class="hljs-built_in">sort</span> -%cpu<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="kill（中止進程）"><a href="#kill（中止進程）" class="headerlink" title="kill（中止進程）"></a>kill（中止進程）</h1><ul>
+<li>用來終止特定進程的運行，通過向進程發起信號，來結束相對應的進程</li>
+<li>需要有足夠的權限，才能夠停止其他用戶的進程</li>
+<li>若不加任何參數，預設為<code>-15</code>，使用信號15，進程會正常退出</li>
+</ul>
 <p>常用參數</p>
 <ul>
 <li>-l：列出所有的信號名稱</li>
 <li>-u：終止指定用戶的進程</li>
 </ul>
-<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><p>kill   PID (預設使用-15停止進程)</p>
-<p>kill -1  PID (重新開啟進程)</p>
-<p>kill -2  PID (像是crtl+c 一樣的停止進程)</p>
-<p>kill -9  PID (強制停止進程)</p>
-<p>kill -15  PID (發送信號給進程，請他正常退出)</p>
+<h2 id="常用信號"><a href="#常用信號" class="headerlink" title="常用信號"></a>常用信號</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span>   PID (預設使用-15停止進程)<br><br><span class="hljs-built_in">kill</span> -1  PID (重新開啟進程)<br><br><span class="hljs-built_in">kill</span> -2  PID (像是crtl+c 一樣的停止進程)<br><br><span class="hljs-built_in">kill</span> -9  PID (強制停止進程)<br><br><span class="hljs-built_in">kill</span> -15  PID (發送信號給進程，請他正常退出)<br></code></pre></td></tr></table></figure>
+
 <h2 id="查看所有的信號名稱"><a href="#查看所有的信號名稱" class="headerlink" title="查看所有的信號名稱"></a>查看所有的信號名稱</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -l<br></code></pre></td></tr></table></figure>
 
-<h3 id="強制退出進程"><a href="#強制退出進程" class="headerlink" title="強制退出進程"></a>強制退出進程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 PID<br></code></pre></td></tr></table></figure>
+<h2 id="強制退出進程"><a href="#強制退出進程" class="headerlink" title="強制退出進程"></a>強制退出進程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 PID<br></code></pre></td></tr></table></figure>
 
-<h3 id="終止指定用戶的進程"><a href="#終止指定用戶的進程" class="headerlink" title="終止指定用戶的進程"></a>終止指定用戶的進程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -u 用戶帳號<br></code></pre></td></tr></table></figure>
+<h2 id="終止指定用戶的進程"><a href="#終止指定用戶的進程" class="headerlink" title="終止指定用戶的進程"></a>終止指定用戶的進程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -u 用戶帳號<br></code></pre></td></tr></table></figure>
 
-<h2 id="nice（設定進程的優先級）"><a href="#nice（設定進程的優先級）" class="headerlink" title="nice（設定進程的優先級）"></a>nice（設定進程的優先級）</h2><p>設定進程的優先級，設定數值為-20~19，數字越少，進程優先級越高</p>
+<h1 id="nice（設定進程的優先級）"><a href="#nice（設定進程的優先級）" class="headerlink" title="nice（設定進程的優先級）"></a>nice（設定進程的優先級）</h1><p>設定進程的優先級，設定數值為-20~19，數字越少，進程優先級越高</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nice</span> -n -10 <span class="hljs-built_in">sleep</span> 500<br></code></pre></td></tr></table></figure>
 <ul>
 <li><p>這會將 <code>sleep 500</code> 設置為較高的優先級（-10），使其在系統資源分配中更有可能獲得更多的CPU時間。</p>
@@ -327,7 +468,82 @@
 <li><p>nice 命令通常需要超級用戶權限（root）才能將進程優先級降低。普通用戶只能將其提高到0</p>
 </li>
 </ul>
+<h1 id="切換進程的指令"><a href="#切換進程的指令" class="headerlink" title="切換進程的指令"></a>切換進程的指令</h1><h2 id="ctrl-z-、-ctrl-c"><a href="#ctrl-z-、-ctrl-c" class="headerlink" title="ctrl+z 、 ctrl+c"></a>ctrl+z 、 ctrl+c</h2><ul>
+<li><p><code>ctrl+c</code>：強制中斷進程，只能中斷前台運行的程序，如果要中斷後台運行的程序要用到<code>kill</code>指令</p>
+</li>
+<li><p><code>ctrl+z</code>：暫時停止進程 (掛起)</p>
+</li>
+</ul>
+<h2 id="jobs（要查看當前終端會話中的所有作業及其對應的作業號）"><a href="#jobs（要查看當前終端會話中的所有作業及其對應的作業號）" class="headerlink" title="jobs（要查看當前終端會話中的所有作業及其對應的作業號）"></a>jobs（要查看當前終端會話中的所有作業及其對應的作業號）</h2><p>要查看當前終端會話中的所有作業及其對應的作業號，可以使用 <code>jobs</code> 命令。這將列出所有正在運行的作業及其狀態。</p>
+<p>輸出類似如下</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># 分別為 作業號  運行狀態   程序名稱</span><br>[<span class="hljs-meta">1</span>] Stopped             sleep <span class="hljs-number">500</span><br>[<span class="hljs-meta">2</span>] Running             tcpdump <br></code></pre></td></tr></table></figure>
+
+<h2 id="bg（將進程抓到後台去執行）"><a href="#bg（將進程抓到後台去執行）" class="headerlink" title="bg（將進程抓到後台去執行）"></a>bg（將進程抓到後台去執行）</h2><p>將進程抓到後台去執行</p>
+<ul>
+<li><p>將上一個掛起的進程，拿到後台執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">bg</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>將指定作業號的進程，拿到後台執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">bg</span> 作業號<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>運行完會看到類似輸出</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># 分別為 作業號  PID</span><br>[<span class="hljs-meta">1</span>] <span class="hljs-number">4327</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="fg（將進程抓到前台終端去執行）"><a href="#fg（將進程抓到前台終端去執行）" class="headerlink" title="fg（將進程抓到前台終端去執行）"></a>fg（將進程抓到前台終端去執行）</h2><p>將進程抓到前台終端去執行</p>
+<ul>
+<li><p>將上一個掛起的進程，拿到前台執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">fg</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>將指定作業號的進程，拿到前台執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">fg</span> %作業號<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="nohup（讓一個命令在後台運行，且不受終端關閉影響）"><a href="#nohup（讓一個命令在後台運行，且不受終端關閉影響）" class="headerlink" title="nohup（讓一個命令在後台運行，且不受終端關閉影響）"></a>nohup（讓一個命令在後台運行，且不受終端關閉影響）</h2><p>讓一個命令在後台運行，且不受終端關閉影響</p>
+<p>雖然 nohup 可以讓一個進程在後台持續運行，但它並不會自動將該進程轉化為典型的守護進程。它仍然與終端會話相關聯，只是在終端關閉後也繼續運行。</p>
+<p>運行時預設會創建一個<code>nohup.out</code>文件紀錄指令運行的過程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> 指令 &amp;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>輸出到指定文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> <span class="hljs-built_in">sleep</span> 500 &gt; custom.out &amp;<br></code></pre></td></tr></table></figure></li>
+<li><p>將標準錯誤輸出到指定文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> <span class="hljs-built_in">sleep</span> 500 &gt; custom.out 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
+<p><font color=#EB5757><code>2&gt;&amp;1</code></font> ，2 為標準錯誤，1為標準輸出，也就是將標準錯誤的輸出，覆蓋掉原本標準輸出的位置<code>custom.out</code></p>
+</li>
+<li><p>忽略標準輸出 跟 標準錯誤 的訊息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> <span class="hljs-built_in">sleep</span> 500 &gt; /dev/null  2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
+<p><font color=#EB5757><code>/dev/null</code></font> ，是一個特殊設備文件，他將一切寫入他的輸入給丟棄</p>
+<p>  <font color=#EB5757><code>2&gt;&amp;1</code></font>， 把標準錯誤輸出也一起丟到標準輸入中，也就是把標準錯誤也一起丟到 <font color=#EB5757><code>/dev/null</code></font></p>
+</li>
+</ul>
+<h2 id="範例介紹-使用sleep-指令練習-進程切換"><a href="#範例介紹-使用sleep-指令練習-進程切換" class="headerlink" title="範例介紹-使用sleep 指令練習 進程切換"></a>範例介紹-使用sleep 指令練習 進程切換</h2><ol>
+<li><p>先在前台運行sleep 指令</p>
+<p> <code>sleep 500</code>，這個指令會占用終端指定秒數(500)後，再將終端返回給用戶，適合拿來練習操作掛起、後台執行等操作</p>
+</li>
+<li><p>將它掛起 <font color=#EB5757><code>ctrl+Z</code></font></p>
+<p> 此時 <code>sleep 500</code> 這個進程暫時停止了</p>
+</li>
+<li><p>使用 <code>jobs</code> 指令查看當前的任務有哪些，可以看到</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 以下資訊分別為</span><br><span class="hljs-comment"># 作業號 ,  進程狀態  , 運行的程式名稱</span><br><br>[1]+ Stopped     <span class="hljs-built_in">sleep</span> 500<br></code></pre></td></tr></table></figure>
+
+<p> 或是想要使用 <code>ps -ef | grep sleep</code> 檢查進程是否還在</p>
+</li>
+<li><p>若想讓 <code>sleep 500</code> 在後台執行，輸入 <font color=#EB5757><code>bg 作業號</code></font>，也就是 <font color=#EB5757><code>bg 1</code></font> ，或是使用<font color=#EB5757><code>bg</code></font> 重新讓上一次掛起的進程再度開始在後台執行，運行完會出現類似 作業號,  PID 的輸出</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 作業號  PID</span><br>[1]  4237<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>如果一開始執行就想要讓他在後台執行可以使用 <font color=#EB5757><code>指令 &amp;</code></font> ，也就是 <code>sleep 500 &amp;</code> </p>
+</li>
+<li><p>若想將 <code>sleep 500</code> 回到前台執行 使用 <font color=#EB5757><code>fg %作業號</code></font> ，也就是 <font color=#EB5757><code>fg %1</code></font></p>
+</li>
+<li><p>最後不想執行了，使用 <font color=#EB5757><code>ctrl+c</code></font> 停止</p>
+</li>
+</ol>
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/peida/archive/2012/12/20/2825837.html">每天一个linux命令（42）：kill命令</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/943b90150c10">Linux-ps命令学习</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-ps.html">Linux ps 命令</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/welcomword/article/details/122000607">Linux 使用 grep 保留表头（首行|标题）的解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/deniece1/article/details/102770363">bg和fg指令（整理）以及 Linux中Ctrl+C、Ctrl+D等按键操作&amp;进程相关命令</a></p>
 
                 
               </div>
@@ -418,9 +634,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/04/hello-world/" title="Hello World">
+                      <a href="/2023/09/15/linux-system-monitor/" title="Linux 系統管理-系統監控">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
+                        <span class="hidden-mobile">Linux 系統管理-系統監控</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
