@@ -4,9 +4,38 @@
   
   
   <entry>
+    <title>Linux 網路抓包工具-tcpdump</title>
+    <link href="/2023/10/07/linux_tcpdump/"/>
+    <url>/2023/10/07/linux_tcpdump/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。</p><h1 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h1><p>常用參數</p><ul><li><code>-i</code>：監聽的網路介面卡，通常都是eth0</li><li><code>-n</code>：不把主機的地址轉換成名字</li><li><code>-t</code>：每條封包內容不打印時間戳</li><li><code>-s</code>：設置每條封包的大小為多少bytes</li><li><code>-X</code>：使用十六進制(hex)顯示每條封包的資料</li></ul><p>指定類型(type)</p><ul><li><code>port</code>：特定端口或服務，如: 80、443 ; 或是指定服務 domain、http、ssh、ftp</li><li><code>portrange</code>：指定端口範圍，如: 1000-2000</li><li><code>net</code>：可以指定一個ip或域名，會捕獲主機與目標ip與他們的子網路的封包(指定192.168.1.100，子網路192.168.1.0&#x2F;24內的封包的也可以捕捉到)</li><li><code>host</code>：可以指定一個ip或主機名，會捕獲主機與目標ip的封包 (指定192.168.1.100，就只包含主機與目標IP為192.168.1.100的封包，不包含子網路)</li></ul><p>指定協議(proto)</p><ul><li><code>tcp</code>：捕獲 tcp 協議流量</li><li><code>udp</code>：捕獲 udp 協議流量</li><li><code>icmp</code>：捕獲 icmp 協議流量</li><li><code>ip</code>：捕獲所有ip協議的流量 (tcp、udp、icmp)</li><li><code>arp</code>：捕獲 arp 通信流量</li></ul><p>封包目標或來源 (dir)</p><ul><li><code>src</code>：指定封包來源</li><li><code>dst</code>：指定封包目標</li><li><code>src or dst</code>：預設，不管來源或目標</li></ul><p>還可以用 and、or、not 來搭配過濾</p><h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><h2 id="查看dns-封包"><a href="#查看dns-封包" class="headerlink" title="查看dns 封包"></a>查看dns 封包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump -i eth0 -nt -s 500 port domain<br></code></pre></td></tr></table></figure><h2 id="查看特定來源的封包"><a href="#查看特定來源的封包" class="headerlink" title="查看特定來源的封包"></a>查看特定來源的封包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump src host 210.27.48.1<br></code></pre></td></tr></table></figure><h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a href="https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/">使用 Tcpdump 分析查看 DNS 通信过程</a></p><p><a href="https://iter01.com/557434.html">抓包工具tcpdump用法說明</a></p><p><a href="https://www.readfog.com/a/1687484429703942144">史上最簡明的 Tcpdump 入門指南，看這一篇就夠了</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+      <category>網路</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>網路抓包</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
-    <link href="/2023/09/16/hello-world/"/>
-    <url>/2023/09/16/hello-world/</url>
+    <link href="/2023/10/07/hello-world/"/>
+    <url>/2023/10/07/hello-world/</url>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
