@@ -71,6 +71,54 @@ Hexo 是一個blog 框架，用於快速產生"靜態"網站，基於 node.js，
 
 ```
 
+# 分類與tags
+
+有時一邊文章會設置多個tag 或是 多個 分類
+
+## 多個tags 的用法
+```bash
+    ---
+    title: Hello World
+    date: 2013/7/13 20:46:25
+    categories:
+        - Diary
+    tags:
+        - PS3
+        - Games
+    ---
+
+```
+## 多個 categories 用法
+```bash
+    ---
+    title: Hello World
+    date: 2013/7/13 20:46:25
+    categories:
+        - [Diary]
+        - [Life]
+    tags:
+        - PS3
+        - Games
+    ---
+
+```
+
+## 同一個categories有子分類
+```bash
+    ---
+    title: Hello World
+    date: 2013/7/13 20:46:25
+    categories:
+        - [Diary,Eat]
+        - [Diary,Life]
+    tags:
+        - PS3
+        - Games
+    ---
+
+```
+
+
 # 部屬到線上
 
 1. 編譯 blog 專案，編譯完會出現一個public 目錄
@@ -150,3 +198,5 @@ Hexo 是一個blog 框架，用於快速產生"靜態"網站，基於 node.js，
 [使用 Hexo 建構個人化部落格](https://www.youtube.com/watch?v=jOJI9ekTzK8)
 
 [如何更換 Hexo 主題](https://ithelp.ithome.com.tw/articles/10242172)
+
+[Front-matter](https://hexo.io/zh-cn/docs/front-matter.html)
