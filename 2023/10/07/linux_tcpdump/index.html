@@ -16,15 +16,15 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。 tcpdump常用參數  -i：監聽的網路介面卡，通常都是eth0 -n：不把主機的地址轉換成名字 -t：每條封包內容不打印時間戳 -s">
+    <meta name="description" content="前言tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。 tcpdump常用參數  -i ：監聽的網路介面卡，通常都是eth0  -n ：不把主機的地址轉換成名字  -t ：每條封包內容不打印時">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 網路抓包工具-tcpdump">
 <meta property="og:url" content="https://austin72905.github.io/2023/10/07/linux_tcpdump/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。 tcpdump常用參數  -i：監聽的網路介面卡，通常都是eth0 -n：不把主機的地址轉換成名字 -t：每條封包內容不打印時間戳 -s">
+<meta property="og:description" content="前言tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。 tcpdump常用參數  -i ：監聽的網路介面卡，通常都是eth0  -n ：不把主機的地址轉換成名字  -t ：每條封包內容不打印時">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-10-07T14:21:00.000Z">
-<meta property="article:modified_time" content="2023-10-07T08:07:42.932Z">
+<meta property="article:modified_time" content="2023-10-07T08:30:41.094Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="網路抓包">
@@ -293,36 +293,55 @@
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>tcpdump 是 linux 常使用的網路抓包工具，可以抓取機器上的網路封包，可以分析網路的使用情況，如查看當前服務使用的dns是否正常響應，或是查看機器是否被駭客開了後門，正在使用奇怪的port號把資料送出去今天就記錄一些常用的tcpdump指令與參數。</p>
 <h1 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h1><p>常用參數</p>
 <ul>
-<li><code>-i</code>：監聽的網路介面卡，通常都是eth0</li>
-<li><code>-n</code>：不把主機的地址轉換成名字</li>
-<li><code>-t</code>：每條封包內容不打印時間戳</li>
-<li><code>-s</code>：設置每條封包的大小為多少bytes</li>
-<li><code>-X</code>：使用十六進制(hex)顯示每條封包的資料</li>
+<li><p><strong><font color=#EB5757><code>-i</code></font></strong> ：監聽的網路介面卡，通常都是eth0</p>
+</li>
+<li><p><code>-n</code> ：不把主機的地址轉換成名字</p>
+</li>
+<li><p><code>-t</code> ：每條封包內容不打印時間戳</p>
+</li>
+<li><p><code>-s</code> ：設置每條封包的大小為多少bytes</p>
+</li>
+<li><p><code>-X</code> ：使用十六進制(hex)顯示每條封包的資料</p>
+</li>
 </ul>
 <p>指定類型(type)</p>
 <ul>
-<li><code>port</code>：特定端口或服務，如: 80、443 ; 或是指定服務 domain、http、ssh、ftp</li>
-<li><code>portrange</code>：指定端口範圍，如: 1000-2000</li>
-<li><code>net</code>：可以指定一個ip或域名，會捕獲主機與目標ip與他們的子網路的封包(指定192.168.1.100，子網路192.168.1.0&#x2F;24內的封包的也可以捕捉到)</li>
-<li><code>host</code>：可以指定一個ip或主機名，會捕獲主機與目標ip的封包 (指定192.168.1.100，就只包含主機與目標IP為192.168.1.100的封包，不包含子網路)</li>
+<li><p><strong><font color=#EB5757><code>port</code></font></strong> ：特定端口或服務，如: 80、443 ; 或是指定服務 <font color=#EB5757><code>domain</code></font>、http、ssh、ftp</p>
+</li>
+<li><p><code>portrange</code> ：指定端口範圍，如: 1000-2000</p>
+</li>
+<li><p><code>net</code> ：可以指定一個ip或域名，會捕獲主機與目標ip與他們的子網路的封包(指定192.168.1.100，子網路192.168.1.0&#x2F;24內的封包的也可以捕捉到)</p>
+</li>
+<li><p><code>host</code> ：可以指定一個ip或主機名，會捕獲主機與目標ip的封包 (指定192.168.1.100，就只包含主機與目標IP為192.168.1.100的封包，不包含子網路)</p>
+</li>
 </ul>
 <p>指定協議(proto)</p>
 <ul>
-<li><code>tcp</code>：捕獲 tcp 協議流量</li>
-<li><code>udp</code>：捕獲 udp 協議流量</li>
-<li><code>icmp</code>：捕獲 icmp 協議流量</li>
-<li><code>ip</code>：捕獲所有ip協議的流量 (tcp、udp、icmp)</li>
-<li><code>arp</code>：捕獲 arp 通信流量</li>
+<li><p><code>tcp</code> ：捕獲 tcp 協議流量</p>
+</li>
+<li><p><code>udp</code> ：捕獲 udp 協議流量</p>
+</li>
+<li><p><code>icmp</code> ：捕獲 icmp 協議流量</p>
+</li>
+<li><p><code>ip</code> ：捕獲所有ip協議的流量 (tcp、udp、icmp)</p>
+</li>
+<li><p><code>arp</code> ：捕獲 arp 通信流量</p>
+</li>
 </ul>
 <p>封包目標或來源 (dir)</p>
 <ul>
-<li><code>src</code>：指定封包來源</li>
-<li><code>dst</code>：指定封包目標</li>
-<li><code>src or dst</code>：預設，不管來源或目標</li>
+<li><p><code>src</code>：指定封包來源</p>
+</li>
+<li><p><code>dst</code>：指定封包目標</p>
+</li>
+<li><p><code>src or dst</code>：預設，不管來源或目標</p>
+</li>
 </ul>
 <p>還可以用 and、or、not 來搭配過濾</p>
 <h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><h2 id="查看dns-封包"><a href="#查看dns-封包" class="headerlink" title="查看dns 封包"></a>查看dns 封包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump -i eth0 -nt -s 500 port domain<br></code></pre></td></tr></table></figure>
 <h2 id="查看特定來源的封包"><a href="#查看特定來源的封包" class="headerlink" title="查看特定來源的封包"></a>查看特定來源的封包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump src host 210.27.48.1<br></code></pre></td></tr></table></figure>
+
+<h2 id="監聽指定Port-跟-主機間的封包"><a href="#監聽指定Port-跟-主機間的封包" class="headerlink" title="監聽指定Port 跟 主機間的封包"></a>監聽指定Port 跟 主機間的封包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump tcp port 9453 and host 10.0.0.2<br></code></pre></td></tr></table></figure>
 
 <h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a target="_blank" rel="noopener" href="https://jaminzhang.github.io/dns/use-tcpdump-to-analyze-dns-communication/">使用 Tcpdump 分析查看 DNS 通信过程</a></p>
 <p><a target="_blank" rel="noopener" href="https://iter01.com/557434.html">抓包工具tcpdump用法說明</a></p>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言Hexo 是一個blog 框架，用於快速產生”靜態”網站，基於 node.js，使用markdown 撰寫文章以下為官網連結 Hexo 安裝流程 首先要先安裝node.js  安裝hexo cli，才能使用hexo 指令   1npm install hexo-cli -g   建立blog 專案  123# 沒有加&lt;folder&gt;會在當前資料夾建立hexo 專案# 也可以自行指定">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-07-17T16:30:00.000Z">
-<meta property="article:modified_time" content="2023-10-07T08:07:42.932Z">
+<meta property="article:modified_time" content="2023-10-07T08:30:41.090Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary_large_image">
@@ -316,6 +316,13 @@
 </ul>
 <h1 id="文章範例"><a href="#文章範例" class="headerlink" title="文章範例"></a>文章範例</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<br>title: 標題<br><span class="hljs-built_in">date</span>:  日期 <span class="hljs-comment"># 依照文章當下新增的時間，但如果之後不小心資料損毀，就無法知道確切時間，所以建議自己打日期</span><br>tags:      <span class="hljs-comment">## 如果只有單一標籤，直接寫在貿號後面就好</span><br>    -  前端<br>---<br><br><span class="hljs-comment"># 以下開始為內文</span><br><br><span class="hljs-comment"># 這會是一個超連結</span><br>[文字](http連結)<br><br><br>`此為行內程式碼`<br><br>```使用的語言，如html<br>此為段落型程式碼<br>``` <span class="hljs-comment"># 使用兩塊 ``` 包起來</span><br><br><br><br></code></pre></td></tr></table></figure>
 
+<h1 id="分類與tags"><a href="#分類與tags" class="headerlink" title="分類與tags"></a>分類與tags</h1><p>有時一邊文章會設置多個tag 或是 多個 分類</p>
+<h2 id="多個tags-的用法"><a href="#多個tags-的用法" class="headerlink" title="多個tags 的用法"></a>多個tags 的用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<br>title: Hello World<br><span class="hljs-built_in">date</span>: 2013/7/13 20:46:25<br>categories:<br>    - Diary<br>tags:<br>    - PS3<br>    - Games<br>---<br><br></code></pre></td></tr></table></figure>
+<h2 id="多個-categories-用法"><a href="#多個-categories-用法" class="headerlink" title="多個 categories 用法"></a>多個 categories 用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<br>title: Hello World<br><span class="hljs-built_in">date</span>: 2013/7/13 20:46:25<br>categories:<br>    - [Diary]<br>    - [Life]<br>tags:<br>    - PS3<br>    - Games<br>---<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="同一個categories有子分類"><a href="#同一個categories有子分類" class="headerlink" title="同一個categories有子分類"></a>同一個categories有子分類</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<br>title: Hello World<br><span class="hljs-built_in">date</span>: 2013/7/13 20:46:25<br>categories:<br>    - [Diary,Eat]<br>    - [Diary,Life]<br>tags:<br>    - PS3<br>    - Games<br>---<br><br></code></pre></td></tr></table></figure>
+
+
 <h1 id="部屬到線上"><a href="#部屬到線上" class="headerlink" title="部屬到線上"></a>部屬到線上</h1><ol>
 <li>編譯 blog 專案，編譯完會出現一個public 目錄</li>
 </ol>
@@ -363,6 +370,7 @@
 <p>調整blog 主題配置可能一開始比較費勁，但相比於自己從零開始搞已經節省很多的時間了，也更可以專注在寫作上，感謝開發者的貢獻。<br>看到自己的blog 有美美的主題就更有動力寫作了! 希望大家寫作愉快。</p>
 <h1 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jOJI9ekTzK8">使用 Hexo 建構個人化部落格</a></p>
 <p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10242172">如何更換 Hexo 主題</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter.html">Front-matter</a></p>
 
                 
               </div>
