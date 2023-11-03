@@ -18,20 +18,20 @@
   
     <meta name="description" content="前言在前面兩篇關於文本處理的文章 Linux 文本處理(1) (查看文件內容)   以及 Linux 文本處理(2) (寫入資料到文件)   介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。 cut (切割、擷取文字)常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 split() 方法，會以每行作為單">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 文本處理(3) (cut、grep、sort、uniq、wc)">
+<meta property="og:title" content="Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc)">
 <meta property="og:url" content="https://austin72905.github.io/2023/08/28/linux-text-processing3/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言在前面兩篇關於文本處理的文章 Linux 文本處理(1) (查看文件內容)   以及 Linux 文本處理(2) (寫入資料到文件)   介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。 cut (切割、擷取文字)常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 split() 方法，會以每行作為單">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-08-28T00:53:00.000Z">
-<meta property="article:modified_time" content="2023-10-07T08:30:41.090Z">
+<meta property="article:modified_time" content="2023-11-03T02:47:19.484Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Linux 文本處理(3) (cut、grep、sort、uniq、wc) - Hexo</title>
+  <title>Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc) - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux 文本處理(3) (cut、grep、sort、uniq、wc)"></span>
+            <span id="subtitle" data-typed-text="Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc)"></span>
           
         </div>
 
@@ -284,7 +284,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux 文本處理(3) (cut、grep、sort、uniq、wc)</h1>
+            <h1 id="seo-header">Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc)</h1>
             
             
               <div class="markdown-body">
@@ -389,6 +389,96 @@
 <h1 id="egrep-grep高配版"><a href="#egrep-grep高配版" class="headerlink" title="egrep (grep高配版)"></a>egrep (grep高配版)</h1><p>grep 的高級版，可以同時搜尋多個關鍵字</p>
 <pre><code class="hljs"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">egrep <span class="hljs-string">&quot;A|B&quot;</span> 文件名.txt<br></code></pre></td></tr></table></figure>
 </code></pre>
+<h1 id="awk-以分隔符擷取文字"><a href="#awk-以分隔符擷取文字" class="headerlink" title="awk (以分隔符擷取文字)"></a>awk (以分隔符擷取文字)</h1><p>簡單來說就是逐行讀取文本，以 <code>空格 or Tab</code> 將每行分割成小單位，也可以自訂分隔符號，最後將結果輸出</p>
+<h2 id="語法格式"><a href="#語法格式" class="headerlink" title="語法格式"></a>語法格式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;&#123;動作&#125;&#x27;</span> 文件名<br><br>awk <span class="hljs-string">&#x27;條件 &#123;動作&#125;&#x27;</span> 文件名<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其中 <code>&#123;動作&#125;</code> 最常使用的是 print，還有其他如printf (格式化輸出)、if 語句，操作一些內置的函數如 length() 獲取字串的長度、substr() 擷取字串等</p>
+</li>
+<li><p>如果指定<code>條件</code>，當條件符合時才會執行動作</p>
+</li>
+</ul>
+<p>常用參數</p>
+<ul>
+<li><code>-F</code>：指定分隔符，默認為 <font color=#EB5757><code>空格 or Tab</code></font></li>
+<li><code>-f</code>：使用awk腳本，來處理文本</li>
+</ul>
+<p>常用的變數</p>
+<ul>
+<li><code>$0</code>： 打印整行 ，之後的數字代表字符以分隔符分隔後所在的位置 $1、$2…以此類推</li>
+<li><code>NR</code>： 每行的行號</li>
+<li><code>NF</code>： 每行用空格分隔後，字段的數量</li>
+</ul>
+<h2 id="內置變數"><a href="#內置變數" class="headerlink" title="內置變數"></a>內置變數</h2><p>前面都不需要加$</p>
+<ul>
+<li><code>FILENAME</code>： 當前文件名</li>
+<li><code>FS</code>：       分隔符，默認為 空格 or Tab</li>
+<li><code>RS</code>：       行分隔符，默認為  換行符</li>
+<li><code>OFS</code>：      輸出的字段的分隔符，默認為空格，可以用 OFS&#x3D;”~” 來指定</li>
+<li><code>ORS</code>：      輸出行的分隔符，默認為空格</li>
+<li><code>OFMT</code>：     輸出的數字的格式，默認為%.6g</li>
+<li><font color=#EB5757><code>NF</code></font>：       每行用空格分隔後，字段的數量， 所以也可以用此找出每行的最後一個字</li>
+</ul>
+<h2 id="內置函數"><a href="#內置函數" class="headerlink" title="內置函數"></a>內置函數</h2><ul>
+<li><code>toupper()</code>：大寫</li>
+<li><code>tolower()</code>：小寫</li>
+<li><code>length()</code>： 長度</li>
+<li><code>substr()</code>： 擷取字串</li>
+<li><code>sin()</code>：    正弦</li>
+<li><code>cos()</code>：    余弦</li>
+<li><code>sqrt()</code>：   平方根</li>
+<li><code>rand()</code>：   隨機數</li>
+</ul>
+<h2 id="常用範例"><a href="#常用範例" class="headerlink" title="常用範例"></a>常用範例</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>有一文本<code>test.txt</code>，內容為<code>this is a test</code></p>
+<ul>
+<li><p>打印出整行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;&#123;print $0&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> a test<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>打印出每行 以空格分隔後的第一個單詞</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">this</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>將分隔符設定為 : 並打印第二個字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk -F <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">is</span> a<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用某個awk腳本處理文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk -f &#123;awk脚本&#125; &#123;文件名&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="設定條件"><a href="#設定條件" class="headerlink" title="設定條件"></a>設定條件</h3><p>有一文本 <code>awk_test_file</code>，內容如下</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs inform7">2 this <span class="hljs-keyword">is</span> a test<br>3 <span class="hljs-keyword">Are</span> you like awk<br>This&#x27;s a test<br>10 There <span class="hljs-keyword">are</span> orange,apple,mongo<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>打印出 不包含 is 的行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;$0 !~ /is/&#x27;</span> awk_test_file<br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">3 </span>Are you like awk<br><span class="hljs-symbol">10 </span>There are orange,apple,mongo<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>打印出奇數行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;NR % 2 == 1 &#123;print $0&#125;&#x27;</span> awk_test_file<br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-number">2</span> <span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> a test<br>This<span class="hljs-string">&#x27;s a test</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>除了打印變數，如果想要打印一些字符用””包起來</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk  <span class="hljs-string">&#x27;&#123;print NR &quot;) &quot; $0&#125;&#x27;</span> awk_test_file<br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>) <span class="hljs-number">2</span> this is a test<br><span class="hljs-attribute">2</span>) <span class="hljs-number">3</span> Are you like awk<br><span class="hljs-attribute">3</span>) This&#x27;s a test<br><span class="hljs-attribute">4</span>) <span class="hljs-number">10</span> There are orange,apple,mongo<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="if-語句"><a href="#if-語句" class="headerlink" title="if 語句"></a>if 語句</h3><p>比較複雜的情況才需要用，不然用一般的條件判斷就行了</p>
+<p>if 需要寫在 <code>&#123;動作&#125;</code>裡面</p>
+<p>else 前記得要分號<code>;</code></p>
+<ul>
+<li>打印奇數行，其他就打印x<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;&#123;if(NR % 2 == 1) print $0; else print &quot;x&quot;&#125;&#x27;</span> awk_test_file<br></code></pre></td></tr></table></figure>
+  <code>Output:</code><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-number">2</span> this <span class="hljs-keyword">is</span> a test<br>x<br>This<span class="hljs-symbol">&#x27;s</span> a test<br>x<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="內置函數用法"><a href="#內置函數用法" class="headerlink" title="內置函數用法"></a>內置函數用法</h3><ul>
+<li>substr(字符串, 起始位置, 长度)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, World&quot;</span> | awk <span class="hljs-string">&#x27;&#123; print substr($0, 1, 5) &#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+  <code>Output:</code><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Hello</span><br></code></pre></td></tr></table></figure></li>
+</ul>
 <h1 id="sort-排序"><a href="#sort-排序" class="headerlink" title="sort (排序)"></a>sort (排序)</h1><p>用於對文本文件中的內容進行 **<font color=#EB5757><code>排序</code></font>**，按照字母順序or數字順序，以每<code>行</code>作為單位執行</p>
 <p>若未指定文件名，<code>sort</code> 命令將會從標準輸入中讀取資料。</p>
 <p>常用參數</p>
@@ -466,6 +556,8 @@
 <li><p><strong>搭配其他指令找到的資料，計算有幾筆</strong></p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;status: 502&quot;</span> 文件名.txt | <span class="hljs-built_in">wc</span> -l<br></code></pre></td></tr></table></figure></li>
 </ul>
+<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110983126">Linux 文本处理三剑客：grep、sed 和 awk</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/11/awk.html">awk 入门教程</a></p>
 
                 
               </div>
@@ -511,7 +603,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux 文本處理(3) (cut、grep、sort、uniq、wc)</div>
+      <div>Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc)</div>
       <div>https://austin72905.github.io/2023/08/28/linux-text-processing3/</div>
     </div>
     <div class="license-meta">
