@@ -1,5 +1,5 @@
 ---
-title: Linux 文本處理(3) (cut、grep、sort、uniq、wc)
+title: Linux 文本處理(3) (cut、grep、awk、sort、uniq、wc)
 date: 2023-8-28 00:53
 categories: Linux
 tags:
@@ -192,6 +192,169 @@ grep 的高級版，可以同時搜尋多個關鍵字
         egrep "A|B" 文件名.txt
     ```
 
+# awk (以分隔符擷取文字)
+
+簡單來說就是逐行讀取文本，以 `空格 or Tab` 將每行分割成小單位，也可以自訂分隔符號，最後將結果輸出
+
+## 語法格式
+```bash
+    awk '{動作}' 文件名
+
+    awk '條件 {動作}' 文件名
+```
+
+* 其中 `{動作}` 最常使用的是 print，還有其他如printf (格式化輸出)、if 語句，操作一些內置的函數如 length() 獲取字串的長度、substr() 擷取字串等
+
+* 如果指定`條件`，當條件符合時才會執行動作
+
+常用參數
+
+* `-F`：指定分隔符，默認為 <font color=#EB5757>`空格 or Tab`</font>
+* `-f`：使用awk腳本，來處理文本
+
+常用的變數
+* `$0`： 打印整行 ，之後的數字代表字符以分隔符分隔後所在的位置 $1、$2...以此類推
+* `NR`： 每行的行號
+* `NF`： 每行用空格分隔後，字段的數量
+
+## 內置變數
+
+前面都不需要加$
+
+* `FILENAME`： 當前文件名
+* `FS`：       分隔符，默認為 空格 or Tab
+* `RS`：       行分隔符，默認為  換行符
+* `OFS`：      輸出的字段的分隔符，默認為空格，可以用 OFS="~" 來指定
+* `ORS`：      輸出行的分隔符，默認為空格
+* `OFMT`：     輸出的數字的格式，默認為%.6g
+* <font color=#EB5757>`NF`</font>：       每行用空格分隔後，字段的數量， 所以也可以用此找出每行的最後一個字
+
+## 內置函數
+
+* `toupper()`：大寫
+* `tolower()`：小寫
+* `length()`： 長度
+* `substr()`： 擷取字串
+* `sin()`：    正弦
+* `cos()`：    余弦
+* `sqrt()`：   平方根
+* `rand()`：   隨機數
+
+## 常用範例
+
+### 基本用法
+
+有一文本`test.txt`，內容為`this is a test`
+
+* 打印出整行
+```bash
+    awk '{print $0}'
+```
+    `Output:`
+```
+    this is a test
+```
+
+* 打印出每行 以空格分隔後的第一個單詞
+```bash
+    awk '{print $1}'
+```
+    `Output:`
+```
+    this
+```
+
+* 將分隔符設定為 : 並打印第二個字
+```bash
+    awk -F ':' '{print $2}'
+```
+    `Output:`
+```
+    is a
+```
+
+* 使用某個awk腳本處理文件
+```bash
+    awk -f {awk脚本} {文件名}
+```
+
+
+
+
+
+### 設定條件
+
+有一文本 `awk_test_file`，內容如下
+```
+    2 this is a test
+    3 Are you like awk
+    This's a test
+    10 There are orange,apple,mongo
+```
+
+* 打印出 不包含 is 的行
+```bash
+    awk '$0 !~ /is/' awk_test_file
+```
+    `Output:`
+```
+    3 Are you like awk
+    10 There are orange,apple,mongo
+```
+
+* 打印出奇數行
+```bash
+    awk 'NR % 2 == 1 {print $0}' awk_test_file
+```
+    `Output:`
+```
+    2 this is a test
+    This's a test
+```
+
+* 除了打印變數，如果想要打印一些字符用””包起來
+```bash
+    awk  '{print NR ") " $0}' awk_test_file
+```
+    `Output:`
+```
+    1) 2 this is a test
+    2) 3 Are you like awk
+    3) This's a test
+    4) 10 There are orange,apple,mongo
+```
+
+
+### if 語句
+比較複雜的情況才需要用，不然用一般的條件判斷就行了
+
+if 需要寫在 `{動作}`裡面
+
+else 前記得要分號`;`
+
+* 打印奇數行，其他就打印x
+```bash
+    awk '{if(NR % 2 == 1) print $0; else print "x"}' awk_test_file
+```
+    `Output:`
+```
+    2 this is a test
+    x
+    This's a test
+    x
+```
+
+### 內置函數用法
+
+* substr(字符串, 起始位置, 长度)
+```bash
+    echo "Hello, World" | awk '{ print substr($0, 1, 5) }'
+```
+    `Output:`
+```
+    Hello
+```
+
 
 # sort (排序)
 
@@ -314,3 +477,10 @@ grep 的高級版，可以同時搜尋多個關鍵字
     ```bash
         grep "status: 502" 文件名.txt | wc -l
     ```
+
+
+
+# 參考資料
+[Linux 文本处理三剑客：grep、sed 和 awk](https://zhuanlan.zhihu.com/p/110983126)
+
+[awk 入门教程](https://www.ruanyifeng.com/blog/2018/11/awk.html)
