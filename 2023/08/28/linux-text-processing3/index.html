@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言在前面兩篇關於文本處理的文章 Linux 文本處理(1) (查看文件內容)   以及 Linux 文本處理(2) (寫入資料到文件)   介紹了基本的文本操作，今日就來介紹其他較為進階的文本操作指令，包含搜尋關鍵字、排序、切割文本等操作。 cut (切割、擷取文字)常用來切割文字，擷取特定位置的字符，或是以特定的分割符，擷取特定的欄位，很像一般程式語言中的 split() 方法，會以每行作為單">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-08-28T00:53:00.000Z">
-<meta property="article:modified_time" content="2023-11-03T02:47:19.484Z">
+<meta property="article:modified_time" content="2023-11-04T08:22:47.406Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -402,6 +402,7 @@
 <ul>
 <li><code>-F</code>：指定分隔符，默認為 <font color=#EB5757><code>空格 or Tab</code></font></li>
 <li><code>-f</code>：使用awk腳本，來處理文本</li>
+<li><code>-v</code>：awk需要使用shell 裡面的變數時，需要先用-v 定義，無法直接使用</li>
 </ul>
 <p>常用的變數</p>
 <ul>
@@ -447,7 +448,13 @@
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">is</span> a<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>使用某個awk腳本處理文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk -f &#123;awk脚本&#125; &#123;文件名&#125;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk -f &#123;awk脚本&#125; &#123;文件名&#125;<br></code></pre></td></tr></table></figure>
+
+</li>
+<li><p>使用shell 裏面的變數</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">count=100<br>awk -v cc=<span class="hljs-variable">$count</span> &#123;<span class="hljs-built_in">print</span> cc&#125;<br></code></pre></td></tr></table></figure>
+<p>  <code>Output:</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">100<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="設定條件"><a href="#設定條件" class="headerlink" title="設定條件"></a>設定條件</h3><p>有一文本 <code>awk_test_file</code>，內容如下</p>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs inform7">2 this <span class="hljs-keyword">is</span> a test<br>3 <span class="hljs-keyword">Are</span> you like awk<br>This&#x27;s a test<br>10 There <span class="hljs-keyword">are</span> orange,apple,mongo<br></code></pre></td></tr></table></figure>
