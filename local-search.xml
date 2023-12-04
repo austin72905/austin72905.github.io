@@ -5,12 +5,174 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="/2023/11/24/hello-world/"/>
-    <url>/2023/11/24/hello-world/</url>
+    <link href="/2023/12/04/hello-world/"/>
+    <url>/2023/12/04/hello-world/</url>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 中的 case 語句 (switch)</title>
+    <link href="/2023/11/27/linux-shell-case/"/>
+    <url>/2023/11/27/linux-shell-case/</url>
+    
+    <content type="html"><![CDATA[<h1 id="語法介紹"><a href="#語法介紹" class="headerlink" title="語法介紹"></a>語法介紹</h1><p>有點像是其他語言的switch</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">case</span> expression <span class="hljs-keyword">in</span><br>    pattern1)<br>        匹配 pattern1，就會執行語句<br>        ;;<br>    pattern2)<br>        匹配 pattern2，就會執行語句<br>        ;;<br>    pattern3)<br>        匹配 pattern3，就會執行語句<br>        ;;<br>    ……<br>    *)<br>        default，預設都不匹配所有pattern時，預設執行的語句<br><span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure><ul><li><p>每個pattern後面接 <code>)</code> ， 只要符合該pattern，就會執行後面對應的語句</p></li><li><p><code>;;</code> 相當於 break</p></li><li><p><code>*</code> 相當於 default</p></li><li><p>expression 可以是一個變數，或是某個指令執行的結果</p></li><li><p>pattern 可以是數字、字串，也可以使用正則表達式</p></li></ul><h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Input integer number: &quot;</span><br><span class="hljs-built_in">read</span> num<br><span class="hljs-keyword">case</span> <span class="hljs-variable">$num</span> <span class="hljs-keyword">in</span><br>    1)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Monday&quot;</span><br>        ;;<br>    2)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Tuesday&quot;</span><br>        ;;<br>    3)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Wednesday&quot;</span><br>        ;;<br>    4)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Thursday&quot;</span><br>        ;;<br>    5)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Friday&quot;</span><br>        ;;<br>    6)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Saturday&quot;</span><br>        ;;<br>    7)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Sunday&quot;</span><br>        ;;<br>    *)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;error&quot;</span><br><span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure><h2 id="配合正則表達式"><a href="#配合正則表達式" class="headerlink" title="配合正則表達式"></a>配合正則表達式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br> <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Input a character: &quot;</span><br> <span class="hljs-built_in">read</span> -n 1 char<br> <span class="hljs-keyword">case</span> <span class="hljs-variable">$char</span> <span class="hljs-keyword">in</span><br>     [a-zA-Z])<br>         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nletter\n&quot;</span><br>         ;;<br>     [0-9])<br>         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nDigit\n&quot;</span><br>         ;;<br>     [0-9])<br>         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nDigit\n&quot;</span><br>         ;;<br>     [,.?!])<br>         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nPunctuation\n&quot;</span><br>         ;;<br>     *)<br>         <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nerror\n&quot;</span><br> <span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://c.biancheng.net/view/2767.html">Shell case in语句详解</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 中的 do while 語句</title>
+    <link href="/2023/11/27/linux-shell-while/"/>
+    <url>/2023/11/27/linux-shell-while/</url>
+    
+    <content type="html"><![CDATA[<h1 id="語法介紹"><a href="#語法介紹" class="headerlink" title="語法介紹"></a>語法介紹</h1><p>while 用於循環，根據條件執行一段代碼塊</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 語法</span><br><span class="hljs-keyword">while</span> [ 條件 ]<br><span class="hljs-keyword">do</span><br>    <span class="hljs-comment"># do something...</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure><h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>c = 1<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$c</span> -le 5 ]<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> welcome <span class="hljs-variable">$c</span> <span class="hljs-built_in">times</span><br>    <span class="hljs-comment"># c = c+1</span><br>    ((c++))<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 中的 for 語句</title>
+    <link href="/2023/11/27/linux-shell-for/"/>
+    <url>/2023/11/27/linux-shell-for/</url>
+    
+    <content type="html"><![CDATA[<h1 id="語法介紹"><a href="#語法介紹" class="headerlink" title="語法介紹"></a>語法介紹</h1><p>for 可以用來遍歷數組，而這個數組很泛用，可以是數字、文件列表或是命令執行的結果</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> 1 2 3 4 5<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a b c d e<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment"># 想要用一般for迴圈時可以用</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (1..5)<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br><br></code></pre></td></tr></table></figure><h1 id="常用範例"><a href="#常用範例" class="headerlink" title="常用範例"></a>常用範例</h1><ul><li><p>遍歷命令執行的結果</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> user <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span> /home)<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;User: <span class="hljs-variable">$user</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure></li><li><p>遍歷文件列表</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 遍歷當前目錄下 後綴為.txt的文件</span><br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> *.txt<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Processing file: <span class="hljs-variable">$file</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure></li><li><p>遍歷數組</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">fruits=(<span class="hljs-string">&quot;apple&quot;</span> <span class="hljs-string">&quot;banana&quot;</span> <span class="hljs-string">&quot;cherry&quot;</span>)<br><span class="hljs-comment"># [@] 需要這樣寫才能遍歷整個數組</span><br><span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;fruits[@]&#125;</span>&quot;</span><br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Fruit: <span class="hljs-variable">$fruit</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 中的 if 語句</title>
+    <link href="/2023/11/27/linux-shell-if/"/>
+    <url>/2023/11/27/linux-shell-if/</url>
+    
+    <content type="html"><![CDATA[<h1 id="語法介紹"><a href="#語法介紹" class="headerlink" title="語法介紹"></a>語法介紹</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ 條件 ]<br><span class="hljs-keyword">then</span><br>    動作<br><span class="hljs-keyword">else</span><br>    動作<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><ul><li>[  ]兩邊都需要空一格</li><li>變數與判斷式都需要空一格</li></ul><h2 id="變數與判斷式都需要空一格"><a href="#變數與判斷式都需要空一格" class="headerlink" title="變數與判斷式都需要空一格"></a>變數與判斷式都需要空一格</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>a=<span class="hljs-string">&quot;sun&quot;</span><br><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> = <span class="hljs-string">&quot;mon&quot;</span> ]<br><span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;cool&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;no&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><h1 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h1><h2 id="字串判斷"><a href="#字串判斷" class="headerlink" title="字串判斷"></a>字串判斷</h2><p>可以使用 &lt;、&gt;、&#x3D; (bash 中 <code>=</code> 、<code>==</code> 是等價的，建議用 <code>=</code>)</p><h2 id="數值判斷"><a href="#數值判斷" class="headerlink" title="數值判斷"></a>數值判斷</h2><ul><li><code>-gt</code>：大於</li><li><code>-ge</code>：大於等於</li><li><code>-lt</code>：小於</li><li><code>-le</code>：小於等於</li><li><code>-eq</code>：等於</li><li><code>-ne</code>：不等於</li></ul><h1 id="跟-差異"><a href="#跟-差異" class="headerlink" title="[] 跟 [[]] 差異?"></a>[] 跟 [[]] 差異?</h1><ul><li><p><code>[]</code> 通常用於執行基本的條件測試，使用時，需要注意變數是否包含空格，以避免錯誤</p></li><li><p><font color=#EB5757><code>[[]]</code></font> 是Bash引入的擴展條件測試構造</p></li><li><p><font color=#EB5757><code>[[]]</code></font> 可以進行更複雜的條件測試，例如正規表達式匹配</p></li></ul><p>使用 <font color=#EB5757><code>[[]]</code></font> 比較好，不會因為包含空格而出錯，但是bash以外有些舊版的shell 可能不支援</p><h1 id="常用範例"><a href="#常用範例" class="headerlink" title="常用範例"></a>常用範例</h1><h2 id="檢查某個文件是否存在"><a href="#檢查某個文件是否存在" class="headerlink" title="檢查某個文件是否存在"></a>檢查某個文件是否存在</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-comment"># -e 代表檢查某個文件是否存在</span><br><br>clear<br><span class="hljs-keyword">if</span> [ -e ./error.txt ]<br><span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;file exist&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;file noexist&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 語法介紹</title>
+    <link href="/2023/11/27/linux-shell-syntax/"/>
+    <url>/2023/11/27/linux-shell-syntax/</url>
+    
+    <content type="html"><![CDATA[<h1 id="shell-語法"><a href="#shell-語法" class="headerlink" title="shell 語法"></a>shell 語法</h1><p>可以分成4個部分</p><ul><li>使用的shell：在腳本文件的第一行可以指定shell 的指示器，通常都是用<code>#!/bin/bash</code></li><li>註解：使用<code>#</code> 可以註解</li><li>命令：要腳本做的動作，echo、cp…</li><li>判斷式：if、for、while…</li></ul><p>創建shell 腳本時，記得給予執行權限(x)</p><h1 id="變數"><a href="#變數" class="headerlink" title="變數"></a>變數</h1><h2 id="定義變數、呼叫變數"><a href="#定義變數、呼叫變數" class="headerlink" title="定義變數、呼叫變數"></a>定義變數、呼叫變數</h2><p>定義變數後(定義時不需要$)，使用$呼叫變數</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-comment"># 這是註解 ，第一行!之後不要有空格</span><br><br>a=<span class="hljs-string">&quot;cool popo&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;test <span class="hljs-variable">$a</span>&quot;</span><br></code></pre></td></tr></table></figure><p><strong>Output</strong>：</p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">test </span>cool popo<br></code></pre></td></tr></table></figure><h2 id="將指令運行結果保存到變數"><a href="#將指令運行結果保存到變數" class="headerlink" title="將指令運行結果保存到變數"></a>將指令運行結果保存到變數</h2><p>定義變數時，如果想要將linux 指令運行的結果存到變數，要加上&#96;&#96;<br>或是使用<code>$()</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-comment"># 這是註解 ，第一行!之後不要有空格</span><br><br>a=`hostname`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hi my server name is <span class="hljs-variable">$a</span>&quot;</span><br><br>s=$(<span class="hljs-built_in">ls</span> -l)<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;result=<span class="hljs-variable">$s</span>&quot;</span><br></code></pre></td></tr></table></figure><h1 id="數值計算"><a href="#數值計算" class="headerlink" title="數值計算 (())"></a>數值計算 (())</h1><ul><li><p>如果想要數值計算，可以用<code>(())</code> </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>c = 1<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$c</span> -le 5 ]<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> welcome <span class="hljs-variable">$c</span> <span class="hljs-built_in">times</span><br>    <span class="hljs-comment"># c = c+1</span><br>    ((c++))<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure></li><li><p>if 要進行數值比較時</p></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>a=5<br>b=10<br><br><span class="hljs-keyword">if</span> ((a &lt; b)); <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> 小于 <span class="hljs-variable">$b</span>&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> 不小于 <span class="hljs-variable">$b</span>&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><h1 id="創建子shell"><a href="#創建子shell" class="headerlink" title="創建子shell ()"></a>創建子shell ()</h1><p>創建子shell原因</p><ul><li>改變子shell 中的變數，不會影響到父shell，當想要限制變數的作用域時可以使用</li><li>可以執行一系列指令</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>variable=42<br><br>(<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;在子shell中，variable 的值是 <span class="hljs-variable">$variable</span>&quot;</span> <br>    variable=99<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;在子shell中，修改后的 variable 的值是 <span class="hljs-variable">$variable</span>&quot;</span><br>)<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;在父shell中，variable 的值仍然是 <span class="hljs-variable">$variable</span>&quot;</span><br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 在子shell中执行一系列命令</span><br>(<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;这是子shell中的命令1&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;这是子shell中的命令2&quot;</span><br>    <span class="hljs-comment"># 更多命令...</span><br>)<br><br><span class="hljs-comment"># 在父shell中执行的命令</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;这是父shell中的命令&quot;</span><br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>shell 基本介紹</title>
+    <link href="/2023/11/27/linux-shell-introduce/"/>
+    <url>/2023/11/27/linux-shell-introduce/</url>
+    
+    <content type="html"><![CDATA[<h1 id="什麼是shell"><a href="#什麼是shell" class="headerlink" title="什麼是shell?"></a>什麼是shell?</h1><p>shell 英文翻譯又叫外殼，但為什麼叫外殼?總是讓人很疑惑，這時就要先介紹內核了(Linux Kernel)</p><h2 id="什麼是Linux-Kernel"><a href="#什麼是Linux-Kernel" class="headerlink" title="什麼是Linux Kernel?"></a>什麼是Linux Kernel?</h2><p>又稱Linux內核，是整個操作系統的核心部分，負責管理和控制硬體資源，以及提供各種系統服務給應用程式。</p><p>由上面的介紹可以知道操作系統是透過內核，來控制底層的硬體設備，但要如何呼叫內核去操作硬體呢?</p><p>因此shell 就出現了，目的就是用來呼叫內核的。</p><p>為什麼叫shell，因為他是相對於內核，更外層的部分。</p><h1 id="shell-的定義"><a href="#shell-的定義" class="headerlink" title="shell 的定義"></a>shell 的定義</h1><p>操控內核的api接口，可以是GUI(圖形化介面)，或者是命令行 (之後文章提到的shell都是這個)</p><p>命令行除了單獨執行，也可以組合這些命令行成為腳本，處理比較複雜的流程</p><h1 id="shell-的管理位置"><a href="#shell-的管理位置" class="headerlink" title="shell 的管理位置"></a>shell 的管理位置</h1><ul><li><p><code>/etc/shells</code> ：可以查看有哪些shell 可以使用</p></li><li><p><code>/etc/passwd</code> ： 裡面記載了目前使用的shell </p></li><li><p><code>echo $0</code> ：可以用此指令查看目前使用的shell</p></li></ul><h1 id="shell-類型"><a href="#shell-類型" class="headerlink" title="shell 類型"></a>shell 類型</h1><ul><li>GUI (圖形化介面)<ul><li>Gnome</li><li>KDE</li></ul></li><li>命令行<ul><li>sh</li><li>bash (sh 的升級版，目前主流都是用他)</li><li>csh、tcsh (很少人用，bash無法在此環境下使用，要注意)</li><li>ksh(兼容bash、sh，但主要在unix solorias 中使用)</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
     
   </entry>
   
