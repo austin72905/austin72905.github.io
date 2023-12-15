@@ -16,23 +16,22 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="什麼是shell?shell 英文翻譯又叫外殼，但為什麼叫外殼?總是讓人很疑惑，這時就要先介紹內核了(Linux Kernel) 什麼是Linux Kernel?又稱Linux內核，是整個操作系統的核心部分，負責管理和控制硬體資源，以及提供各種系統服務給應用程式。 由上面的介紹可以知道操作系統是透過內核，來控制底層的硬體設備，但要如何呼叫內核去操作硬體呢? 因此shell 就出現了，目的就是用來呼">
+    <meta name="description" content="前言nvm (Node Version Manager)為 node.js 的版本管理工具，透過nvm，能夠在同一台電腦上輕鬆的管理多個版本的node.js，可以依照每個專案的需求切換node.js的版本 nvm安裝步驟Windows 版本有提供下載工具nvm-windows下載連結滑到下面選擇nvm-setup.zip，點選後就一路按下一步就能順利安裝 接著在終端輸入nvm，確認是否有安裝成功">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell 基本介紹">
-<meta property="og:url" content="https://austin72905.github.io/2023/11/27/linux-shell-introduce/index.html">
+<meta property="og:title" content="使用nvm 安裝 node.js">
+<meta property="og:url" content="https://austin72905.github.io/2023/12/16/nvm-install-node/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="什麼是shell?shell 英文翻譯又叫外殼，但為什麼叫外殼?總是讓人很疑惑，這時就要先介紹內核了(Linux Kernel) 什麼是Linux Kernel?又稱Linux內核，是整個操作系統的核心部分，負責管理和控制硬體資源，以及提供各種系統服務給應用程式。 由上面的介紹可以知道操作系統是透過內核，來控制底層的硬體設備，但要如何呼叫內核去操作硬體呢? 因此shell 就出現了，目的就是用來呼">
+<meta property="og:description" content="前言nvm (Node Version Manager)為 node.js 的版本管理工具，透過nvm，能夠在同一台電腦上輕鬆的管理多個版本的node.js，可以依照每個專案的需求切換node.js的版本 nvm安裝步驟Windows 版本有提供下載工具nvm-windows下載連結滑到下面選擇nvm-setup.zip，點選後就一路按下一步就能順利安裝 接著在終端輸入nvm，確認是否有安裝成功">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-11-27T08:35:00.000Z">
+<meta property="article:published_time" content="2023-12-16T00:06:00.000Z">
 <meta property="article:modified_time" content="2023-12-15T16:53:15.215Z">
 <meta property="article:author" content="Austin Lin">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="Node.js">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>shell 基本介紹 - Hexo</title>
+  <title>使用nvm 安裝 node.js - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="shell 基本介紹"></span>
+            <span id="subtitle" data-typed-text="使用nvm 安裝 node.js"></span>
           
         </div>
 
@@ -241,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-27 08:35" pubdate>
-          2023年11月27日 早上
+        <time datetime="2023-12-16 00:06" pubdate>
+          2023年12月16日 凌晨
         </time>
       </span>
     
@@ -285,40 +284,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">shell 基本介紹</h1>
+            <h1 id="seo-header">使用nvm 安裝 node.js</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="什麼是shell"><a href="#什麼是shell" class="headerlink" title="什麼是shell?"></a>什麼是shell?</h1><p>shell 英文翻譯又叫外殼，但為什麼叫外殼?總是讓人很疑惑，這時就要先介紹內核了(Linux Kernel)</p>
-<h2 id="什麼是Linux-Kernel"><a href="#什麼是Linux-Kernel" class="headerlink" title="什麼是Linux Kernel?"></a>什麼是Linux Kernel?</h2><p>又稱Linux內核，是整個操作系統的核心部分，負責管理和控制硬體資源，以及提供各種系統服務給應用程式。</p>
-<p>由上面的介紹可以知道操作系統是透過內核，來控制底層的硬體設備，但要如何呼叫內核去操作硬體呢?</p>
-<p>因此shell 就出現了，目的就是用來呼叫內核的。</p>
-<p>為什麼叫shell，因為他是相對於內核，更外層的部分。</p>
-<h1 id="shell-的定義"><a href="#shell-的定義" class="headerlink" title="shell 的定義"></a>shell 的定義</h1><p>操控內核的api接口，可以是GUI(圖形化介面)，或者是命令行 (之後文章提到的shell都是這個)</p>
-<p>命令行除了單獨執行，也可以組合這些命令行成為腳本，處理比較複雜的流程</p>
-<h1 id="shell-的管理位置"><a href="#shell-的管理位置" class="headerlink" title="shell 的管理位置"></a>shell 的管理位置</h1><ul>
-<li><p><code>/etc/shells</code> ：可以查看有哪些shell 可以使用</p>
-</li>
-<li><p><code>/etc/passwd</code> ： 裡面記載了目前使用的shell </p>
-</li>
-<li><p><code>echo $0</code> ：可以用此指令查看目前使用的shell</p>
-</li>
-</ul>
-<h1 id="shell-類型"><a href="#shell-類型" class="headerlink" title="shell 類型"></a>shell 類型</h1><ul>
-<li>GUI (圖形化介面)<ul>
-<li>Gnome</li>
-<li>KDE</li>
-</ul>
-</li>
-<li>命令行<ul>
-<li>sh</li>
-<li>bash (sh 的升級版，目前主流都是用他)</li>
-<li>csh、tcsh (很少人用，bash無法在此環境下使用，要注意)</li>
-<li>ksh(兼容bash、sh，但主要在unix solorias 中使用)</li>
-</ul>
-</li>
-</ul>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>nvm (Node Version Manager)為 node.js 的版本管理工具，透過nvm，能夠在同一台電腦上輕鬆的管理多個版本的node.js，可以依照每個專案的需求切換node.js的版本</p>
+<h1 id="nvm安裝步驟"><a href="#nvm安裝步驟" class="headerlink" title="nvm安裝步驟"></a>nvm安裝步驟</h1><p>Windows 版本有提供下載工具<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">nvm-windows</a><br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">下載連結</a>滑到下面選擇<code>nvm-setup.zip</code><br>，點選後就一路按下一步就能順利安裝</p>
+<p>接著在終端輸入<code>nvm</code>，確認是否有安裝成功</p>
+<h1 id="node-安裝"><a href="#node-安裝" class="headerlink" title="node 安裝"></a>node 安裝</h1><p>安裝完<code>nvm</code> 後接著就可以下載 node.js，下載node.js預設就會跟著下載套件管理工具<code>npm</code>。</p>
+<p>輸入<font color=#EB5757><code>nvm install node的版本號</code></font>下載指定版本的node.js，版本號可以去node.js官網查看LTS，如:<font color=#EB5757><code>nvm use 20.10.0</code></font><br>下載完可以用<code>node -v</code> 檢查是否有安裝成功</p>
+<h1 id="‘node’-不是內部或外部命令、可執行的程式或批次檔。"><a href="#‘node’-不是內部或外部命令、可執行的程式或批次檔。" class="headerlink" title="‘node’ 不是內部或外部命令、可執行的程式或批次檔。"></a>‘node’ 不是內部或外部命令、可執行的程式或批次檔。</h1><p>下載完之後如果出現以上訊息<br>使用 <code>nvm use 安裝node的版本號</code></p>
+<p>如:<code>nvm use 20.10.0</code></p>
+<p>不知道為啥使用了他沒有預設use我安裝的版本，還要自己指定…</p>
+<p>再次使用<code>node -v</code> 發現可以正常使用了</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://www.casper.tw/development/2022/01/10/install-nvm/">安裝 nvm 環境，Node.js 開發者必學（Windows、Mac 均適用）</a></p>
 
                 
               </div>
@@ -337,7 +317,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Node-js/" class="category-chain-item">Node.js</a>
   
   
 
@@ -352,9 +332,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
-      
-        <a href="/tags/shell/" class="print-no-link">#shell</a>
+        <a href="/tags/Node-js/" class="print-no-link">#Node.js</a>
       
     </div>
   
@@ -366,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>shell 基本介紹</div>
-      <div>https://austin72905.github.io/2023/11/27/linux-shell-introduce/</div>
+      <div>使用nvm 安裝 node.js</div>
+      <div>https://austin72905.github.io/2023/12/16/nvm-install-node/</div>
     </div>
     <div class="license-meta">
       
@@ -379,7 +357,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2023年11月27日</div>
+          <div>2023年12月16日</div>
         </div>
       
       
@@ -411,18 +389,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/27/linux-shell-syntax/" title="shell 語法介紹">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">shell 語法介紹</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/05/linux-system-management-cmd/" title="Linux 系統管理-常用指令(date)">
-                        <span class="hidden-mobile">Linux 系統管理-常用指令(date)</span>
+                      <a href="/2023/12/15/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
