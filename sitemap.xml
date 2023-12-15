@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://austin72905.github.io/2023/07/30/linux-filesystem/</loc>
+    <loc>https://austin72905.github.io/2023/11/27/linux-shell-case/</loc>
     
     <lastmod>2023-12-15</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://austin72905.github.io/2023/11/27/linux-shell-case/</loc>
+    <loc>https://austin72905.github.io/2023/07/30/linux-filesystem/</loc>
     
     <lastmod>2023-12-15</lastmod>
     
@@ -237,6 +237,15 @@
   
   <url>
     <loc>https://austin72905.github.io/2023/12/16/nvm-install-node/</loc>
+    
+    <lastmod>2023-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/12/16/wsl-install/</loc>
     
     <lastmod>2023-12-15</lastmod>
     
