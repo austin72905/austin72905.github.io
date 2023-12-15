@@ -17,6 +17,9 @@ Windows 版本有提供下載工具[nvm-windows](https://github.com/coreybutler/
 [下載連結](https://github.com/coreybutler/nvm-windows/releases)滑到下面選擇`nvm-setup.zip`
 ，點選後就一路按下一步就能順利安裝
 
+![nvm安裝](https://drive.google.com/u/2/uc?id=1US9E8PTYZlkcrMYkXIi3G8Tr5qCKrpWR&export=download)
+
+
 接著在終端輸入`nvm`，確認是否有安裝成功
 
 # node 安裝
