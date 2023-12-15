@@ -24,7 +24,7 @@
 <meta property="og:description" content="top （查看當前進程實時的使用情況）top指令可以查看當前進程實時的使用情況、CPU、RAM、I&#x2F;O使用率等其他資訊 常用參數  -u：查看指定用戶運行的進程 -p：查看特定進程的使用情況  交互模式下可使用的快捷鍵  q：退出 c：運行的COMMAND會顯示絕對路徑 k：系統會讓你選擇要kill 的進程編號，輸入完進程編號再按enter就能 kill 進程 P：按照cpu 排序 M：">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-09-15T12:22:00.000Z">
-<meta property="article:modified_time" content="2023-12-04T05:52:16.631Z">
+<meta property="article:modified_time" content="2023-12-15T16:02:26.530Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -364,6 +364,13 @@
 <li>查看root 運行的進程實時的使用情況<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">top -u root<br></code></pre></td></tr></table></figure></li>
 <li>查看PID&#x3D;5的進程實時的使用情況<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">top -p 5<br></code></pre></td></tr></table></figure></li>
 </ul>
+<h1 id="history-（查看用戶的cmd-使用紀錄）"><a href="#history-（查看用戶的cmd-使用紀錄）" class="headerlink" title="history （查看用戶的cmd 使用紀錄）"></a>history （查看用戶的cmd 使用紀錄）</h1><p>例如可以在系統崩潰時，排查是哪個指令出問題，或是哪個指令誤刪了文件</p>
+<p>每個用戶的歷史紀錄可以在</p>
+<p><font color=#EB5757><code>/home/用戶名/.bash_history</code></font> 找到</p>
+<p>如果想要重新使用指令，除了複製外，可以記住該指令的歷史編號</p>
+<p>使用</p>
+<p><font color=#EB5757><code>! 歷史編號</code></font></p>
+<p>系統就會運行該歷史編號的指令，就不用每次都找得很辛苦</p>
 <h1 id="df-（磁碟分區的使用狀況）"><a href="#df-（磁碟分區的使用狀況）" class="headerlink" title="df （磁碟分區的使用狀況）"></a>df （磁碟分區的使用狀況）</h1><p>df指令用來顯示磁碟分區的使用狀況。它會顯示每個磁碟分區的總空間、已使用空間和可用空間</p>
 <p>常用參數</p>
 <ul>
