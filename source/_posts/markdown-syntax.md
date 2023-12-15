@@ -185,6 +185,14 @@ google drive 裡面圖片的連結
     <font color=#EB5757>**`字體顏色`**</font>
 ```
 
+# 箭頭
+
+1. 右箭頭 &rarr;
+
+```md
+    &rarr;
+```
+
 # 引言
 
 使用 `> 文字` (與文字間需要空一格)
@@ -202,3 +210,5 @@ google drive 裡面圖片的連結
 [[實用]建立Google Drive圖床並顯示到網站上的方法](https://www.mytechgirl.com/tw/cloud/how-to-create-google-drive-online-photo-album-mtg6688.html)
 
 [Markdown 放入 google drive 圖片](https://theriseofdavid.github.io/2021/02/28/blog/hackmd_view_googledricePIC/)
+
+[markdown显示箭头方法](https://blog.csdn.net/l_degege/article/details/118045751)
