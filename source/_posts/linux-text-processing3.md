@@ -225,7 +225,7 @@ grep 的高級版，可以同時搜尋多個關鍵字
 * `FILENAME`： 當前文件名
 * `FS`：       分隔符，默認為 空格 or Tab
 * `RS`：       行分隔符，默認為  換行符
-* `OFS`：      輸出的字段的分隔符，默認為空格，可以用 OFS="~" 來指定
+* `OFS`：      輸出的字段的分隔符，默認為空格，可以用 OFS="~" 來指定，前面加上`-v`
 * `ORS`：      輸出行的分隔符，默認為空格
 * `OFMT`：     輸出的數字的格式，默認為%.6g
 * <font color=#EB5757>`NF`</font>：       每行用空格分隔後，字段的數量， 所以也可以用此找出每行的最後一個字
@@ -288,6 +288,12 @@ grep 的高級版，可以同時搜尋多個關鍵字
     `Output:`
 ```
     100
+```
+
+* 設定輸入自段的分隔符(OFS)，加上 `-v`
+```bash
+    
+    awk -v OFS='\n' -F '-' '{print $2}'
 ```
 
 
@@ -458,7 +464,21 @@ else 前記得要分號`;`
     ```bash
         sort 文件名.txt | uniq -c
     ```
+* **搭配sort、awk 指令使用，打印出兩個文件不一樣的部分**
 
+    ```bash
+        #!/bin/bash
+      
+        old=`tr ',' '\n' < o_content | awk -v OFS='\n' -F '-' '{print $2}'`
+
+        new=`tr ',' '\n' < n_content | awk -v OFS='\n' -F '-' '{print $2}'`
+
+
+        # 執行去重複, 只打印出 不重複的部分
+        # "" 包注可以保留制表符 \n \t 那些
+        echo "$old$new" | sort  | uniq -c | awk '$1 == 1  {print $0}'
+
+    ```
 
 # wc (計數)
 
@@ -487,7 +507,29 @@ else 前記得要分號`;`
         grep "status: 502" 文件名.txt | wc -l
     ```
 
+# tr (取代文字)
 
+可以取代一個文本內的文字
+
+## 語法格式
+```bash
+    tr '要取代的文字' '取代成的文字'
+```
+
+## 常用範例
+
+* 將文本內的`,`替換成`\n`
+
+```bash
+
+    # 將 inputfile.txt 內的 , 替換成 \n ，寫入到 outfile.txt
+    tr ',' '\n' < inputfile.txt > outfile.txt
+
+    # 使用管道
+
+    echo "helo,caal,sail,bill" | tr ',' '\n'
+
+```
 
 # 參考資料
 [Linux 文本处理三剑客：grep、sed 和 awk](https://zhuanlan.zhihu.com/p/110983126)

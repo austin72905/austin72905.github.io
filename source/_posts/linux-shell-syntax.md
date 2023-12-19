@@ -115,3 +115,52 @@ tags:
     echo "这是父shell中的命令"
     
 ```
+
+# 保留制表符
+
+使用 `""` 包住變數
+
+有一文件`o_content`
+
+```
+    ax-aa
+    bx-bb
+    cx-cc
+    dx-dd
+```
+
+
+腳本
+```bash
+    #!/bin/bash
+
+
+    # 使用"" 包住變數可以保留制表符 \n \t 那些
+
+    # 如果沒有用 "" 包住 
+
+    result=`cat o_content | awk -F '-' '{print $2}'`
+
+    echo $result
+
+```
+
+Output  (會以空格分隔，不是如預期一般以`\n`分隔)
+```
+    aa bb cc dd
+```
+
+如欲想要以`\n`分隔，使用 `""` 包住變數
+```bash
+    #!/bin/bash
+    result=`cat o_content | awk -F '-' '{print $2}'`
+
+    echo "$result"
+```
+Output
+```
+    aa
+    bb
+    cc
+    dd
+```
