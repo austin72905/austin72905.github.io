@@ -16,17 +16,17 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能安裝Linux虛擬機，wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定 安裝步驟 安裝">
+    <meta name="description" content="前言wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能使用Linux作業系統， wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。 注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定 安裝步驟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在win11上使用wsl2">
 <meta property="og:url" content="https://austin72905.github.io/2023/12/16/wsl-install/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能安裝Linux虛擬機，wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定 安裝步驟 安裝">
+<meta property="og:description" content="前言wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能使用Linux作業系統， wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。 注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定 安裝步驟">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://drive.google.com/u/2/uc?id=1jgvN0DyCTJ1RCxhZNgvaaM7O53bygtZ0&export=download">
 <meta property="og:image" content="https://drive.google.com/u/2/uc?id=1dPjPcFOuOGwdnDSYQrrcBOT0WWRYnqVF&export=download">
 <meta property="article:published_time" content="2023-12-16T03:26:00.000Z">
-<meta property="article:modified_time" content="2023-12-19T10:21:06.309Z">
+<meta property="article:modified_time" content="2023-12-20T10:04:42.429Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -292,13 +292,15 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能安裝Linux虛擬機，<br>wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。<br>注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能使用Linux作業系統，</p>
+<p>wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。</p>
+<p>注意: win10&#x2F;win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定</p>
 <h1 id="安裝步驟"><a href="#安裝步驟" class="headerlink" title="安裝步驟"></a>安裝步驟</h1><ol>
 <li>安裝之前需要先開啟windows 上的功能<br> 控制台 &rarr; 程式集 &rarr; 開啟或關閉windows功能<br> 需要將<code>虛擬機器平台</code>、<code>Windows 子系統Linux版</code> 勾選</li>
 </ol>
 <p><img src="https://drive.google.com/u/2/uc?id=1jgvN0DyCTJ1RCxhZNgvaaM7O53bygtZ0&export=download" srcset="/img/loading.gif" lazyload alt="開啟windows上的功能"></p>
 <ol start="2">
-<li>windows update 需要打開接收最新更新通知，之後重新啟動電腦</li>
+<li>windows update 打開接收最新更新通知，之後重新啟動電腦 (<em>不一定要開啟，如果在安裝時遇到報錯再開啟就行</em>)</li>
 </ol>
 <p><img src="https://drive.google.com/u/2/uc?id=1dPjPcFOuOGwdnDSYQrrcBOT0WWRYnqVF&export=download" srcset="/img/loading.gif" lazyload alt="打開接收最新更新通知"></p>
 <ol start="3">
@@ -323,6 +325,23 @@
 </li>
 </ol>
 <p>基本上就是沒有啟動windows 功能或是沒有打開更新</p>
+<h1 id="輸入wsl-遇到-出現-docker-desktop-root-之類的字眼"><a href="#輸入wsl-遇到-出現-docker-desktop-root-之類的字眼" class="headerlink" title="輸入wsl 遇到 出現 docker-desktop-root 之類的字眼"></a>輸入wsl 遇到 出現 docker-desktop-root 之類的字眼</h1><p>檢查一下是否之前安裝過docker desktop (windows 版docker)，docker desktop 會被視為一個linux 發行版</p>
+<p>查看已經安裝的發行版</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --list<br></code></pre></td></tr></table></figure>
+<p>會發現 有 <code>docker-desktop</code></p>
+<p>此時可以切換到另一個發行版</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --set-version &lt;DistributionName&gt; &lt;VersionNumber&gt;<br><span class="hljs-comment"># 範例</span><br>wsl --set-version Ubuntu-20.04 2<br></code></pre></td></tr></table></figure>
+
+<p>設置默認的發行版</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --set-default &lt;DistributionName&gt;<br><span class="hljs-comment"># 範例</span><br>wsl --set-default Ubuntu-20.04 <br></code></pre></td></tr></table></figure>
+
+<h1 id="與windows-宿主機共用資料夾"><a href="#與windows-宿主機共用資料夾" class="headerlink" title="與windows 宿主機共用資料夾"></a>與windows 宿主機共用資料夾</h1><p>在 wsl 終端 進入 <code>/mnt</code>，會發現裡面包含著windows 所有的磁碟，接著進入 <code>/mnt/c</code>，會看到它顯示的文件跟宿主機上的<code>C:/</code>內的文件是一樣的</p>
+<p>因此可以在wsl 上 訪問 宿主機上的文件的，但每次都要進入宿主機目錄很麻煩，可以透過建立捷徑(軟連結)的方式</p>
+<h2 id="建立一個捷徑-軟連結"><a href="#建立一個捷徑-軟連結" class="headerlink" title="建立一個捷徑 (軟連結)"></a>建立一個捷徑 (軟連結)</h2><p>在wsl 上， 先切換到家目錄(比較沒有權限問題)，創建一個目錄<code>commonWithHost</code>，之後在此目錄內建立捷徑</p>
+<p>假設我想與宿主機共用 <code>C:\commonWithWSL</code> (此目錄要存在)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~<br><br><span class="hljs-built_in">mkdir</span> commonWithHost<br><br><span class="hljs-comment"># 將宿主機上 C:\commonWithWSL 建立捷徑放在 commonWithHost 目錄裡</span><br><span class="hljs-built_in">ln</span> -s /mnt/c/commonWithWSL commonWithHost<br></code></pre></td></tr></table></figure>
+<p>之後進入<code>commonWithHost</code> 會發現多了一個<code>commonWithWSL</code>，進入後就可以訪問宿主機的文件了</p>
+<p>因為是捷徑，所以在wsl 裡面刪掉這個commonWithWSL目錄 沒差，不會影響到windows 上的目錄</p>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>之前用win10時，不記得需要那麼多的設定，win11 微軟號稱把wsl整合進了操作系統中，結果反而在安裝上遇到了很多問題…只能說果然是微軟出品阿。</p>
 <p>但是wsl 還是挺不錯的，省略掉很多以前建立虛擬機麻煩的步驟，雖然在某些網路功能上還是不像開一個虛擬機一樣能夠完全的隔離，但一般的文本處理功能也是很夠用了。</p>
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/wsl2-gui/">WSL2 安裝錯誤 0x800701bc 與 GUI 整合初體驗</a></p>
@@ -418,7 +437,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/19/hello-world/" title="Hello World">
+                      <a href="/2023/12/20/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
