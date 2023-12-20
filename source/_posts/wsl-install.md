@@ -7,8 +7,10 @@ tags:
 ---
 
 # 前言
-wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能安裝Linux虛擬機，
+wsl 是 windows 操作系統的一個linux子系統，讓你不用像以往一樣需要先下載VirtualBox，才能使用Linux作業系統，
+
 wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡單好用的指令，本文會介紹如何在win11上使用wsl。
+
 注意: win10/win11 預設使用的是wsl2，如果想要使用wsl1 可以去微軟官網查詢相關設定
 
 # 安裝步驟
@@ -20,7 +22,7 @@ wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡�
 ![開啟windows上的功能](https://drive.google.com/u/2/uc?id=1jgvN0DyCTJ1RCxhZNgvaaM7O53bygtZ0&export=download)
 
 
-2. windows update 需要打開接收最新更新通知，之後重新啟動電腦
+2. windows update 打開接收最新更新通知，之後重新啟動電腦 (*不一定要開啟，如果在安裝時遇到報錯再開啟就行*)
 
 ![打開接收最新更新通知](https://drive.google.com/u/2/uc?id=1dPjPcFOuOGwdnDSYQrrcBOT0WWRYnqVF&export=download)
 
@@ -51,6 +53,55 @@ wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡�
 3. 終端輸入wsl 閃退
 
 基本上就是沒有啟動windows 功能或是沒有打開更新
+
+# 輸入wsl 遇到 出現 docker-desktop-root 之類的字眼
+
+檢查一下是否之前安裝過docker desktop (windows 版docker)，docker desktop 會被視為一個linux 發行版
+
+查看已經安裝的發行版
+```bash
+    wsl --list
+```
+會發現 有 `docker-desktop`
+
+此時可以切換到另一個發行版
+
+```bash
+    wsl --set-version <DistributionName> <VersionNumber>
+    # 範例
+    wsl --set-version Ubuntu-20.04 2
+```
+
+設置默認的發行版
+```bash
+    wsl --set-default <DistributionName>
+    # 範例
+    wsl --set-default Ubuntu-20.04 
+```
+
+# 與windows 宿主機共用資料夾
+
+在 wsl 終端 進入 `/mnt`，會發現裡面包含著windows 所有的磁碟，接著進入 `/mnt/c`，會看到它顯示的文件跟宿主機上的`C:/`內的文件是一樣的
+
+因此可以在wsl 上 訪問 宿主機上的文件的，但每次都要進入宿主機目錄很麻煩，可以透過建立捷徑(軟連結)的方式
+
+## 建立一個捷徑 (軟連結)
+在wsl 上， 先切換到家目錄(比較沒有權限問題)，創建一個目錄`commonWithHost`，之後在此目錄內建立捷徑
+
+假設我想與宿主機共用 `C:\commonWithWSL` (此目錄要存在)
+
+```bash
+    cd ~
+
+    mkdir commonWithHost
+
+    # 將宿主機上 C:\commonWithWSL 建立捷徑放在 commonWithHost 目錄裡
+    ln -s /mnt/c/commonWithWSL commonWithHost
+```
+之後進入`commonWithHost` 會發現多了一個`commonWithWSL`，進入後就可以訪問宿主機的文件了
+
+
+因為是捷徑，所以在wsl 裡面刪掉這個commonWithWSL目錄 沒差，不會影響到windows 上的目錄
 
 
 # 結語
