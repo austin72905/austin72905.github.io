@@ -104,6 +104,24 @@ wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡�
 因為是捷徑，所以在wsl 裡面刪掉這個commonWithWSL目錄 沒差，不會影響到windows 上的目錄
 
 
+# windows 、linux 文件跨平台異常
+
+如果在windows 上編輯文件後，在linux開啟有時會出現以下報錯
+<font color=#EB5757>`/bin/bash^M: bad interpreter: No such file or directory`</font>
+
+原因是 不同系統編碼格式引起的：在windows系統中編輯的`.sh`檔案可能有不可見字元，導致跨平台讀取時會有問題
+
+
+可以用以下方式解決
+
+在linux 環境下，使用 vi 開啟文件，
+進入文件後在指令模式下輸入 `:set ff`  ，按下 enter 會看到檔案左下角出現 `fileformat=dos` 或是 `fileformat=unix`。
+
+在linux 環境下 `fileformat=dos` 是會有問題的
+
+輸入`:set ff=unix`，按下 enter 就可以修改，修改後輸入`:wq`保存修改並退出，腳本就可以正常運作了
+
+
 # 結語
 之前用win10時，不記得需要那麼多的設定，win11 微軟號稱把wsl整合進了操作系統中，結果反而在安裝上遇到了很多問題...只能說果然是微軟出品阿。
 
@@ -115,3 +133,5 @@ wsl 的出現讓Windows 的使用者能夠更簡單的使用 Linux 上那些簡�
 [如何使用 WSL 在 Windows 上安裝 Linux](https://learn.microsoft.com/zh-tw/windows/wsl/install)
 
 [wsl2的Error 0x80370102 解决方案](https://zhuanlan.zhihu.com/p/147233604)
+
+[sh腳本異常：/bin/sh^M:bad interpreter: No such file or directory](https://www.laitimes.com/article/1ebmr_1fxqw.html)
