@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Linux 遠端複製-scp</title>
+    <link href="/2023/12/25/linux-service-scp/"/>
+    <url>/2023/12/25/linux-service-scp/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用ssh 連線遠端時，總是有需要把遠端的文件複製到本地的需求，例如系統崩潰時，想要把日誌抓到本地分析研究，linux 中有個好用的指令 <code>scp</code> 可以做到這點。<br>scp 是基於 ssh 協議的檔案傳輸，預設為<code>22</code>port，可以將檔案從 <strong>服務器A</strong> 複製到 <strong>服務器B</strong>。</p><h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><h3 id="從本地複製文件到遠端-本地-rarr-遠端"><a href="#從本地複製文件到遠端-本地-rarr-遠端" class="headerlink" title="從本地複製文件到遠端 ( 本地 &rarr; 遠端 )"></a>從本地複製文件到遠端 ( 本地 &rarr; 遠端 )</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp 檔案名  遠端服務器IP:遠端服務器目錄<br><br><span class="hljs-comment"># 範例</span><br>scp filename.txt austin72905@192.168.56.x:/home/austin72905<br></code></pre></td></tr></table></figure><p>具體說明</p><ul><li><p>遠端服務器IP：格式為 用戶名@ip</p></li><li><p>遠端服務器目錄：複製的檔案要存到遠端服務器的哪個目錄</p></li></ul><h3 id="從遠端複製文件到本地-遠端-rarr-本地"><a href="#從遠端複製文件到本地-遠端-rarr-本地" class="headerlink" title="從遠端複製文件到本地 ( 遠端 &rarr; 本地 )"></a>從遠端複製文件到本地 ( 遠端 &rarr; 本地 )</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp 遠端服務器IP:檔案名 本地目錄/ <br><br><span class="hljs-comment"># 範例</span><br>scp austin72905@192.168.56.x:/home/austin72905/filename.txt  /home/myaccount/<br></code></pre></td></tr></table></figure><h2 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h2><ul><li><code>-r</code>：複製目錄時可用</li><li><code>-P</code>：啟用端口號，未指定預設為<code>port22</code></li><li><code>-C</code>：啟用壓縮</li><li><code>-i</code>：用於驗證身分的私鑰文件</li></ul><h1 id="使用範例"><a href="#使用範例" class="headerlink" title="使用範例"></a>使用範例</h1><h2 id="指定-port-號"><a href="#指定-port-號" class="headerlink" title="指定 port 號"></a>指定 port 號</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp -P 2222 file.txt username@remote:/path/to/destination/<br></code></pre></td></tr></table></figure><h2 id="複製整個目錄"><a href="#複製整個目錄" class="headerlink" title="複製整個目錄"></a>複製整個目錄</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp -r 目錄/ username@remote:/路徑/到/目的地/<br></code></pre></td></tr></table></figure><h2 id="指定驗證身分的私鑰文件"><a href="#指定驗證身分的私鑰文件" class="headerlink" title="指定驗證身分的私鑰文件"></a>指定驗證身分的私鑰文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp -i /path/to/private_key.pem file.txt username@remote:/path/to/destination/<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>ssh</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2023/12/25/hello-world/"/>
     <url>/2023/12/25/hello-world/</url>
@@ -34,6 +61,8 @@
     <tags>
       
       <tag>Linux</tag>
+      
+      <tag>ssh</tag>
       
     </tags>
     
