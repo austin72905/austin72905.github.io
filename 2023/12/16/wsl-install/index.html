@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://drive.google.com/u/2/uc?id=1jgvN0DyCTJ1RCxhZNgvaaM7O53bygtZ0&export=download">
 <meta property="og:image" content="https://drive.google.com/u/2/uc?id=1dPjPcFOuOGwdnDSYQrrcBOT0WWRYnqVF&export=download">
 <meta property="article:published_time" content="2023-12-16T03:26:00.000Z">
-<meta property="article:modified_time" content="2023-12-20T10:04:42.429Z">
+<meta property="article:modified_time" content="2023-12-25T08:59:11.578Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -342,11 +342,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~<br><br><span class="hljs-built_in">mkdir</span> commonWithHost<br><br><span class="hljs-comment"># 將宿主機上 C:\commonWithWSL 建立捷徑放在 commonWithHost 目錄裡</span><br><span class="hljs-built_in">ln</span> -s /mnt/c/commonWithWSL commonWithHost<br></code></pre></td></tr></table></figure>
 <p>之後進入<code>commonWithHost</code> 會發現多了一個<code>commonWithWSL</code>，進入後就可以訪問宿主機的文件了</p>
 <p>因為是捷徑，所以在wsl 裡面刪掉這個commonWithWSL目錄 沒差，不會影響到windows 上的目錄</p>
+<h1 id="windows-、linux-文件跨平台異常"><a href="#windows-、linux-文件跨平台異常" class="headerlink" title="windows 、linux 文件跨平台異常"></a>windows 、linux 文件跨平台異常</h1><p>如果在windows 上編輯文件後，在linux開啟有時會出現以下報錯<br><font color=#EB5757><code>/bin/bash^M: bad interpreter: No such file or directory</code></font></p>
+<p>原因是 不同系統編碼格式引起的：在windows系統中編輯的<code>.sh</code>檔案可能有不可見字元，導致跨平台讀取時會有問題</p>
+<p>可以用以下方式解決</p>
+<p>在linux 環境下，使用 vi 開啟文件，<br>進入文件後在指令模式下輸入 <code>:set ff</code>  ，按下 enter 會看到檔案左下角出現 <code>fileformat=dos</code> 或是 <code>fileformat=unix</code>。</p>
+<p>在linux 環境下 <code>fileformat=dos</code> 是會有問題的</p>
+<p>輸入<code>:set ff=unix</code>，按下 enter 就可以修改，修改後輸入<code>:wq</code>保存修改並退出，腳本就可以正常運作了</p>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>之前用win10時，不記得需要那麼多的設定，win11 微軟號稱把wsl整合進了操作系統中，結果反而在安裝上遇到了很多問題…只能說果然是微軟出品阿。</p>
 <p>但是wsl 還是挺不錯的，省略掉很多以前建立虛擬機麻煩的步驟，雖然在某些網路功能上還是不像開一個虛擬機一樣能夠完全的隔離，但一般的文本處理功能也是很夠用了。</p>
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/wsl2-gui/">WSL2 安裝錯誤 0x800701bc 與 GUI 整合初體驗</a></p>
 <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/windows/wsl/install">如何使用 WSL 在 Windows 上安裝 Linux</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/147233604">wsl2的Error 0x80370102 解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.laitimes.com/article/1ebmr_1fxqw.html">sh腳本異常：&#x2F;bin&#x2F;sh^M:bad interpreter: No such file or directory</a></p>
 
                 
               </div>
@@ -437,9 +444,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/20/hello-world/" title="Hello World">
+                      <a href="/2023/12/21/linux-service-ssh/" title="Linux網路服務-ssh">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
+                        <span class="hidden-mobile">Linux網路服務-ssh</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
