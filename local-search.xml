@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>Hello World</title>
+    <link href="/2023/12/28/hello-world/"/>
+    <url>/2023/12/28/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux 包管理工具-apt</title>
+    <link href="/2023/12/26/linux-pk-mg-apt/"/>
+    <url>/2023/12/26/linux-pk-mg-apt/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>apt 是 Debian 系發行版使用的軟體包管理工具，本質上就是去網路上包的網址，將包下載下來</p><h1 id="apt-與-apt-get-差異"><a href="#apt-與-apt-get-差異" class="headerlink" title="apt 與 apt-get 差異"></a>apt 與 apt-get 差異</h1><p>apt-get 是比較舊版本的軟體包管理工具，apt 是近年推出的，支援了一些原本apt-get 沒有的功能，對於處理複雜依賴的關係有加強過</p><p>主要差異</p><ul><li>apt upgrade 之後，舊版的套件會從系統刪除</li><li>apt-get upgrade 舊版的套件會保留</li></ul><h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><h2 id="列出所有安裝過的包-（apt-list）"><a href="#列出所有安裝過的包-（apt-list）" class="headerlink" title="列出所有安裝過的包 （apt list）"></a>列出所有安裝過的包 （apt list）</h2><p><code>apt list</code></p><p>通常可以搭配grep， 來查詢特定的包是否安裝過</p><p><code>apt list | grep &quot;nginx&quot;</code></p><h2 id="列出所有安裝過的包及詳細資訊-（apt-show）"><a href="#列出所有安裝過的包及詳細資訊-（apt-show）" class="headerlink" title="列出所有安裝過的包及詳細資訊 （apt show）"></a>列出所有安裝過的包及詳細資訊 （apt show）</h2><p><code>apt show</code></p><h2 id="更新包可安裝清單-（apt-update）"><a href="#更新包可安裝清單-（apt-update）" class="headerlink" title="更新包可安裝清單 （apt update）"></a>更新包可安裝清單 （apt update）</h2><p>只更新清單，但不會真的升級</p><p><code>apt update</code></p><h2 id="升級包-（apt-upgrade）"><a href="#升級包-（apt-upgrade）" class="headerlink" title="升級包 （apt upgrade）"></a>升級包 （apt upgrade）</h2><p><code>apt upgrade</code></p><h2 id="查詢包-（apt-search）"><a href="#查詢包-（apt-search）" class="headerlink" title="查詢包 （apt search）"></a>查詢包 （apt search）</h2><p>查詢那些包可以下載</p><p><code>apt search nginx</code></p><h2 id="安裝包-（apt-install）"><a href="#安裝包-（apt-install）" class="headerlink" title="安裝包 （apt install）"></a>安裝包 （apt install）</h2><p><code>apt install nginx</code></p><h2 id="刪除包-（apt-remove）"><a href="#刪除包-（apt-remove）" class="headerlink" title="刪除包 （apt remove）"></a>刪除包 （apt remove）</h2><p><code>apt remove nginx</code></p><h2 id="刪除包及設定檔-（apt-purge）"><a href="#刪除包及設定檔-（apt-purge）" class="headerlink" title="刪除包及設定檔 （apt purge）"></a>刪除包及設定檔 （apt purge）</h2><p><code>apt purge nginx</code><br>可以清得比較乾淨，但建議是先使用apt remove ，清的不夠乾淨再用purge</p><h2 id="配置檔-（-etc-apt-sources-list）"><a href="#配置檔-（-etc-apt-sources-list）" class="headerlink" title="配置檔 （/etc/apt/sources.list）"></a>配置檔 （<code>/etc/apt/sources.list</code>）</h2><p>可以配置每個包的網址，如果想要將第三方軟體也納入apt 管理，可以在此添加三方軟體的下載網址</p><h2 id="編輯配置檔-（apt-edit-sources）"><a href="#編輯配置檔-（apt-edit-sources）" class="headerlink" title="編輯配置檔 （apt edit-sources）"></a>編輯配置檔 （apt edit-sources）</h2><p>輸入<code>apt edit-sources</code>後，會開啟文字編輯器進入 <code>/etc/apt/sources.list</code> 編輯畫面</p><h2 id="moo"><a href="#moo" class="headerlink" title="moo"></a>moo</h2><p>彩蛋<br>輸入 <code>apt moo</code> 會有一隻牛出現在螢幕上</p><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://www.tokfun.net/os/linux/install-remove-linux-software-using-apt-command/#%E9%80%8F%E9%81%8E%E3%80%8Capt_edit-sources%E3%80%8D%E6%8C%87%E4%BB%A4%E7%B7%A8%E8%BC%AF%E8%BB%9F%E9%AB%94%E5%BA%AB%E8%A8%AD%E5%AE%9A%E6%AA%94">[Linux] Ubuntu APT 指令更新、升級、移除、安裝套件教學</a></p><p><a href="https://zhuanlan.zhihu.com/p/350690109">[Linux]apt 和 apt-get 之间有什么区别？</a></p><p><a href="https://aws.amazon.com/tw/compare/the-difference-between-apt-and-apt-get/">apt 與 apt-get 之間有什麼區別？</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux 遠端複製-scp</title>
     <link href="/2023/12/25/linux-service-scp/"/>
     <url>/2023/12/25/linux-service-scp/</url>
@@ -25,19 +63,6 @@
       <tag>ssh</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2023/12/25/hello-world/"/>
-    <url>/2023/12/25/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
     
   </entry>
   
