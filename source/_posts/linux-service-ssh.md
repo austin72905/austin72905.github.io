@@ -152,13 +152,13 @@ ssh 協議有多個實現，像是windows 上常用的putty，或是非常多人
     ssh-copy-id 用戶@服務器ip
 ```
 
-* 上傳之後服務端會出現一個 `~/.ssh/authorized_key`
+* 上傳之後服務端會出現一個 `~/.ssh/authorized_keys`
 
 
 ###  windows 無法使用 `ssh-copy-id`
 
 如果是windows 會無法使用`ssh-copy-id`這個指令，
-只要把本機的 <font color=#EB5757>`公鑰`</font> (`id_rsa.pub`)複製到服務端上的 <font color=#EB5757>`~/.ssh/authorized_key`</font> 文件就可以了，這也是`ssh-copy-id`腳本實際上做的事。
+只要把本機的 <font color=#EB5757>`公鑰`</font> (`id_rsa.pub`)複製到服務端上的 <font color=#EB5757>`~/.ssh/authorized_keys`</font> 文件就可以了，這也是`ssh-copy-id`腳本實際上做的事。
 
 公鑰格式大概會是 `ssh-rsa AAA.....5js= user@MSI`。
 
