@@ -16,22 +16,23 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。 本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。 檔案的所有權 (所有者、">
+    <meta name="description" content="前言工作上有台生產環境的VM是用Ubuntu環境，之前上面安裝的nginx出問題，想要下載日誌到本機分析，有想過可以用ssh連線到VM，但又不想在VM 上 額外開啟ssh port，增加管理上的麻煩，後來進一步對openssh了解，才知道openssh分成客戶端與服務端，又剛好接觸到wsl 因此想到可以將本機 wsl 當服務端，用 ngrok 暴露對外ip，VM當客戶端，使用scp指令將檔案傳到本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 檔案權限">
-<meta property="og:url" content="https://austin72905.github.io/2023/07/31/linux-file-access/index.html">
+<meta property="og:title" content="使用 ssh 搭配 ngrok 將遠程檔案傳到本機">
+<meta property="og:url" content="https://austin72905.github.io/2024/01/01/linux_ssh_advance1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。 本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。 檔案的所有權 (所有者、">
+<meta property="og:description" content="前言工作上有台生產環境的VM是用Ubuntu環境，之前上面安裝的nginx出問題，想要下載日誌到本機分析，有想過可以用ssh連線到VM，但又不想在VM 上 額外開啟ssh port，增加管理上的麻煩，後來進一步對openssh了解，才知道openssh分成客戶端與服務端，又剛好接觸到wsl 因此想到可以將本機 wsl 當服務端，用 ngrok 暴露對外ip，VM當客戶端，使用scp指令將檔案傳到本">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-07-31T02:30:00.000Z">
+<meta property="article:published_time" content="2024-01-01T12:00:00.000Z">
 <meta property="article:modified_time" content="2024-01-01T09:44:53.550Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Linux 檔案權限 - Hexo</title>
+  <title>使用 ssh 搭配 ngrok 將遠程檔案傳到本機 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux 檔案權限"></span>
+            <span id="subtitle" data-typed-text="使用 ssh 搭配 ngrok 將遠程檔案傳到本機"></span>
           
         </div>
 
@@ -240,8 +241,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-31 02:30" pubdate>
-          2023年7月31日 凌晨
+        <time datetime="2024-01-01 12:00" pubdate>
+          2024年1月1日 中午
         </time>
       </span>
     
@@ -284,127 +285,76 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux 檔案權限</h1>
+            <h1 id="seo-header">使用 ssh 搭配 ngrok 將遠程檔案傳到本機</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Linux 是一個多用戶的操作系統，在眾多的使用場景中，每個用戶都有可能會對檔案進行增刪與修改，如果都給予用戶最高權限，勢必會出現重要的系統檔案被誤刪的情況，或者試想某個用戶遭到駭客盜用，駭客就能在系統上為所欲為，刪光所有檔案，不對檔案進行保護對於系統來說是個災難，因此對於每個檔案、用戶設定權限格外重要。</p>
-<p>本文將會介紹Linux 系統中，針對檔案的權限如何修改及設定。</p>
-<h1 id="檔案的所有權-所有者、群組"><a href="#檔案的所有權-所有者、群組" class="headerlink" title="檔案的所有權 (所有者、群組)"></a>檔案的所有權 (所有者、群組)</h1><p>每個檔案都有2種類型的所有權 (ownership)</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>工作上有台生產環境的VM是用Ubuntu環境，之前上面安裝的nginx出問題，想要下載日誌到本機分析，有想過可以用ssh連線到VM，但又不想在VM 上 額外開啟ssh port，增加管理上的麻煩，後來進一步對openssh了解，才知道openssh分成客戶端與服務端，又剛好接觸到wsl</p>
+<p>因此想到<br><strong>可以將本機 wsl 當服務端，用 ngrok 暴露對外ip，VM當客戶端，使用scp指令將檔案傳到本機的wsl</strong>，就不用在線上環境開啟ssh port了</p>
+<p>相關名次介紹可以參考我之前的文章</p>
 <ul>
-<li>user  :  擁有者</li>
-<li>group  :  擁有群組</li>
-</ul>
-<h2 id="修改檔案的擁有者-chown"><a href="#修改檔案的擁有者-chown" class="headerlink" title="修改檔案的擁有者 (chown)"></a>修改檔案的擁有者 (chown)</h2><p>只有文件擁有者、系統管理員帳號可以修改</p>
-<p><code>chown 新的擁有者 檔名</code></p>
-<p>例如 : <code>chown austin72905 test-right</code></p>
-<p><code>chown -R</code>  :  會對該目錄裡面所有的檔案進行遞歸修改權限</p>
-<h2 id="修改檔案的擁有群組-chgrp"><a href="#修改檔案的擁有群組-chgrp" class="headerlink" title="修改檔案的擁有群組 (chgrp)"></a>修改檔案的擁有群組 (chgrp)</h2><p>只有文件擁有者、系統管理員帳號可以修改</p>
-<p><code>chgrp 新的擁有全組 檔名</code></p>
-<p>例如 : <code>chown austin72905 test-right</code></p>
-<h1 id="檔案權限"><a href="#檔案權限" class="headerlink" title="檔案權限"></a>檔案權限</h1><p>只有文件擁有者、系統管理員帳號可以修改</p>
-<p>每個檔案有 3  種類型的權限</p>
-<ul>
-<li>r  :  讀，沒有此權限無法 <code>ls</code> 查看目錄裡的文件</li>
-<li>w  :  寫，沒有此權限無法修改、刪除檔案</li>
-<li>x  :  執行，沒有此權限無法<code>cd</code> 進入該目錄</li>
-</ul>
-<p>3 種權限針對不同的對象</p>
-<ul>
-<li>u  :  擁有者 (user)</li>
-<li>g  :  擁有群組 (group)</li>
-<li>o  :  其他人 (other)，系統上其他的一般使用者</li>
-</ul>
-<h3 id="如何查看檔案權限"><a href="#如何查看檔案權限" class="headerlink" title="如何查看檔案權限 ?"></a>如何查看檔案權限 ?</h3><p>使用<code>ls -l</code> 可以看到 類似於 <code>drwxr-xr-x</code> 的一串英文字共10個字符，把它拆成 1、3、3、3 的方式查看</p>
-<table>
-<thead>
-<tr>
-<th>檔案類型</th>
-<th>擁有者權限</th>
-<th>擁有群組權限</th>
-<th>其他人權限</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>rwx</td>
-<td>r-x</td>
-<td>r-x</td>
-</tr>
-</tbody></table>
-<p>由上方範例可知該檔案</p>
-<ul>
-<li>是一個目錄</li>
-<li>擁有者權限 : 讀、寫、執行</li>
-<li>擁有群組權限 : 讀、執行 (-代表沒有該權限)</li>
-<li>其他人權限 : 讀、執行 (-代表沒有該權限)</li>
-</ul>
-<h2 id="修改檔檔案權限-chmod"><a href="#修改檔檔案權限-chmod" class="headerlink" title="修改檔檔案權限 (chmod)"></a>修改檔檔案權限 (chmod)</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用 +-"></a>使用 +-</h3><p>針對對象<code>u、g、o</code>，加上或減少<code>+-</code>，讀寫執行權限<code>rwx</code></p>
-<p><code>chmod (ugo)(+-)(rwx) 檔名</code></p>
-<p>給檔案的 擁有者 去掉 <code>寫</code> 權限</p>
-<p><code>chmod u-w 檔名</code></p>
-<p>給檔案 的 擁有者 加上 <code>寫</code> 跟 <code>執行</code> 權限</p>
-<p><code>chmod u+rw 檔名</code></p>
-<p>給檔案 的 擁有者、擁有群組 加上 <code>寫</code> 跟 <code>執行</code> 權限</p>
-<p><code>chmod ug+rw 檔名</code></p>
-<h3 id="使用-數字"><a href="#使用-數字" class="headerlink" title="使用 數字"></a>使用 數字</h3><p>修改順序為 ugo</p>
-<p>代表數字</p>
-<ul>
-<li><p>4 : r</p>
+<li><p><code>ssh</code> <a href="/2023/12/21/linux-service-ssh/" title="Linux網路服務-ssh">Linux網路服務-ssh</a></p>
 </li>
-<li><p>2: w</p>
+<li><p><code>scp</code> <a href="/2023/12/25/linux-service-scp/" title="Linux 遠端複製-scp">Linux 遠端複製-scp</a></p>
 </li>
-<li><p>1: u</p>
+<li><p><code>wsl</code> <a href="/2023/12/16/wsl-install/" title="在win11上使用wsl2">在win11上使用wsl2</a></p>
 </li>
 </ul>
-<p>所以要給一個檔案的擁有者 讀+寫 權限  4+2 &#x3D; 6，給0就是關掉該權限，其他的數字都是由這三個數字相加而來</p>
-<p><code>chmod 600 檔名</code></p>
-<p>上面的範例 擁有者 有 讀+寫 權限 (4+2)，擁有群組、其他人完全沒有權限 (0)</p>
-<p>還有一個常見範例，權限全開<br><code>chmod 777 檔名</code></p>
-<p><code>chmod -R</code> :  會對該目錄裡面所有的檔案進行遞歸修改權限</p>
-<h1 id="針對特定用戶-or-特定群組設定權限-ACL"><a href="#針對特定用戶-or-特定群組設定權限-ACL" class="headerlink" title="針對特定用戶 or 特定群組設定權限 (ACL)"></a>針對特定用戶 or 特定群組設定權限 (ACL)</h1><p>運行級別比 檔案權限還高</p>
-<p>假設只想要給某個用戶有讀寫的權限，一般用戶只有讀權限，就可以使用ACL，給予單獨的用戶或群組設定權限</p>
-<h2 id="設定權限-setfacl"><a href="#設定權限-setfacl" class="headerlink" title="設定權限 (setfacl)"></a>設定權限 (setfacl)</h2><p>(set file acl)</p>
-<p><code>setfacl -m u:用戶名:權限 檔名</code></p>
-<p><code>setfacl -m g:群組名:權限 檔名</code></p>
-<p>例如</p>
-<p><code>setfacl -m u:test:rw test-right</code></p>
-<p><code>setfacl -m g:test:rw test-right</code></p>
-<p>針對目錄和 子目錄 跟 子文件 遞歸設定</p>
-<p><code>setfacl -Rm u:用戶名:權限 檔名</code></p>
-<h3 id="刪除某個用戶的權限-x"><a href="#刪除某個用戶的權限-x" class="headerlink" title="刪除某個用戶的權限 (-x)"></a>刪除某個用戶的權限 (-x)</h3><p><code>setfacl -x u:用戶名 檔名</code></p>
-<h3 id="刪除所有的acl-權限-b"><a href="#刪除所有的acl-權限-b" class="headerlink" title="刪除所有的acl 權限 (-b)"></a>刪除所有的acl 權限 (-b)</h3><p><code>setfacl -b  檔名</code></p>
-<h2 id="獲取權限-getfacl"><a href="#獲取權限-getfacl" class="headerlink" title="獲取權限 (getfacl)"></a>獲取權限 (getfacl)</h2><p>(get file acl)</p>
-<p><code>getfacl 檔名</code></p>
-<h2 id="未設定前"><a href="#未設定前" class="headerlink" title="未設定前"></a>未設定前</h2><pre><code class="hljs"># file: 檔名
-# owner: 擁有者
-# group: 擁有群組
-user::rw-
-group::r--
-mask::r--
-other::r--
-</code></pre>
-<hr>
-<h2 id="設定後，會發現多個一個特別用戶的權限"><a href="#設定後，會發現多個一個特別用戶的權限" class="headerlink" title="設定後，會發現多個一個特別用戶的權限"></a>設定後，會發現多個一個特別用戶的權限</h2><pre><code class="hljs"># file: 檔名
-# owner: 擁有者
-# group: 擁有群組
-user::rw-
-user:特別用戶:rw-
-group::r--
-mask::r--
-other::r--
-</code></pre>
-<hr>
-<p>mask作用</p>
+<h1 id="ngrok"><a href="#ngrok" class="headerlink" title="ngrok"></a>ngrok</h1><h2 id="使用ngrok-開啟ssh-port"><a href="#使用ngrok-開啟ssh-port" class="headerlink" title="使用ngrok 開啟ssh port"></a>使用ngrok 開啟ssh port</h2><p>本機的 ip 是不會暴露給外網的，需要透過其他的工具才能讓處在外網的VM連線到</p>
+<p>可以使用<code>ngrok</code>， 這個工具可以把你本機的ip 暴露給外網，讓外網的人可以連線，如何安裝ngrok就不贅述</p>
+<ol>
+<li>在wsl宿主機上(非wsl環境)安裝ngrok</li>
+</ol>
+<p>安裝完後在wsl宿主機(非wsl環境)輸入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 依自己需求指定port</span><br>ngrok tcp 22<br></code></pre></td></tr></table></figure>
+
+<p>接著會看到畫面出現類似</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">tcp</span>://<span class="hljs-number">6</span>.tcp.ngrok.io:<span class="hljs-number">10211</span> -&gt; localhost:<span class="hljs-number">22</span><br></code></pre></td></tr></table></figure>
+
+<p>此時外網可以透過 <code>6.tcp.ngrok.io</code> 的 <code>10211</code> port，連線到本機的 <code>22</code> port</p>
+<p>wsl port 與 宿主機 是共用的，所以可以透過 本機的 22 port 直接連線到 wsl 22 port</p>
+<h1 id="生產環境VM"><a href="#生產環境VM" class="headerlink" title="生產環境VM"></a>生產環境VM</h1><h2 id="產生公鑰-如果選擇輸入密碼連線則可跳過"><a href="#產生公鑰-如果選擇輸入密碼連線則可跳過" class="headerlink" title="產生公鑰 (如果選擇輸入密碼連線則可跳過)"></a>產生公鑰 (如果選擇輸入密碼連線則可跳過)</h2><p>VM 作為客戶端</p>
+<p>使用<code>ssh-keygen</code>建立公私鑰，</p>
+<p>會在<code>~/.ssh</code> 新增一對公私鑰</p>
 <ul>
-<li><p>mask 表示在 ACL 中的使用者權限或群組權限的最大權限值，用於限制 ACL 權限的有效性</p>
-</li>
-<li><p>mask 的值在設置 ACL 時會自動計算，通常不需要手動更改。</p>
-</li>
-<li><p>雖然 擁有者 和群組 本來應該有讀取和寫入權限（rw-），但由於 mask 設置為 r–，所以實際有效的權限為 r–，即只有讀取權限。</p>
-</li>
+<li>id_rsa</li>
+<li>id_rsa.pub (公鑰)</li>
 </ul>
+<h1 id="wsl"><a href="#wsl" class="headerlink" title="wsl"></a>wsl</h1><p>我使用的wsl 是 ubuntu 發行版，其他發行版指令可能略有不同</p>
+<h2 id="開啟ssh-服務端"><a href="#開啟ssh-服務端" class="headerlink" title="開啟ssh 服務端"></a>開啟ssh 服務端</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">service ssh start<br><br><span class="hljs-comment"># 或是 (依照發行版不同)</span><br><br>service sshd start<br></code></pre></td></tr></table></figure>
+
+
+<p>如果還沒下載 <code>openssh</code> 服務端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install openssh-server<br></code></pre></td></tr></table></figure>
+
+<h2 id="修改為ssh-連線時需輸入密碼-與配置公鑰擇一"><a href="#修改為ssh-連線時需輸入密碼-與配置公鑰擇一" class="headerlink" title="修改為ssh 連線時需輸入密碼 (與配置公鑰擇一)"></a>修改為ssh 連線時需輸入密碼 (與配置公鑰擇一)</h2><p>連線時採用配置公鑰可以跳過</p>
+<p>wsl 預設 連線時不需要輸入密碼，如果想要修改，可以到 <code>/etc/ssh/sshd_config</code> 修改配置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">PasswordAuthentication</span> : <span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
+
+<p>輸入完後，重新加載服務<br><code>service ssh restart</code></p>
+<h2 id="修改為ssh-連線使用配置公鑰-與輸入密碼擇一"><a href="#修改為ssh-連線使用配置公鑰-與輸入密碼擇一" class="headerlink" title="修改為ssh 連線使用配置公鑰 (與輸入密碼擇一)"></a>修改為ssh 連線使用配置公鑰 (與輸入密碼擇一)</h2><p>採用連線時輸入密碼這步可以跳過</p>
+<p>將 客戶端(也就是VM)的公鑰(<code>~/.ssh/id_rsa.pub</code>)內容貼到 wsl上的<code>~/.ssh/authorized_keys</code>，沒有此目錄跟文件，可以自行創立一個。</p>
+<p>或者回到生產環境VM</p>
+<p>輸入以下指令，將公鑰上傳到遠端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># port 跟 用戶、遠端域名 依自己的配置修改</span><br>ssh-copy-id -p 10221 austin72905@6.tcp.ngrok.io<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="scp-指令"><a href="#scp-指令" class="headerlink" title="scp 指令"></a>scp 指令</h2><p>回到生產環境VM</p>
+<p>傳送檔案，假設有一個文件<code>test</code>，想要傳到遠端的<code>/home/austin72905</code>目錄</p>
+<p>輸入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># port 跟 用戶、遠端域名 依自己的配置修改 (注意這裡指定port 是大寫&quot;P&quot;)</span><br>scp -P 10221 <span class="hljs-built_in">test</span> austin72905@6.tcp.ngrok.io:/home/austin72905<br></code></pre></td></tr></table></figure>
+
+
+
+<p>就會看到文件傳送成功了</p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><ul>
+<li>如果不透過wsl 的話 ，新版本windows 其實內建已經有 openssh，但需要額外設定防火牆的樣子，也可以自行去嘗試，我自己是搞很久都沒成功，索性用wsl 比較方便。</li>
+<li>使用這個方式因為使用ngrok 暴露ip，每次開啟時ip都會不一樣，每次連線VM上的 <code>~/.ssh/know_hosts</code> 都會增加一筆，要定時去刪除。</li>
+</ul>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://lostsea.cn/articles/2023/05/11/1683793910638.html">wsl中使用ngrok进行ssh连接</a></p>
 
                 
               </div>
@@ -440,6 +390,8 @@ other::r--
       
         <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
+        <a href="/tags/ssh/" class="print-no-link">#ssh</a>
+      
     </div>
   
 </div>
@@ -450,8 +402,8 @@ other::r--
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux 檔案權限</div>
-      <div>https://austin72905.github.io/2023/07/31/linux-file-access/</div>
+      <div>使用 ssh 搭配 ngrok 將遠程檔案傳到本機</div>
+      <div>https://austin72905.github.io/2024/01/01/linux_ssh_advance1/</div>
     </div>
     <div class="license-meta">
       
@@ -463,7 +415,7 @@ other::r--
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2023年7月31日</div>
+          <div>2024年1月1日</div>
         </div>
       
       
@@ -495,18 +447,12 @@ other::r--
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/03/linux-user-management/" title="Linux 用戶管理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux 用戶管理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/30/linux-filesystem/" title="Linux 文件系統">
-                        <span class="hidden-mobile">Linux 文件系統</span>
+                      <a href="/2024/01/01/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

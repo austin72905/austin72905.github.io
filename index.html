@@ -247,13 +247,76 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/12/28/hello-world/" target="_self">
+        <a href="/2024/01/01/linux_ssh_advance1/" target="_self">
+          使用 ssh 搭配 ngrok 將遠程檔案傳到本機
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/01/linux_ssh_advance1/" target="_self">
+        <div>
+          前言工作上有台生產環境的VM是用Ubuntu環境，之前上面安裝的nginx出問題，想要下載日誌到本機分析，有想過可以用ssh連線到VM，但又不想在VM 上 額外開啟ssh port，增加管理上的麻煩，後來進一步對openssh了解，才知道openssh分成客戶端與服務端，又剛好接觸到wsl 因此想到可以將本機 wsl 當服務端，用 ngrok 暴露對外ip，VM當客戶端，使用scp指令將檔案傳到本
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-01 12:00" pubdate>
+              2024-01-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/ssh/">#ssh</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/01/hello-world/" target="_self">
           Hello World
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/28/hello-world/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/01/hello-world/" target="_self">
         <div>
           Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
         </div>
@@ -263,8 +326,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-28 19:30" pubdate>
-              2023-12-28
+            <time datetime="2024-01-01 09:44" pubdate>
+              2024-01-01
             </time>
           </div>
         
@@ -732,69 +795,6 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
             <time datetime="2023-11-27 16:36" pubdate>
-              2023-11-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-              <a href="/tags/shell/">#shell</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/11/27/linux-shell-if/" target="_self">
-          shell 中的 if 語句
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/27/linux-shell-if/" target="_self">
-        <div>
-          語法介紹123456if [ 條件 ]then    動作else    動作fi  [  ]兩邊都需要空一格 變數與判斷式都需要空一格  變數與判斷式都需要空一格12345678910#!/bin/basha=&quot;sun&quot;if [ $a = &quot;mon&quot; ]then    echo &quot;cool&quot;else    echo &quot;no&q
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-27 09:39" pubdate>
               2023-11-27
             </time>
           </div>
