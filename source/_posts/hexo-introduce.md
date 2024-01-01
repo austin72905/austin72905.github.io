@@ -118,6 +118,14 @@ Hexo 是一個blog 框架，用於快速產生"靜態"網站，基於 node.js，
 
 ```
 
+# 引用自己的其他文章
+
+```
+    {% post_link 文章所在檔名 顯示的文字 %}
+
+    # 範例
+    {% post_link linux-service-ssh Linux網路服務-ssh %}
+```
 
 # 部屬到線上
 
