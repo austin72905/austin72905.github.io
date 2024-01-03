@@ -4,6 +4,46 @@
   
   
   <entry>
+    <title>Hello World</title>
+    <link href="/2024/01/03/hello-world/"/>
+    <url>/2024/01/03/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>查詢 dns 常用指令 (nslookup、dig)</title>
+    <link href="/2024/01/03/linux_dns_commands/"/>
+    <url>/2024/01/03/linux_dns_commands/</url>
+    
+    <content type="html"><![CDATA[<h1 id="常用的-dns-服務器"><a href="#常用的-dns-服務器" class="headerlink" title="常用的 dns 服務器"></a>常用的 dns 服務器</h1><ul><li><p><code>8.8.8.8</code>：google 的 dns</p></li><li><p><code>1.1.1.1</code>：cloudfare 的 dns</p></li><li><p><code>180.76.76.76</code>：百度 的 dns</p></li></ul><h1 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h1><p>可以用來查詢dns相關訊息，在windows 上也能使用</p><h2 id="常用範例"><a href="#常用範例" class="headerlink" title="常用範例"></a>常用範例</h2><ul><li><p>指定dns服務器查詢</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nslookup www.youtube.com 8.8.8.8<br></code></pre></td></tr></table></figure></li><li><p>反查</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nslookup 123.10.16.8<br></code></pre></td></tr></table></figure></li><li><p>指定查詢類型</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nslookup -<span class="hljs-built_in">type</span>=mx www.youtube.com 8.8.8.8<br></code></pre></td></tr></table></figure></li></ul><h1 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h1><p>dig指令(domain information groper)，可以用來查詢域名的dns相關訊息</p><h2 id="語法說明"><a href="#語法說明" class="headerlink" title="語法說明"></a>語法說明</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">dns 域名<br><br>dns @指定使用的dns服務器 域名<br><br>dig @指定的dns服務器 域名 查詢種類<br></code></pre></td></tr></table></figure><p>常用參數</p><ul><li><code>@dns服務器</code>：如<code>8.8.8.8</code>、<code>1.1.1.1</code>，如果沒有指定，預設會使用本地<code>/etc/resolv.conf</code> 配置的dns 服務器</li><li><code>+short</code>：簡短回應，只回應ip 或 域名</li><li><code>+trace</code>：顯示域名解析時，經過哪些節點</li><li><code>+recurse</code>：必要時進行遞歸查詢，而不是只返回緩存的結果</li><li><code>-x</code>：反向查詢，通常是輸入IP，可以查詢與之相關的域名</li><li><code>-p</code>：指定訪問dns服務器的port，當dns使用非53port時可用</li></ul><h2 id="查詢路徑"><a href="#查詢路徑" class="headerlink" title="查詢路徑"></a>查詢路徑</h2><p>作業系統會從網域的「最後段」一路反向查詢到「最前段」。例如，以網域 <a href="http://www.ntu.edu.tw/">www.ntu.edu.tw</a> 為例，首先會查詢負責回應 <strong><font color=#EB5757><code>tw</code></font></strong> 網域DNS記錄的主機為何，再接著查詢負責 <strong><font color=#EB5757><code>edu</code></font></strong> 網域的主機，而後是負責 <strong><font color=#EB5757><code>ntu</code></font></strong> 網域的主機。最後，再詢問負責 <strong><font color=#EB5757><code>ntu</code></font></strong> 網域的主機，網域名稱 <strong><font color=#EB5757><code>www</code></font></strong> 的主機 IP 為何。也</p><p>就是查詢路徑為：</p><p><strong>tw → edu → ntu → www</strong></p><h2 id="查詢種類"><a href="#查詢種類" class="headerlink" title="查詢種類"></a>查詢種類</h2><ul><li><code>A</code>：ipv4位置</li><li><code>AAAA</code>：ipv6位置</li><li><code>ns</code>：(Name Server) 網域名稱是哪台主機解析的</li><li><code>MX</code>：電子郵件</li></ul><h2 id="常用範例-1"><a href="#常用範例-1" class="headerlink" title="常用範例"></a>常用範例</h2><ul><li><p>查詢youtube 域名 指向的 ip</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig www.youtube.com<br></code></pre></td></tr></table></figure></li><li><p>使用 google 的 dns 查詢 youtube 域名 指向的 ip</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig @8.8.8.8 www.youtube.com<br></code></pre></td></tr></table></figure></li><li><p>詳細輸出</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig +trace @8.8.8.8  www.youtube.com<br></code></pre></td></tr></table></figure></li></ul><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://ithelp.ithome.com.tw/articles/10214466">[鐵人修煉_5]-利用DNS - dig</a><br><a href="http://mepopedia.com/forum/read.php?135,90293">DNS設定反查與偵錯：dig指令深入使用</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>dns</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用 ssh 搭配 ngrok 將遠程檔案傳到本機</title>
     <link href="/2024/01/01/linux_ssh_advance1/"/>
     <url>/2024/01/01/linux_ssh_advance1/</url>
@@ -25,19 +65,6 @@
       <tag>ssh</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2024/01/01/hello-world/"/>
-    <url>/2024/01/01/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
     
   </entry>
   
