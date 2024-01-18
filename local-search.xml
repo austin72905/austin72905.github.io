@@ -5,12 +5,39 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="/2024/01/03/hello-world/"/>
-    <url>/2024/01/03/hello-world/</url>
+    <link href="/2024/01/18/hello-world/"/>
+    <url>/2024/01/18/hello-world/</url>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用Docker 安裝 MySQL</title>
+    <link href="/2024/01/18/mysql-docker/"/>
+    <url>/2024/01/18/mysql-docker/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面</p><h1 id="確認wsl-中-Docker-是否有開啟"><a href="#確認wsl-中-Docker-是否有開啟" class="headerlink" title="確認wsl 中 Docker 是否有開啟"></a>確認wsl 中 Docker 是否有開啟</h1><p>service docker status</p><p>啟動docker<br>service docker start</p><h1 id="拉取MySQL-映像"><a href="#拉取MySQL-映像" class="headerlink" title="拉取MySQL 映像"></a>拉取MySQL 映像</h1><p>docker pull mysql:8</p><h1 id="檢查-image-是否有下載成功"><a href="#檢查-image-是否有下載成功" class="headerlink" title="檢查 image 是否有下載成功"></a>檢查 image 是否有下載成功</h1><p>docker images</p><h1 id="運行-MySQL-容器"><a href="#運行-MySQL-容器" class="headerlink" title="運行 MySQL 容器"></a>運行 MySQL 容器</h1><p>docker run –name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;YourRootPassword -d mysql:8</p><ul><li>–name : 指定容器為 mysql-test</li><li>-p 3306:3306 : 將容器的 3306 端口映射到主機的 3306 端口，mysql 預設啟動時是跑3306 port，設定此port 比較省事</li><li>-e MYSQL_ROOT_PASSWORD&#x3D;YourRootPassword : 初始化 root 用戶的密碼為 YourRootPassword。</li><li>-d mysql:8 : 背景執行 MySQL 映像</li></ul><h1 id="檢查運行中的容器"><a href="#檢查運行中的容器" class="headerlink" title="檢查運行中的容器"></a>檢查運行中的容器</h1><p>docker ps</p><h1 id="進入容器"><a href="#進入容器" class="headerlink" title="進入容器"></a>進入容器</h1><p>docker exec -it mysql-test bash</p><h1 id="進入容器後，登陸MySQL"><a href="#進入容器後，登陸MySQL" class="headerlink" title="進入容器後，登陸MySQL"></a>進入容器後，登陸MySQL</h1><p>mysql -u root -p</p><h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>每個語句後面要用; 結尾，不然MySQL 會以為你還沒輸入完，出現 -&gt; 記號</p><h2 id="修改root-密碼"><a href="#修改root-密碼" class="headerlink" title="修改root 密碼"></a>修改root 密碼</h2><p>ALTER USER ‘root‘@’localhost’ IDENTIFIED BY ‘yourNewPassword’;</p><h2 id="添加用戶"><a href="#添加用戶" class="headerlink" title="添加用戶"></a>添加用戶</h2><p>遠端連線時，不要使用root 用戶比較好，因使額外新增一個用戶</p><p>設定用戶時可以指定用戶使用語句的權限(SELECT、INSERT…)</p><p>對那些表有訪問的權限</p><h2 id="建立用戶"><a href="#建立用戶" class="headerlink" title="建立用戶"></a>建立用戶</h2><p>CREATE USER ‘your_user_name‘@’%’ IDENTIFIED WITH mysql_native_password BY ‘your_password’;</p><p>替换 ‘your_username’ 为你要创建的用户名。<br>替换 ‘your_password’ 为你要设置的密码。</p><h2 id="給予用戶權限"><a href="#給予用戶權限" class="headerlink" title="給予用戶權限"></a>給予用戶權限</h2><p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘your_user_name‘@’%’;</p><p>GRANT SELECT ON tableName.* TO ‘your_username‘@’%’;</p><p>GRANT SELECT: 表示你要授予用户 SELECT 权限。<br>ON transaction.<em>: 表示你要将权限应用到 transaction 数据库的所有表。</em> 表示所有表。<br>TO ‘your_username‘@’%’: 指定了用户和来源主机。’your_username’ 是你要授予权限的用户名，’%’ 表示允许从任何主机远程登录。<br>这样，用户 ‘your_username’ 将只有在 transaction 数据库的所有表上执行 SELECT 操作的权限。</p><p>请确保在授权时谨慎操作，仅授予用户他们实际需要的权限，以提高系统的安全性。</p><h2 id="建立資料庫"><a href="#建立資料庫" class="headerlink" title="建立資料庫"></a>建立資料庫</h2><p>create database yourDbName;</p><p>顯示資料庫<br>show databases;</p><p>選擇資料庫<br>use yourDbName;</p><h2 id="建立資料表"><a href="#建立資料表" class="headerlink" title="建立資料表"></a>建立資料表</h2><p>看語意就知道如果資料表存在就刪除，確定要刪除才執行，否則後果很嚴重<br>drop table if exists tableName;</p><p>建立新的資料表<br>create table tableName (<br>    id int auto_increment primary key,<br>    name nvarchar(30),<br>    version nvarchar(30),<br>    remark nvarchar(30)<br>);</p><h2 id="插入資料"><a href="#插入資料" class="headerlink" title="插入資料"></a>插入資料</h2><p>insert into tableName(name,version,remark)</p><h2 id="離開MySQL"><a href="#離開MySQL" class="headerlink" title="離開MySQL"></a>離開MySQL</h2><p>quit 或是 exit 都行</p><h1 id="連線"><a href="#連線" class="headerlink" title="連線"></a>連線</h1><p>從外部連線MySQL 需要連線字串，主機名因為MySQL 是安裝在wsl 的 Docker 裡面，只要在wsl 獲取ip後，就能透過連線字串連接</p><p>ifconfig</p><p>eth0</p><p>172.27.119.190</p><p>連線字串<br>server&#x3D;172.27.119.190;port&#x3D;3306;user id&#x3D;your-user-name;password&#x3D;your-user-password;database&#x3D;database-name;charset&#x3D;utf8;</p><h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://ithelp.ithome.com.tw/articles/10272193">【Docker 攻略】MySQL 安裝篇 | 安裝資料庫 好快的說 !</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MySQL</tag>
+      
+      <tag>Docker</tag>
+      
+    </tags>
     
   </entry>
   
