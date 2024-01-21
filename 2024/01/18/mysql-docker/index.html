@@ -16,15 +16,15 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面 確認wsl 中 Docker 是否有開啟service docker status 啟動dockerservice docker start 拉取MySQL 映像docker pull mysql:8 檢查 image 是否有下載成功docker images 運行 MySQL 容器docker run –">
+    <meta name="description" content="前言本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面，docker 安裝過程就不贅述。 確認wsl 中 Docker 是否有開啟service docker status 啟動dockerservice docker start 拉取MySQL 映像docker pull mysql:8 檢查 image 是否有下載成功docker images 運行 MyS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Docker 安裝 MySQL">
 <meta property="og:url" content="https://austin72905.github.io/2024/01/18/mysql-docker/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面 確認wsl 中 Docker 是否有開啟service docker status 啟動dockerservice docker start 拉取MySQL 映像docker pull mysql:8 檢查 image 是否有下載成功docker images 運行 MySQL 容器docker run –">
+<meta property="og:description" content="前言本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面，docker 安裝過程就不贅述。 確認wsl 中 Docker 是否有開啟service docker status 啟動dockerservice docker start 拉取MySQL 映像docker pull mysql:8 檢查 image 是否有下載成功docker images 運行 MyS">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-01-18T11:38:00.000Z">
-<meta property="article:modified_time" content="2024-01-18T12:13:20.515Z">
+<meta property="article:modified_time" content="2024-01-21T10:47:22.676Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="Docker">
@@ -290,44 +290,88 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面</p>
-<h1 id="確認wsl-中-Docker-是否有開啟"><a href="#確認wsl-中-Docker-是否有開啟" class="headerlink" title="確認wsl 中 Docker 是否有開啟"></a>確認wsl 中 Docker 是否有開啟</h1><p>service docker status</p>
-<p>啟動docker<br>service docker start</p>
-<h1 id="拉取MySQL-映像"><a href="#拉取MySQL-映像" class="headerlink" title="拉取MySQL 映像"></a>拉取MySQL 映像</h1><p>docker pull mysql:8</p>
-<h1 id="檢查-image-是否有下載成功"><a href="#檢查-image-是否有下載成功" class="headerlink" title="檢查 image 是否有下載成功"></a>檢查 image 是否有下載成功</h1><p>docker images</p>
-<h1 id="運行-MySQL-容器"><a href="#運行-MySQL-容器" class="headerlink" title="運行 MySQL 容器"></a>運行 MySQL 容器</h1><p>docker run –name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;YourRootPassword -d mysql:8</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文介紹使用 Docker 安裝 MySQL，Docker 是安裝在本機 wsl 裡面，docker 安裝過程就不贅述。</p>
+<h1 id="確認wsl-中-Docker-是否有開啟"><a href="#確認wsl-中-Docker-是否有開啟" class="headerlink" title="確認wsl 中 Docker 是否有開啟"></a>確認wsl 中 Docker 是否有開啟</h1><p><code>service docker status</code></p>
+<p>啟動docker<br><code>service docker start</code></p>
+<h1 id="拉取MySQL-映像"><a href="#拉取MySQL-映像" class="headerlink" title="拉取MySQL 映像"></a>拉取MySQL 映像</h1><p><code>docker pull mysql:8</code></p>
+<h1 id="檢查-image-是否有下載成功"><a href="#檢查-image-是否有下載成功" class="headerlink" title="檢查 image 是否有下載成功"></a>檢查 image 是否有下載成功</h1><p><code>docker images</code></p>
+<h1 id="運行-MySQL-容器"><a href="#運行-MySQL-容器" class="headerlink" title="運行 MySQL 容器"></a>運行 MySQL 容器</h1><p><code>docker run --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=YourRootPassword -d mysql:8</code></p>
 <ul>
-<li>–name : 指定容器為 mysql-test</li>
-<li>-p 3306:3306 : 將容器的 3306 端口映射到主機的 3306 端口，mysql 預設啟動時是跑3306 port，設定此port 比較省事</li>
-<li>-e MYSQL_ROOT_PASSWORD&#x3D;YourRootPassword : 初始化 root 用戶的密碼為 YourRootPassword。</li>
-<li>-d mysql:8 : 背景執行 MySQL 映像</li>
+<li><code>--name mysql-test</code> : 指定容器為 mysql-test</li>
+<li><code>-p 3306:3306</code>(host port:container port)  : 將主機的 3306 端口映射到容器的 3306 端口，mysql 預設啟動時是跑3306 port，設定此port 比較省事</li>
+<li><code>-e MYSQL_ROOT_PASSWORD=YourRootPassword</code> : 初始化 root 用戶的密碼為 YourRootPassword。</li>
+<li><code>-d mysql:8</code> : 背景執行 MySQL 映像</li>
 </ul>
-<h1 id="檢查運行中的容器"><a href="#檢查運行中的容器" class="headerlink" title="檢查運行中的容器"></a>檢查運行中的容器</h1><p>docker ps</p>
-<h1 id="進入容器"><a href="#進入容器" class="headerlink" title="進入容器"></a>進入容器</h1><p>docker exec -it mysql-test bash</p>
-<h1 id="進入容器後，登陸MySQL"><a href="#進入容器後，登陸MySQL" class="headerlink" title="進入容器後，登陸MySQL"></a>進入容器後，登陸MySQL</h1><p>mysql -u root -p</p>
-<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>每個語句後面要用; 結尾，不然MySQL 會以為你還沒輸入完，出現 -&gt; 記號</p>
-<h2 id="修改root-密碼"><a href="#修改root-密碼" class="headerlink" title="修改root 密碼"></a>修改root 密碼</h2><p>ALTER USER ‘root‘@’localhost’ IDENTIFIED BY ‘yourNewPassword’;</p>
-<h2 id="添加用戶"><a href="#添加用戶" class="headerlink" title="添加用戶"></a>添加用戶</h2><p>遠端連線時，不要使用root 用戶比較好，因使額外新增一個用戶</p>
+<h1 id="檢查運行中的容器"><a href="#檢查運行中的容器" class="headerlink" title="檢查運行中的容器"></a>檢查運行中的容器</h1><p><code>docker ps</code></p>
+<h1 id="進入容器"><a href="#進入容器" class="headerlink" title="進入容器"></a>進入容器</h1><p><code>docker exec -it mysql-test bash</code></p>
+<h1 id="進入容器後，登陸MySQL"><a href="#進入容器後，登陸MySQL" class="headerlink" title="進入容器後，登陸MySQL"></a>進入容器後，登陸MySQL</h1><p><code>mysql -u root -p</code></p>
+<h1 id="在wsl-中開啟兩個docker-container-MySQL"><a href="#在wsl-中開啟兩個docker-container-MySQL" class="headerlink" title="在wsl 中開啟兩個docker container ( MySQL)"></a>在wsl 中開啟兩個docker container ( MySQL)</h1><p>有時候需要會同時需要開啟多個mysql，最簡單的方式就是容器映射不同的port</p>
+<h2 id="方法1-調整容器的port"><a href="#方法1-調整容器的port" class="headerlink" title="方法1 (調整容器的port)"></a>方法1 (調整容器的port)</h2><p>容器1<br><code>docker run --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=YourRootPassword -d mysql:8</code></p>
+<p>容器2 (將容器內3306 port 映射到主機 3307port)<br><code>docker run --name mysql-test -p 3307:3306 -e MYSQL_ROOT_PASSWORD=YourRootPassword -d mysql:8</code></p>
+<p>最省事，也不用修改啥配置文件</p>
+<h2 id="方法2-調整mysql-配置文件"><a href="#方法2-調整mysql-配置文件" class="headerlink" title="方法2 (調整mysql 配置文件)"></a>方法2 (調整mysql 配置文件)</h2><p>詳見<code>MySQL修改配置文件</code>內容</p>
+<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>每個語句後面要用 <code>;</code> 結尾，不然 MySQL 會以為你還沒輸入完，出現 <code>-&gt;</code> 記號</p>
+<h2 id="修改root-密碼"><a href="#修改root-密碼" class="headerlink" title="修改root 密碼"></a>修改root 密碼</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;yourNewPassword&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>localhost 代表允許從哪個主機遠端連線，也可以設置為 <code>%</code>， 代表允許從任何主機遠端連線</li>
+</ul>
+<h2 id="添加用戶"><a href="#添加用戶" class="headerlink" title="添加用戶"></a>添加用戶</h2><p>遠端連線時，不要使用root 用戶比較好，因此額外新增一個用戶</p>
 <p>設定用戶時可以指定用戶使用語句的權限(SELECT、INSERT…)</p>
-<p>對那些表有訪問的權限</p>
-<h2 id="建立用戶"><a href="#建立用戶" class="headerlink" title="建立用戶"></a>建立用戶</h2><p>CREATE USER ‘your_user_name‘@’%’ IDENTIFIED WITH mysql_native_password BY ‘your_password’;</p>
-<p>替换 ‘your_username’ 为你要创建的用户名。<br>替换 ‘your_password’ 为你要设置的密码。</p>
-<h2 id="給予用戶權限"><a href="#給予用戶權限" class="headerlink" title="給予用戶權限"></a>給予用戶權限</h2><p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘your_user_name‘@’%’;</p>
-<p>GRANT SELECT ON tableName.* TO ‘your_username‘@’%’;</p>
-<p>GRANT SELECT: 表示你要授予用户 SELECT 权限。<br>ON transaction.<em>: 表示你要将权限应用到 transaction 数据库的所有表。</em> 表示所有表。<br>TO ‘your_username‘@’%’: 指定了用户和来源主机。’your_username’ 是你要授予权限的用户名，’%’ 表示允许从任何主机远程登录。<br>这样，用户 ‘your_username’ 将只有在 transaction 数据库的所有表上执行 SELECT 操作的权限。</p>
-<p>请确保在授权时谨慎操作，仅授予用户他们实际需要的权限，以提高系统的安全性。</p>
-<h2 id="建立資料庫"><a href="#建立資料庫" class="headerlink" title="建立資料庫"></a>建立資料庫</h2><p>create database yourDbName;</p>
-<p>顯示資料庫<br>show databases;</p>
-<p>選擇資料庫<br>use yourDbName;</p>
-<h2 id="建立資料表"><a href="#建立資料表" class="headerlink" title="建立資料表"></a>建立資料表</h2><p>看語意就知道如果資料表存在就刪除，確定要刪除才執行，否則後果很嚴重<br>drop table if exists tableName;</p>
-<p>建立新的資料表<br>create table tableName (<br>    id int auto_increment primary key,<br>    name nvarchar(30),<br>    version nvarchar(30),<br>    remark nvarchar(30)<br>);</p>
-<h2 id="插入資料"><a href="#插入資料" class="headerlink" title="插入資料"></a>插入資料</h2><p>insert into tableName(name,version,remark)</p>
-<h2 id="離開MySQL"><a href="#離開MySQL" class="headerlink" title="離開MySQL"></a>離開MySQL</h2><p>quit 或是 exit 都行</p>
+<p>以及對那些表有訪問的權限</p>
+<h2 id="建立用戶"><a href="#建立用戶" class="headerlink" title="建立用戶"></a>建立用戶</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;your_user_name&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;your_password&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>your_username</code> 為你要創建的用戶名</li>
+<li><code>your_password</code> 為你要設置的密碼</li>
+</ul>
+<h2 id="給予用戶權限"><a href="#給予用戶權限" class="headerlink" title="給予用戶權限"></a>給予用戶權限</h2><h3 id="給予所有權限"><a href="#給予所有權限" class="headerlink" title="給予所有權限"></a>給予所有權限</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;your_user_name&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="指給予某個權限"><a href="#指給予某個權限" class="headerlink" title="指給予某個權限"></a>指給予某個權限</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> tableName.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;your_username&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>GRANT SELECT： 表示要給予使用者 SELECT 權限。</li>
+<li>ON transaction.*： 表示你要將許可權應用到 transaction 資料庫的所有表。 * 表示所有表。</li>
+<li>TO ‘your_username‘@’%’： 指定了使用者和來源主機。 ‘your_username’ 是你要授予許可權的使用者名，’%’ 表示允許從任何主機遠端登錄。<br>這樣，使用者 『your_username』 將只有在 transaction 資料庫的所有表上執行 SELECT 操作的許可權。</li>
+</ul>
+<h2 id="建立資料庫"><a href="#建立資料庫" class="headerlink" title="建立資料庫"></a>建立資料庫</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> database yourDbName;<br></code></pre></td></tr></table></figure>
+
+<p>顯示資料庫</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">show</span> databases;<br></code></pre></td></tr></table></figure>
+
+
+<p>選擇資料庫</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL">use yourDbName;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="建立資料表"><a href="#建立資料表" class="headerlink" title="建立資料表"></a>建立資料表</h2><p>看語意就知道如果資料表存在就刪除，確定要刪除才執行，否則後果很嚴重</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> if <span class="hljs-keyword">exists</span> tableName;<br></code></pre></td></tr></table></figure>
+
+
+<p>建立新的資料表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> tableName (<br>    id <span class="hljs-type">int</span> auto_increment <span class="hljs-keyword">primary</span> key,<br>    name nvarchar(<span class="hljs-number">30</span>),<br>    version nvarchar(<span class="hljs-number">30</span>),<br>    remark nvarchar(<span class="hljs-number">30</span>)<br>);<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="插入資料"><a href="#插入資料" class="headerlink" title="插入資料"></a>插入資料</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> tableName(name,version,remark) <span class="hljs-keyword">values</span><br>(<span class="hljs-string">&#x27;sisi&#x27;</span>,<span class="hljs-string">&#x27;1.05&#x27;</span>,<span class="hljs-string">&#x27;cool man&#x27;</span>)<br>(<span class="hljs-string">&#x27;coco&#x27;</span>,<span class="hljs-string">&#x27;0.7&#x27;</span>,<span class="hljs-string">&#x27;poor guy&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>一般來說不需要，除非有例如更換服務port的需求</p>
+<p>進入配置文件的目錄<br><code>cd /etc/mysql/conf.d</code></p>
+<p>新增一個mysql.cnf<br><code>touch mysql.cnf</code></p>
+<p>以下都要寫入</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[mysql]</span><br><span class="hljs-attr">port</span> = <span class="hljs-number">3307</span><br></code></pre></td></tr></table></figure>
+
+<p>修改完配置重新啟動容器<br><code>docker reatart mysql-test</code></p>
+<h2 id="離開MySQL"><a href="#離開MySQL" class="headerlink" title="離開MySQL"></a>離開MySQL</h2><p><code>quit</code> 或是 <code>exit</code> 都行</p>
 <h1 id="連線"><a href="#連線" class="headerlink" title="連線"></a>連線</h1><p>從外部連線MySQL 需要連線字串，主機名因為MySQL 是安裝在wsl 的 Docker 裡面，只要在wsl 獲取ip後，就能透過連線字串連接</p>
-<p>ifconfig</p>
-<p>eth0</p>
-<p>172.27.119.190</p>
-<p>連線字串<br>server&#x3D;172.27.119.190;port&#x3D;3306;user id&#x3D;your-user-name;password&#x3D;your-user-password;database&#x3D;database-name;charset&#x3D;utf8;</p>
+<p>在wsl 終端<br><code>ifconfig</code></p>
+<p>找到 <code>eth0</code> 字段的ip 值</p>
+<p>例如ip為<br>172.27.119.190</p>
+<p>連線字串<br><code>server=172.27.119.190;port=3306;user id=your-user-name;password=your-user-password;database=database-name;charset=utf8;</code></p>
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10272193">【Docker 攻略】MySQL 安裝篇 | 安裝資料庫 好快的說 !</a></p>
 
                 
@@ -421,7 +465,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/18/hello-world/" title="Hello World">
+                      <a href="/2024/01/21/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
