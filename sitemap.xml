@@ -2,96 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://austin72905.github.io/2023/07/27/awesome-skill-in-github/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/17/deploy-to-github-page/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2024/12/09/hello-world/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/17/hexo-introduce/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/17/hexo-theme-modify/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/21/install-golang/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/11/04/linux-alias/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/09/01/linux-compress-and-uncompress/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/31/linux-file-access/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/30/linux-filesystem/</loc>
-    
-    <lastmod>2024-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://austin72905.github.io/2023/12/26/linux-pk-mg-apt/</loc>
     
     <lastmod>2024-12-09</lastmod>
@@ -309,6 +219,96 @@
   
   <url>
     <loc>https://austin72905.github.io/about/index.html</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/27/awesome-skill-in-github/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/17/deploy-to-github-page/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2024/12/09/hello-world/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/17/hexo-introduce/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/17/hexo-theme-modify/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/21/install-golang/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/11/04/linux-alias/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/09/01/linux-compress-and-uncompress/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/31/linux-file-access/</loc>
+    
+    <lastmod>2024-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/30/linux-filesystem/</loc>
     
     <lastmod>2024-12-09</lastmod>
     
