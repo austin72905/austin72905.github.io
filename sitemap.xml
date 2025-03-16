@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://austin72905.github.io/2023/09/15/linux-system-monitor/</loc>
+    
+    <lastmod>2025-03-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://austin72905.github.io/2023/09/04/linux-system-process/</loc>
     
     <lastmod>2025-03-16</lastmod>
@@ -110,15 +119,6 @@
   </url>
   
   <url>
-    <loc>https://austin72905.github.io/about/backup.html</loc>
-    
-    <lastmod>2025-03-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://austin72905.github.io/about/index.html</loc>
     
     <lastmod>2025-03-16</lastmod>
@@ -128,7 +128,16 @@
   </url>
   
   <url>
-    <loc>https://austin72905.github.io/20235/03/17/cursor/</loc>
+    <loc>https://austin72905.github.io/about/backup.html</loc>
+    
+    <lastmod>2025-03-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/2023/07/27/awesome-skill-in-github/</loc>
     
     <lastmod>2025-03-16</lastmod>
     
@@ -317,16 +326,7 @@
   </url>
   
   <url>
-    <loc>https://austin72905.github.io/2023/09/15/linux-system-monitor/</loc>
-    
-    <lastmod>2025-03-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/2023/07/27/awesome-skill-in-github/</loc>
+    <loc>https://austin72905.github.io/2025/03/17/cursor/</loc>
     
     <lastmod>2025-03-16</lastmod>
     
@@ -345,13 +345,6 @@
   
   <url>
     <loc>https://austin72905.github.io/tags/git/</loc>
-    <lastmod>2025-03-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://austin72905.github.io/tags/AI/</loc>
     <lastmod>2025-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -441,17 +434,17 @@
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://austin72905.github.io/categories/Git/</loc>
+    <loc>https://austin72905.github.io/tags/AI/</loc>
     <lastmod>2025-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://austin72905.github.io/categories/AI/</loc>
+    <loc>https://austin72905.github.io/categories/Git/</loc>
     <lastmod>2025-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -501,6 +494,13 @@
   
   <url>
     <loc>https://austin72905.github.io/categories/Node-js/</loc>
+    <lastmod>2025-03-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://austin72905.github.io/categories/AI/</loc>
     <lastmod>2025-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
