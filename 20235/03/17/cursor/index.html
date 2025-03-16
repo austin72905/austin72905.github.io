@@ -1,0 +1,979 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Austin Lin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="參考資料普通人也可以看的 AI 编程指南 | Cursor 教程｜Cursor 使用技巧和思路｜如何免费使用 Cursor 前言此文章是以上參考資料中的影片的內容整理，完整操作可以去查看影片，目前最新版cursor 已經取消或新增部分功能，文章中有說明 Cursor 的核心功能 tab鍵自動補全代碼  模型選擇  建議使用的模型包括 gpt-4o 和 Claude 3.5 Sonnet，前者適合綜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cursor 介紹">
+<meta property="og:url" content="https://austin72905.github.io/20235/03/17/cursor/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="參考資料普通人也可以看的 AI 编程指南 | Cursor 教程｜Cursor 使用技巧和思路｜如何免费使用 Cursor 前言此文章是以上參考資料中的影片的內容整理，完整操作可以去查看影片，目前最新版cursor 已經取消或新增部分功能，文章中有說明 Cursor 的核心功能 tab鍵自動補全代碼  模型選擇  建議使用的模型包括 gpt-4o 和 Claude 3.5 Sonnet，前者適合綜">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="+020235-03-17T00:25:00.000Z">
+<meta property="article:modified_time" content="2025-03-16T16:50:45.880Z">
+<meta property="article:author" content="Austin Lin">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>cursor 介紹 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"austin72905.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":false,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-D32GX2SXWV"},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-D32GX2SXWV", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-D32GX2SXWV');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Austin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首頁</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>全部文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分類</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>標籤</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>關於</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cursor 介紹"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Austin Lin
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="20235-03-17 00:25" pubdate>
+          20235年3月17日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">cursor 介紹</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><strong><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=lypPoT8lZ2M">普通人也可以看的 AI 编程指南 | Cursor 教程｜Cursor 使用技巧和思路｜如何免费使用 Cursor</a></strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此文章是以上參考資料中的影片的內容整理，完整操作可以去查看影片，目前最新版cursor 已經取消或新增部分功能，文章中有說明</p>
+<h1 id="Cursor-的核心功能"><a href="#Cursor-的核心功能" class="headerlink" title="Cursor 的核心功能"></a><strong>Cursor 的核心功能</strong></h1><ul>
+<li><p>tab鍵自動補全代碼</p>
+</li>
+<li><p>模型選擇</p>
+<ul>
+<li>建議使用的模型包括 gpt-4o 和 Claude 3.5 Sonnet，前者適合綜合領域的問答理解，後者在程式碼生成領域更優秀</li>
+</ul>
+</li>
+<li><p>Ask v.s. Agent v.s  Edit</p>
+</li>
+<li><p><strong>使用 @ 符號喚醒功能菜單</strong></p>
+</li>
+<li><p>codebase</p>
+</li>
+<li><p><strong>Cursor Rules (全域與專案規則)</strong></p>
+<ul>
+<li><code>.cursorrules</code></li>
+</ul>
+</li>
+<li><p><strong>Cursor 的使用技巧和思路</strong></p>
+</li>
+<li><p>其他功能</p>
+<ul>
+<li>生成git message</li>
+</ul>
+</li>
+<li><p>如何白嫖</p>
+</li>
+</ul>
+<hr>
+<h2 id="Ask-v-s-Agent-v-s-Edit"><a href="#Ask-v-s-Agent-v-s-Edit" class="headerlink" title="Ask v.s. Agent v.s  Edit"></a>Ask v.s. Agent v.s  Edit</h2><h3 id="Ask-模式（當前模式）-ctrl-l"><a href="#Ask-模式（當前模式）-ctrl-l" class="headerlink" title="Ask 模式（當前模式） ctrl + l"></a>Ask 模式（當前模式） <code>ctrl + l</code></h3><p><strong>特點</strong>：</p>
+<ul>
+<li><p>只能看到您明確提供的代碼或信息</p>
+</li>
+<li><p>無法主動搜索您的代碼庫</p>
+</li>
+<li><p>回答更快速直接</p>
+</li>
+<li><p>適合一般性的編程問題</p>
+</li>
+</ul>
+<p><strong>適用場景</strong>：</p>
+<ul>
+<li><p>通用編程概念解釋</p>
+</li>
+<li><p>代碼語法問題</p>
+</li>
+<li><p>簡單的代碼示例</p>
+</li>
+<li><p>Vue、React 等框架的一般使用方法</p>
+</li>
+<li><p>算法解釋</p>
+</li>
+<li><p>設計模式討論</p>
+</li>
+</ul>
+<hr>
+<h3 id="Agent-模式-ctrl-i"><a href="#Agent-模式-ctrl-i" class="headerlink" title="Agent 模式  ctrl + i"></a>Agent 模式  <code>ctrl + i</code></h3><p><strong>特點</strong>：</p>
+<ul>
+<li><p>可以主動搜索和讀取您的整個代碼庫</p>
+</li>
+<li><p>能夠理解項目上下文</p>
+</li>
+<li><p>處理時間相對較長</p>
+</li>
+<li><p>可以提供更具體的項目相關建議</p>
+</li>
+</ul>
+<p><strong>適用場景</strong>：</p>
+<ul>
+<li><p>需要了解項目特定實現的問題</p>
+</li>
+<li><p>代碼重構建議</p>
+</li>
+<li><p>項目架構相關問題</p>
+</li>
+<li><p>特定文件或組件的修改</p>
+</li>
+<li><p>項目依賴關係的問題</p>
+</li>
+<li><p>需要跨文件分析的問題</p>
+</li>
+</ul>
+<hr>
+<h3 id="Edit-模式"><a href="#Edit-模式" class="headerlink" title="Edit 模式"></a>Edit 模式</h3><p><strong>特點</strong>：</p>
+<ul>
+<li><p>可以直接對代碼進行修改</p>
+</li>
+<li><p>提供具體的代碼更改建議</p>
+</li>
+<li><p>支持批量修改</p>
+</li>
+</ul>
+<p><strong>使用場景</strong>：</p>
+<ul>
+<li><p>直接修改代碼</p>
+</li>
+<li><p>重構代碼</p>
+</li>
+<li><p>添加新功能</p>
+</li>
+</ul>
+<h3 id="選擇建議："><a href="#選擇建議：" class="headerlink" title="選擇建議："></a>選擇建議：</h3><p><strong>使用 Ask 模式當：</strong></p>
+<ul>
+<li><p>問題是通用的編程概念</p>
+</li>
+<li><p>不需要了解項目具體實現</p>
+</li>
+<li><p>需要快速的回答</p>
+</li>
+<li><p>問題範圍明確且獨立</p>
+</li>
+</ul>
+<p><strong>使用 Agent 模式當：</strong></p>
+<ul>
+<li><p>需要了解項目具體實現</p>
+</li>
+<li><p>問題涉及多個文件或組件</p>
+</li>
+<li><p>需要基於現有代碼進行修改或優化</p>
+</li>
+<li><p>需要項目級別的建議</p>
+</li>
+</ul>
+<p><strong>使用 Edit 模式當</strong>：</p>
+<ul>
+<li><p>需要直接修改代碼</p>
+</li>
+<li><p>需要代碼重構</p>
+</li>
+<li><p>需要批量修改</p>
+</li>
+</ul>
+<h3 id="實際例子："><a href="#實際例子：" class="headerlink" title="實際例子："></a>實際例子：</h3><p>Ask 模式適合的問題：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>- <span class="hljs-string">&quot;Vue 3 的 ref 和 reactive 有什麼區別？&quot;</span><br><br>- <span class="hljs-string">&quot;如何實現一個簡單的防抖函數？&quot;</span><br><br>- <span class="hljs-string">&quot;Vue 組件生命週期有哪些？&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>Agent 模式適合的問題：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">- <span class="hljs-string">&quot;我的項目中 UserService 在哪些地方被使用了？&quot;</span><br><br>- <span class="hljs-string">&quot;如何優化當前項目的性能？&quot;</span><br><br>- <span class="hljs-string">&quot;這個組件如何與其他組件交互？&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>Edit 模式適合的問題：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">- <span class="hljs-string">&quot;將這個函數改為 async/await&quot;</span><br><br>  - <span class="hljs-string">&quot;添加錯誤處理&quot;</span><br><br>  - <span class="hljs-string">&quot;重構這段代碼&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>總的來說，如果您的問題是關於具體項目實現或需要了解代碼庫上下文，建議使用 Agent 模式；如果是通用的編程問題，使用 Ask 模式就足夠了; 修改代碼用Edit模式。</p>
+<hr>
+<h2 id="使用-符號喚醒功能菜單"><a href="#使用-符號喚醒功能菜單" class="headerlink" title="使用 @ 符號喚醒功能菜單"></a><strong>使用 @ 符號喚醒功能菜單</strong></h2><p>15:20開始</p>
+<ul>
+<li><p><strong><code>@files &amp; folders</code></strong> ：引用一個文件夾或資料夾</p>
+<ul>
+<li>files 跟 folders 整合在一起了，點進去可以選擇要當作上下文的文件或目錄</li>
+</ul>
+</li>
+<li><p><strong><code>@code</code></strong> ：選中一塊程式碼 當作上下文</p>
+<ul>
+<li>直接全選一個代碼塊，<code>ctrl + l</code> 比較快</li>
+</ul>
+</li>
+<li><p><strong><code>@docs</code></strong> ：選擇第三方文檔 (Cursor 默認帶有一些，帶有Official就是)</p>
+<ul>
+<li><p>也可以自訂義文檔@docs (自定義文檔)：可以添加自定義的文檔鏈接，Cursor 會自動抓取內容並編入索引，方便在聊天中引用. 這相當於一個基於專案的知識庫</p>
+</li>
+<li><p>例如引入<strong>需求文檔、接口文檔</strong>…</p>
+</li>
+<li><p>可以在設置 <code>(Futures -&gt; Docs)</code> 中添加和管理自定義文檔鏈接</p>
+<ul>
+<li>如果添加文檔鏈接時在 URL 後面帶有斜槓 &#x2F;，Cursor 會鎖定該鏈接及其所有子頁面和子目錄</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>@link</code></strong> ：臨時引用一個鏈接，AI 會先解析鏈接內容再結合輸入的提示詞進行回覆</p>
+</li>
+<li><p><strong><code>@web</code></strong> ：讓 AI 根據提供的資訊和上下文構建搜索查詢，搜索網絡上的相關資訊作為附加上下文進行回覆，相當於一個 <strong>AI 搜索引擎</strong></p>
+</li>
+<li><p><strong><code>@git</code><strong>：選擇歷史提交，將某一次或多次提交添加到輸入框中作為上下文，方便查看提交的修改或</strong>對比多次提交的差異</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="Notepad-已取消此功能"><a href="#Notepad-已取消此功能" class="headerlink" title="Notepad (已取消此功能)"></a><del>Notepad</del> (已取消此功能)</h2><ul>
+<li>@notepad：打開記事本功能，可以作為臨時筆記記錄、專案相關的上下文記錄或保存 AI 的對話歷史記錄</li>
+</ul>
+<p>Cursor 最近的更新中確實移除了內建的 Notepad 功能。</p>
+<p>這個改變主要是因為：</p>
+<ol>
+<li><p>大多數用戶更傾向於直接在主編輯器中工作</p>
+</li>
+<li><p>為了簡化界面和提升性能</p>
+</li>
+</ol>
+<h3 id="替代方案："><a href="#替代方案：" class="headerlink" title="替代方案："></a>替代方案：</h3><ol>
+<li><p>直接在 Cursor 主編輯器中創建新文件</p>
+</li>
+<li><p>使用系統的記事本</p>
+</li>
+<li><p>使用其他文本編輯器（如 VS Code、Sublime Text 等）</p>
+</li>
+<li><p>在 Cursor 中創建臨時文件（.txt）進行簡單的文本編輯</p>
+</li>
+</ol>
+<p>如果您經常需要做臨時筆記，建議：</p>
+<ul>
+<li><p>在項目中創建一個專門的 <a href="notes.md">notes.md</a> 或 temp.txt 文件</p>
+</li>
+<li><p>使用獨立的筆記軟件（如 Notion、OneNote 等）</p>
+</li>
+<li><p>使用系統自帶的記事本</p>
+</li>
+</ul>
+<hr>
+<h2 id="codebase"><a href="#codebase" class="headerlink" title="codebase"></a>codebase</h2><p>21:52</p>
+<ul>
+<li><strong><code>@codebase</code></strong></li>
+</ul>
+<p>輸入 @codebase 後，AI 會根據給出的指令對採集的專案程式碼進行排序、推理，然後給出最匹配的答案</p>
+<ul>
+<li><p>使用 @codebase 時，Cursor 會執行四個步驟：收集 (掃描專案相關文件或程式碼塊) -&gt; 重新排序 (根據與查詢的相關性對上下文進行排序) -&gt; 推理 (思考如何利用上下文) -&gt; 生成 (給出回覆)</p>
+</li>
+<li><p>首次打開新專案時，Cursor 會自動採集專案程式碼</p>
+</li>
+<li><p>為了確保採集完整，建議每次打開新專案時，在<code>設置 (Futures -&gt; Codebase Indexing)</code> 中點擊 Reset Index 重新採集</p>
+</li>
+<li><p><strong>Codebase Indexing 的原理</strong>：將本地程式碼庫分割成小塊語言數據，發送到 Cursor 的伺服器，Cursor 使用 OpenAI Embedding API 進行嵌入，並將文件相對路徑存儲到遠程的向量數據庫中，利用索引提高回覆質量</p>
+</li>
+<li><p>Cursor 尊重 .gitignore 文件，其中聲明的文件或目錄不會被索引</p>
+</li>
+<li><p>可以創建 <code>.cursorignore</code> 文件來聲明需要忽略的文件或目錄，以++縮小索引範圍++，提高程式碼生成和理解的準確性</p>
+</li>
+<li><p>不應被索引的文件類型包括</p>
+<ol>
+<li><p>日誌文件</p>
+</li>
+<li><p>++環境變量++文件 (如果有機密資訊擔心的話就把它設置在<code>.cursorignore</code>)</p>
+</li>
+<li><p>構建輸出的文件</p>
+</li>
+<li><p>緩存文件</p>
+</li>
+<li><p>第三方工具的配置文件等</p>
+</li>
+</ol>
+</li>
+<li><p>新手可以使用 Composer 讓 AI 檢索整個專案目錄並生成 .cursorignore 文件</p>
+</li>
+</ul>
+<hr>
+<h2 id="Cursor-Rules-全域與專案規則"><a href="#Cursor-Rules-全域與專案規則" class="headerlink" title="Cursor Rules (全域與專案規則)"></a><strong>Cursor Rules (全域與專案規則)</strong></h2><p>25:09 </p>
+<ul>
+<li><p><strong>全域規則</strong>：在設置 (Rules AI) 中可以配置 Cursor 的全域規則，例如設置 AI 回覆的語言</p>
+</li>
+<li><p><strong>專案規則 (<code>.cursorrules</code>)</strong> ：可以在專案的根目錄創建 .cursorrules 文件，用於設置只針對該專案的 Cursor 規則</p>
+</li>
+<li><p>每次與 AI 交流時，Cursor 會參考 <code>.cursorrules</code> 中的規則</p>
+</li>
+<li><p>如果不知道如何編寫 .cursorrules 文件，可以在 Chat 模式中使用 @ 符號引用專案文檔等，然後讓 AI 檢索整個專案並生成 <code>.cursorrules</code> 文件，之後再根據需要進行修改</p>
+</li>
+<li><p>可以在 <code>.cursorrules</code> 文件的第一行寫上 使用中文回覆，這樣 AI 在該專案中回覆時都會以中文進行</p>
+</li>
+</ul>
+<p>可以在 <strong><code>.cursorrules</code></strong> 裡面寫入</p>
+<ul>
+<li><p>項目簡介</p>
+</li>
+<li><p>使用那些技術 (typescript、tailwind.css、vue3…)</p>
+</li>
+<li><p>目錄架構</p>
+</li>
+<li><p>組件規範</p>
+</li>
+<li><p>樣式規範</p>
+</li>
+<li><p>命名規範</p>
+</li>
+</ul>
+<p>有點像是cursor 的前置 prompt</p>
+<hr>
+<h2 id="Cursor-的使用技巧和思路"><a href="#Cursor-的使用技巧和思路" class="headerlink" title="Cursor 的使用技巧和思路"></a><strong>Cursor 的使用技巧和思路</strong></h2><p>26:08</p>
+<ul>
+<li><p><strong>回滾 (Undo) 功能</strong></p>
+<ul>
+<li><p>Cursor 會為每次 Composer 的問答都做一個 restore checkpoint 標記</p>
+</li>
+<li><p>但如果該次修改是新創建檔案，回退效果無效</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何提高AI回復準確性"><a href="#如何提高AI回復準確性" class="headerlink" title="如何提高AI回復準確性?"></a><strong>如何提高AI回復準確性?</strong></h2><p>29:25</p>
+<ul>
+<li><p><strong>AI 複述需求指令</strong>：在給出 AI 指令時，先讓 AI 複述一遍需求再進行回覆，以便確認 AI 是否準確理解</p>
+</li>
+<li><p><strong>明確需求輻射範圍</strong>：指令要盡可能小且單一化，明確指令的範圍，最好攜帶相關的程式碼或文件，告知 AI 在什麼範圍內進行修改<strong>，</strong> 可以利用 Cursor 輸入框內置的各種 @ 功能來輔助</p>
+</li>
+<li><p><strong>需求拆解</strong>：如果需求較大，可以將其拆解成多個小步驟，或者在一次問答中以條列式的方式清晰描述</p>
+</li>
+<li><p><strong>將 AI 當成小孩子</strong>：與 AI 溝通時要邏輯清晰，描述問題時要加以引導，可以一併發送自己的解決思路或參考資料</p>
+</li>
+</ul>
+<hr>
+<h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>40:51</p>
+<ul>
+<li><strong>Git Commit Message 自動生成</strong>：如果專案使用了 Git，在修改程式碼並暫存後，Cursor 可以為暫存的文件一鍵生成更有意義的 Commit Message，它會分析當前的更改和以前提交的信息，遵循相同的提交規範</li>
+</ul>
+<hr>
+<h2 id="如何白嫖"><a href="#如何白嫖" class="headerlink" title="如何白嫖"></a>如何白嫖</h2><p>41:56 </p>
+<p>這部分我沒有實踐過，只是做個紀錄</p>
+<ul>
+<li><p>由於 Cursor 註冊後有 14 天的免費試用期，可以每 14 天使用一個新的郵箱賬號註冊 Cursor</p>
+</li>
+<li><p><strong>臨時郵箱</strong>：使用臨時郵箱平台提供的隨機郵箱來註冊 Cursor，用於接收驗證碼</p>
+</li>
+<li><p><strong>無限郵箱</strong>：在無限郵箱平台註冊一個主郵箱，然後可以使用主郵箱名稱後加不同字符的方式創建多個子郵箱來註冊 Cursor</p>
+</li>
+<li><p><strong>規避設備指紋檢測</strong>：由於過多的人「白嫖」，Cursor 更新了用戶指紋檢測機制，同一設備使用免費賬號登錄太多次可能會被限制使用</p>
+</li>
+<li><p>可以使用腳本更新 Cursor 配置文檔中的用戶指紋信息來規避這個問題</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cursor 介紹</div>
+      <div>https://austin72905.github.io/20235/03/17/cursor/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Austin Lin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>發布於</div>
+          <div>20235年3月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>許可協議</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/16/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <span>blog主題使用</span> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
