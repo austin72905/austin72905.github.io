@@ -1,6 +1,6 @@
 ---
 title: cursor 介紹
-date: 20235-3-17 00:25
+date: 2025-3-17 00:25
 categories: AI
 tags:
     - AI
