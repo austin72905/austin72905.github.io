@@ -35,6 +35,71 @@ SELECT name, email FROM users;
 
 ---
 
+## ✅ 條件查詢 `WHERE` 
+```sql
+SELECT 欄位名稱 FROM 表格名稱
+WHERE 條件;
+```
+
+---
+
+## 🔍 常見的 `WHERE` 條件語法
+
+| 條件範例                | 說明              |
+|------------------------|-------------------|
+| `=`, `<>`, `!=`, `<`, `>`, `<=`, `>=` | 比較運算子       |
+| `AND`, `OR`, `NOT`     | 多條件結合         |
+| `BETWEEN A AND B`      | 範圍查詢（含 A 和 B） |
+| `IN (值1, 值2, ...)`    | 等同多個 `OR`      |
+| `LIKE '%字串%'`        | 模糊比對           |
+| `IS NULL`, `IS NOT NULL` | NULL 判斷         |
+| `EXISTS`, `NOT EXISTS` | 子查詢存在性       |
+
+---
+
+## 🟡 NULL 判斷語法
+
+```sql
+-- 找出 age 欄位為 NULL 的資料
+SELECT * FROM users
+WHERE age IS NULL;
+
+-- 找出 age 欄位不為 NULL 的資料
+SELECT * FROM users
+WHERE age IS NOT NULL;
+```
+
+📝 注意：**不能用 `= NULL`，會無法正確判斷。**
+
+---
+
+## 📋 常見的 `WHERE` 語句範例
+
+```sql
+-- 單一條件
+SELECT * FROM users WHERE age >= 18;
+
+-- 多條件 AND
+SELECT * FROM users WHERE age >= 18 AND gender = 'female';
+
+-- 使用 OR
+SELECT * FROM users WHERE city = 'Taipei' OR city = 'Kaohsiung';
+
+-- 模糊查詢
+SELECT * FROM products WHERE name LIKE '%手機%';
+
+-- 範圍查詢
+SELECT * FROM orders WHERE order_date BETWEEN '2024-01-01' AND '2024-12-31';
+
+-- 使用 IN
+SELECT * FROM users WHERE id IN (1, 2, 3, 4);
+
+-- NULL 判斷
+SELECT * FROM logs WHERE deleted_at IS NULL;
+```
+
+---
+
 ## ✅ 更新資料（UPDATE）
 
 ```sql
