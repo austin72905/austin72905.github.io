@@ -16,21 +16,22 @@
   <meta name="author" content="Austin Lin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="🔸1. 表名（Table Name）大小寫敏感性   作業系統 預設行為 說明    Linux 大小寫敏感 (lower_case_table_names&#x3D;0) users ≠ Users   Windows 大小寫不敏感 (lower_case_table_names&#x3D;1) users &#x3D; Users   macOS 通常不敏感（視檔案系統） 可能為 1 或 2，需確認設定   ✅">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://austin72905.github.io/2025/04/11/hello-world/index.html">
+<meta property="og:title" content="MySQL 「欄位名、表名、資料的值」對大小寫是否敏感">
+<meta property="og:url" content="https://austin72905.github.io/2025/04/15/mysql-case-sensitive/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="🔸1. 表名（Table Name）大小寫敏感性   作業系統 預設行為 說明    Linux 大小寫敏感 (lower_case_table_names&#x3D;0) users ≠ Users   Windows 大小寫不敏感 (lower_case_table_names&#x3D;1) users &#x3D; Users   macOS 通常不敏感（視檔案系統） 可能為 1 或 2，需確認設定   ✅">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2025-04-11T06:17:47.679Z">
-<meta property="article:modified_time" content="2025-04-11T06:17:47.679Z">
+<meta property="article:published_time" content="2025-04-15T14:19:00.000Z">
+<meta property="article:modified_time" content="2025-04-15T06:36:03.045Z">
 <meta property="article:author" content="Austin Lin">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - Hexo</title>
+  <title>MySQL 「欄位名、表名、資料的值」對大小寫是否敏感 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -223,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="MySQL 「欄位名、表名、資料的值」對大小寫是否敏感"></span>
           
         </div>
 
@@ -239,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-11 06:17" pubdate>
-          2025年4月11日 早上
+        <time datetime="2025-04-15 14:19" pubdate>
+          2025年4月15日 下午
         </time>
       </span>
     
@@ -283,24 +284,241 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello World</h1>
+            <h1 id="seo-header">MySQL 「欄位名、表名、資料的值」對大小寫是否敏感</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="🔸1-表名（Table-Name）大小寫敏感性"><a href="#🔸1-表名（Table-Name）大小寫敏感性" class="headerlink" title="🔸1. 表名（Table Name）大小寫敏感性"></a>🔸1. 表名（Table Name）大小寫敏感性</h2><table>
+<thead>
+<tr>
+<th>作業系統</th>
+<th>預設行為</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linux</td>
+<td>大小寫敏感 (<code>lower_case_table_names=0</code>)</td>
+<td><code>users</code> ≠ <code>Users</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>大小寫不敏感 (<code>lower_case_table_names=1</code>)</td>
+<td><code>users</code> &#x3D; <code>Users</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>通常不敏感（視檔案系統）</td>
+<td>可能為 1 或 2，需確認設定</td>
+</tr>
+</tbody></table>
+<h3 id="✅-相關參數說明："><a href="#✅-相關參數說明：" class="headerlink" title="✅ 相關參數說明："></a>✅ 相關參數說明：</h3><ul>
+<li><code>lower_case_table_names=0</code>：保留原始大小寫，查詢時大小寫敏感（Linux 常見）</li>
+<li><code>lower_case_table_names=1</code>：強制轉小寫儲存，查詢時大小寫不敏感（Windows）</li>
+<li><code>lower_case_table_names=2</code>：保留原始大小寫儲存，查詢時大小寫不敏感（某些 macOS）</li>
+</ul>
+<h3 id="📌-查詢-lower-case-table-names-設定值"><a href="#📌-查詢-lower-case-table-names-設定值" class="headerlink" title="📌 查詢 lower_case_table_names 設定值"></a>📌 查詢 lower_case_table_names 設定值</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> VARIABLES <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;lower_case_table_names&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+<h3 id="🔍-查詢結果說明："><a href="#🔍-查詢結果說明：" class="headerlink" title="🔍 查詢結果說明："></a>🔍 查詢結果說明：</h3><table>
+<thead>
+<tr>
+<th>Variable_name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lower_case_table_names</code></td>
+<td>0 &#x2F; 1 &#x2F; 2</td>
+</tr>
+</tbody></table>
+<h3 id="🔸對應值解釋："><a href="#🔸對應值解釋：" class="headerlink" title="🔸對應值解釋："></a>🔸對應值解釋：</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>表名大小寫敏感（Linux 常見）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>表名大小寫不敏感，<strong>所有表名儲存為小寫</strong>（Windows 常見）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>表名大小寫不敏感，但<strong>保留原始大小寫儲存</strong>（macOS 某些情況）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🔸2-欄位名（Column-Name）大小寫敏感性"><a href="#🔸2-欄位名（Column-Name）大小寫敏感性" class="headerlink" title="🔸2. 欄位名（Column Name）大小寫敏感性"></a>🔸2. 欄位名（Column Name）大小寫敏感性</h2><ul>
+<li>✅ 欄位名稱在所有作業系統中預設都是大小寫 <strong>不敏感</strong></li>
+<li>範例：<code>SELECT name</code> 與 <code>SELECT NAME</code> 等價</li>
+</ul>
+<hr>
+<h2 id="🔸3-別名（Alias）大小寫敏感性"><a href="#🔸3-別名（Alias）大小寫敏感性" class="headerlink" title="🔸3. 別名（Alias）大小寫敏感性"></a>🔸3. 別名（Alias）大小寫敏感性</h2><ul>
+<li>✅ SQL 查詢中的別名（例如 <code>AS Name</code>）通常不敏感</li>
+<li>❗ 但應用程式端讀取資料時，<strong>有時會區分大小寫</strong></li>
+</ul>
+<hr>
+<h2 id="🔸4-資料值（Data-Values）大小寫敏感性"><a href="#🔸4-資料值（Data-Values）大小寫敏感性" class="headerlink" title="🔸4. 資料值（Data Values）大小寫敏感性"></a>🔸4. 資料值（Data Values）大小寫敏感性</h2><table>
+<thead>
+<tr>
+<th>資料型別</th>
+<th>預設大小寫敏感性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CHAR</code>, <code>VARCHAR</code>, <code>TEXT</code></td>
+<td>❌ 視 Collation 而定</td>
+</tr>
+<tr>
+<td><code>BINARY</code>, <code>VARBINARY</code></td>
+<td>✅ 大小寫敏感</td>
+</tr>
+</tbody></table>
+<h3 id="✅-Collation-決定是否敏感："><a href="#✅-Collation-決定是否敏感：" class="headerlink" title="✅ Collation 決定是否敏感："></a>✅ Collation 決定是否敏感：</h3><ul>
+<li><code>utf8mb4_general_ci</code> → <code>ci</code> &#x3D; case-insensitive（不敏感）</li>
+<li><code>utf8mb4_bin</code> → <code>bin</code> &#x3D; binary（大小寫敏感）</li>
+</ul>
+<hr>
+<h2 id="utf8mb4-general-ci-跟-utf8mb4-0900-ai-ci-差異"><a href="#utf8mb4-general-ci-跟-utf8mb4-0900-ai-ci-差異" class="headerlink" title="utf8mb4_general_ci 跟 utf8mb4_0900_ai_ci 差異?"></a>utf8mb4_general_ci 跟 utf8mb4_0900_ai_ci 差異?</h2><h2 id="✅-Collation-名稱結構說明"><a href="#✅-Collation-名稱結構說明" class="headerlink" title="✅ Collation 名稱結構說明"></a>✅ Collation 名稱結構說明</h2><table>
+<thead>
+<tr>
+<th>名稱部分</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>utf8mb4</code></td>
+<td>使用 UTF-8 編碼，可支援完整 Unicode（含 Emoji）</td>
+</tr>
+<tr>
+<td><code>general / 0900</code></td>
+<td>指排序與比較邏輯</td>
+</tr>
+<tr>
+<td><code>ci</code></td>
+<td>Case-insensitive（不區分大小寫）</td>
+</tr>
+<tr>
+<td><code>ai</code></td>
+<td>Accent-insensitive（不區分重音，例如 é &#x3D; e）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🔍-差異總覽"><a href="#🔍-差異總覽" class="headerlink" title="🔍 差異總覽"></a>🔍 差異總覽</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>utf8mb4_general_ci</code></th>
+<th><code>utf8mb4_0900_ai_ci</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>發佈版本</td>
+<td>MySQL 5.x 以前就有</td>
+<td>✅ MySQL 8.0 新增</td>
+</tr>
+<tr>
+<td>語言支援準確度</td>
+<td>❌ 基本排序，略為不準確</td>
+<td>✅ 更符合 Unicode 標準</td>
+</tr>
+<tr>
+<td>重音符區分</td>
+<td>❌ 不支援 AI，不精準</td>
+<td>✅ 支援 AI，可分辨 <code>e</code> vs <code>é</code>（若使用 <code>_as_ci</code>）</td>
+</tr>
+<tr>
+<td>Unicode 規則相容</td>
+<td>❌ 不完全相容</td>
+<td>✅ 遵循 Unicode Collation Algorithm (UCA) 9.0</td>
+</tr>
+<tr>
+<td>效能</td>
+<td>✅ 較快（因為簡單）</td>
+<td>❌ 較慢（但差異通常不大）</td>
+</tr>
+<tr>
+<td>建議用途</td>
+<td>舊系統 &#x2F; 無特別語言需求</td>
+<td>🔥 新系統 &#x2F; 精準排序需求（推薦）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-建議使用情境"><a href="#✅-建議使用情境" class="headerlink" title="✅ 建議使用情境"></a>✅ 建議使用情境</h2><table>
+<thead>
+<tr>
+<th>情境</th>
+<th>推薦 Collation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新專案、MySQL 8 以上</td>
+<td><code>utf8mb4_0900_ai_ci</code> ✅</td>
+</tr>
+<tr>
+<td>舊系統升級</td>
+<td><code>utf8mb4_general_ci</code> ✅</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✨-範例比較"><a href="#✨-範例比較" class="headerlink" title="✨ 範例比較"></a>✨ 範例比較</h2><table>
+<thead>
+<tr>
+<th>比較項目</th>
+<th><code>utf8mb4_general_ci</code></th>
+<th><code>utf8mb4_0900_ai_ci</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&#39;a&#39; = &#39;A&#39;</code></td>
+<td>✅ 是</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>&#39;e&#39; = &#39;é&#39;</code></td>
+<td>✅ 是</td>
+<td>✅ 是（ai）</td>
+</tr>
+<tr>
+<td><code>&#39;e&#39; = &#39;é&#39;</code> (<code>as_ci</code>)</td>
+<td>❌ 否</td>
+<td>❌ 否（可指定 accent sensitive）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📌-查詢資料表或欄位的-Collation"><a href="#📌-查詢資料表或欄位的-Collation" class="headerlink" title="📌 查詢資料表或欄位的 Collation"></a>📌 查詢資料表或欄位的 Collation</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查詢某資料表欄位的 collation</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">FULL</span> COLUMNS <span class="hljs-keyword">FROM</span> your_table;<br><br><span class="hljs-comment">-- 查整張表的預設 collation</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">TABLE</span> STATUS <span class="hljs-keyword">WHERE</span> Name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;your_table&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>👉 如果你希望排序更準確，支援更多語言與特殊符號比對（如德文 ß、西班牙 ñ），<strong>建議使用 <code>utf8mb4_0900_ai_ci</code>。</strong></p>
+<hr>
+<h2 id="✅-總結表"><a href="#✅-總結表" class="headerlink" title="✅ 總結表"></a>✅ 總結表</h2><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>是否大小寫敏感</th>
+<th>備註</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>表名</td>
+<td>依作業系統與設定</td>
+<td>Linux 敏感、Windows 不敏感</td>
+</tr>
+<tr>
+<td>欄位名</td>
+<td>❌ 不敏感</td>
+<td>預設不區分大小寫</td>
+</tr>
+<tr>
+<td>資料值</td>
+<td>視 Collation 而定</td>
+<td><code>*_ci</code> 不敏感，<code>*_bin</code> 敏感</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -309,6 +527,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MySQL/" class="print-no-link">#MySQL</a>
+      
+    </div>
   
 </div>
 
@@ -318,8 +564,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>https://austin72905.github.io/2025/04/11/hello-world/</div>
+      <div>MySQL 「欄位名、表名、資料的值」對大小寫是否敏感</div>
+      <div>https://austin72905.github.io/2025/04/15/mysql-case-sensitive/</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +577,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2025年4月11日</div>
+          <div>2025年4月15日</div>
         </div>
       
       
@@ -363,18 +609,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/11/mysql-syntax-join/" title="MySQL Join">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL Join</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/10/mysql-syntax-basic/" title="MySQL 常用語法整理">
-                        <span class="hidden-mobile">MySQL 常用語法整理</span>
+                      <a href="/2025/04/15/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
