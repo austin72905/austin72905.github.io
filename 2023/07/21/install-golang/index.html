@@ -24,7 +24,7 @@
 <meta property="og:description" content="安裝步驟 到官網連結安裝，(官網連結可以能會修改)，安裝的版本選 amd64  1wget https:&#x2F;&#x2F;go.dev&#x2F;dl&#x2F;go1.20.6.linux-amd64.tar.gz   解壓縮到 &#x2F;usr&#x2F;local，解壓縮完會發現  &#96;&#x2F;usr&#x2F;local&#96;&#96; 多了一個go 目錄  12# -C 解壓縮的目標目錄sudo tar -C &#x2F;usr&#x2F;lo">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-07-21T16:43:00.000Z">
-<meta property="article:modified_time" content="2025-04-15T06:36:03.044Z">
+<meta property="article:modified_time" content="2025-04-30T07:13:21.385Z">
 <meta property="article:author" content="Austin Lin">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,12 +297,12 @@
 <ol start="2">
 <li>解壓縮到 <code>/usr/local</code>，解壓縮完會發現  &#96;&#x2F;usr&#x2F;local&#96;&#96; 多了一個go 目錄</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -C 解壓縮的目標目錄</span><br>sudo tar -C /usr/local -xzf go1.20.6.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -C 解壓縮的目標目錄</span><br><span class="hljs-built_in">sudo</span> tar -C /usr/local -xzf go1.20.6.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>在 <code>/etc/profile</code> 檔案 新增 go 的 環境變數</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 編輯 /etc/profile</span><br>sudo vi /etc/profile<br><br><span class="hljs-comment"># 在檔案中新增這行</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/local/go/bin <br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 編輯 /etc/profile</span><br><span class="hljs-built_in">sudo</span> vi /etc/profile<br><br><span class="hljs-comment"># 在檔案中新增這行</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/local/go/bin <br></code></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>刷新當前shell環境，獲取到&#x2F;etc&#x2F;profile最新的配置</li>
